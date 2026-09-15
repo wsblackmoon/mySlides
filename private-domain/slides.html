@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>从小阵地到大私域 · 幻灯片</title>
+<style>
+ :root{color-scheme:dark} *{box-sizing:border-box}
+ body{margin:0;background:#0b0d12;color:#eef1f7;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;overflow:hidden;height:100vh}
+ .bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;gap:14px;padding:0 16px;background:linear-gradient(#0b0d12,rgba(11,13,18,.4),transparent);z-index:10;font-size:14px}
+ .bar a{color:#b3bacb;text-decoration:none;font-weight:600;white-space:nowrap} .bar a:hover{color:#fff}
+ .bar .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#cfd4e0;font-weight:600}
+ .bar .c{color:#7f889c;font-variant-numeric:tabular-nums;white-space:nowrap}
+ .stage{position:fixed;inset:52px 0 0 0;display:grid;place-items:center;padding:14px}
+ .stage img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.55);user-select:none}
+ .nav{position:fixed;top:0;bottom:0;width:16%;min-width:64px;display:grid;place-items:center;cursor:pointer;z-index:8;border:0;background:transparent;color:#fff;opacity:0;transition:opacity .15s}
+ .nav:hover{opacity:1} .nav.l{left:0} .nav.r{right:0}
+ .nav span{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.10);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:22px}
+ .pb{position:fixed;left:0;bottom:0;height:3px;background:linear-gradient(90deg,#7c78ff,#38bdf8);transition:width .2s;z-index:9}
+ @media(max-width:640px){.nav{opacity:.6} .bar .t{font-size:13px}}
+</style></head><body>
+<div class="bar"><a href="../">← 作品集</a><div class="t">从小阵地到大私域 — 众安保险在私域建设的思考与实践</div><div class="c" id="c">1 / 14</div></div>
+<div class="stage"><img id="s" alt="幻灯片"></div>
+<button class="nav l" id="pv" aria-label="上一页"><span>‹</span></button>
+<button class="nav r" id="nx" aria-label="下一页"><span>›</span></button>
+<div class="pb" id="pb"></div>
+<script>
+ var IM=["img/slide-01.jpg","img/slide-02.jpg","img/slide-03.jpg","img/slide-04.jpg","img/slide-05.jpg","img/slide-06.jpg","img/slide-07.jpg","img/slide-08.jpg","img/slide-09.jpg","img/slide-10.jpg","img/slide-11.jpg","img/slide-12.jpg","img/slide-13.jpg","img/slide-14.jpg"],i=0,N=14,img=document.getElementById('s');
+ function show(n){i=Math.max(0,Math.min(N-1,n));img.src=IM[i];document.getElementById('c').textContent=(i+1)+' / '+N;document.getElementById('pb').style.width=((i+1)/N*100)+'%';
+   var nx=new Image();if(i+1<N)nx.src=IM[i+1];}
+ document.getElementById('nx').onclick=function(){show(i+1)};
+ document.getElementById('pv').onclick=function(){show(i-1)};
+ document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){show(i+1);e.preventDefault()}else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(i-1)}else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(N-1)}});
+ var sx=null;document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+ document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));sx=null});
+ show(0);
+</script></body></html>
