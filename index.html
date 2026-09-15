@@ -139,6 +139,18 @@
   .xp .card .yr{font-size:12.5px;color:var(--brand);font-weight:700;white-space:nowrap}
   .xp .card p{margin-top:8px;font-size:14.5px}
   .xp-label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-top:58px}
+  /* 作品集卡片：紧凑 + 三列 + 按钮贴底对齐 */
+  #works .grid{gap:16px}
+  #works .card{padding:20px;display:flex;flex-direction:column}
+  #works .card .ic{width:38px;height:38px;border-radius:10px;margin-bottom:12px}
+  #works .card .ic svg{width:19px;height:19px}
+  #works .card h3{font-size:16px;margin-bottom:6px}
+  #works .card p{font-size:13.5px;line-height:1.55}
+  #works .card ul{margin-top:10px}
+  #works .card li{font-size:12.8px;margin-top:5px;padding-left:19px}
+  #works .card li:before{top:8px;width:7px;height:7px}
+  #works .card>div:last-child{margin-top:auto!important;padding-top:14px}
+  #works .card .btn{padding:8px 13px;font-size:12.8px;border-radius:9px}
 
   /* Case */
   .case{display:grid;gap:32px;align-items:center}
@@ -250,7 +262,7 @@
     <p class="lead">把方法论沉淀成可阅读的作品 —— 点击直接查看。</p>
     <!-- 企业服务 -->
     <div class="xp-label" style="margin-top:40px">企业服务</div>
-    <div class="grid cols-2" style="margin-top:18px">
+    <div class="grid cols-3" style="margin-top:18px">
       <div class="card reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg></div>
         <h3>从小阵地到大私域</h3>
@@ -284,7 +296,7 @@
 
     <!-- 个人思考 -->
     <div class="xp-label" style="margin-top:44px">个人思考</div>
-    <div class="grid cols-2" style="margin-top:18px">
+    <div class="grid cols-3" style="margin-top:18px">
       <div class="card reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 1-2-2z"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></div>
         <h3>构建个人投资交易系统 V1.0</h3>
