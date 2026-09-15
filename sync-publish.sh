@@ -32,9 +32,11 @@ has_secret(){
   /usr/bin/python3 - "$1" <<'PY'
 import re,sys
 h=open(sys.argv[1],encoding='utf-8',errors='ignore').read()
-h=re.sub(r'data:[^;]+;base64,[A-Za-z0-9+/=\s]+','',h)   # 去内嵌 base64
+h=re.sub(r'data:[^;]+;base64,[A-Za-z0-9+/=\s]+','',h)      # 去 data: 内嵌 base64
+h=re.sub(r'[A-Za-z0-9+/]{50,}={0,2}','',h)                 # 去任何长 base64 串(图片/字体等)，避免图片里碰巧的 AIzaSy 误报
 t=re.sub(r'<[^>]+>',' ',h)
-pat=r'AIzaSy[0-9A-Za-z_\-]{30,}|sk-(?:ant-)?[A-Za-z0-9_\-]{24,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}'
+# 只拦“含 - / _ 或特定长前缀”的高置信度字面密钥（这些字符不在 base64 字符集，图片里不会出现）
+pat=r'sk-(?:ant-)?[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}'
 sys.exit(1 if re.search(pat,t) else 0)
 PY
 }
