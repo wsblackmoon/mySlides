@@ -66,6 +66,25 @@ h2 .g{color:var(--gold)}
 <style id="reveal-fx">
 .slide .body{opacity:0;transform:translateY(16px);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
 .slide.on.reveal .body{opacity:1;transform:none}
+</style><style id="nav-fx">
+#nav-toggle{position:fixed;top:12px;left:12px;z-index:120;width:40px;height:40px;border-radius:10px;border:1px solid #e6e8ef;background:#fff;color:#333;cursor:pointer;display:grid;place-items:center;font-size:18px;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:left .28s cubic-bezier(.2,.7,.2,1)}
+#nav-toggle:hover{border-color:#4f46e5;color:#4f46e5}
+body.nav-open #nav-toggle{left:262px}
+#nav-panel{position:fixed;top:0;left:0;bottom:0;width:250px;z-index:110;background:rgba(255,255,255,.985);backdrop-filter:blur(8px);border-right:1px solid #e6e8ef;box-shadow:2px 0 24px rgba(16,24,40,.08);transform:translateX(-100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif}
+body.nav-open #nav-panel{transform:none}
+#nav-panel .np-head{padding:16px 16px 12px 58px;font-weight:800;font-size:15px;color:#14161c;border-bottom:1px solid #eef0f4}
+#nav-list{flex:1;overflow:auto;padding:8px 8px 4px}
+#nav-list::-webkit-scrollbar{width:6px}#nav-list::-webkit-scrollbar-thumb{background:#d7dbe6;border-radius:3px}
+.np-item{display:flex;gap:9px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:12.8px;color:#4a5060;line-height:1.45;align-items:flex-start}
+.np-item:hover{background:#f2f3f7;color:#14161c}
+.np-item.active{background:#eef0ff;color:#4f46e5;font-weight:700}
+.np-item .n{color:#aab;font-variant-numeric:tabular-nums;flex:none;width:20px;text-align:right}
+.np-item .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.np-timer{border-top:1px solid #eef0f4;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.np-timer .t{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums;color:#14161c;letter-spacing:.01em;flex:1}
+.np-timer button{border:1px solid #e6e8ef;background:#fff;border-radius:8px;width:32px;height:32px;cursor:pointer;color:#555;font-size:14px;display:grid;place-items:center}
+.np-timer button:hover{border-color:#4f46e5;color:#4f46e5}
+@media(max-width:640px){#nav-panel{width:78vw}body.nav-open #nav-toggle{left:calc(78vw + 12px)}}
 </style></head>
 <body>
 <div class="deck" id="deck">
@@ -421,7 +440,7 @@ h2 .g{color:var(--gold)}
 (function(){
   var slides=document.querySelectorAll('.slide'),n=slides.length,i=0;
   var cur=document.getElementById('cur'),tot=document.getElementById('tot'),prog=document.getElementById('prog');
-  tot.textContent=n;
+  if(tot)tot.textContent=n;
   function hasBody(s){return !!s.querySelector('.body');}
   function render(rev){
     slides.forEach(function(s,j){
@@ -429,7 +448,8 @@ h2 .g{color:var(--gold)}
       if(j===i){ if(rev||!hasBody(s)){s.classList.add('reveal');} else {s.classList.remove('reveal');} }
       else { s.classList.remove('reveal'); }
     });
-    cur.textContent=i+1;prog.style.width=((i+1)/n*100)+'%';
+    if(cur)cur.textContent=i+1;if(prog)prog.style.width=((i+1)/n*100)+'%';
+    document.dispatchEvent(new CustomEvent('deck:change',{detail:{index:i}}));
   }
   function show(k,rev){i=Math.max(0,Math.min(n-1,k));render(rev);}
   function next(){var s=slides[i];if(hasBody(s)&&!s.classList.contains('reveal')){s.classList.add('reveal');return;}show(i+1,false);}
@@ -450,8 +470,53 @@ h2 .g{color:var(--gold)}
     if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;
     if(dx<-40){next();}else if(dx>40){prev();}tx=null;
   });
+  window.__deck={goto:function(k){show(k,true);},next:next,prev:prev,count:n,get index(){return i;}};
   show(0,false);
 })();
 </script>
+<!--NAVFX-START-->
+<button id="nav-toggle" title="目录 / 隐藏 (M)" aria-label="目录">☰</button>
+<aside id="nav-panel" aria-label="幻灯片目录">
+  <div class="np-head">目录</div>
+  <div id="nav-list"></div>
+  <div class="np-timer"><span class="t" id="tm-disp">00:00</span><button id="tm-pause" title="暂停/继续">⏸</button><button id="tm-reset" title="归零">↺</button></div>
+</aside>
+<script>
+(function(){
+  function boot(){
+    if(!window.__deck){return setTimeout(boot,50);}
+    var slides=document.querySelectorAll('.slide');
+    var list=document.getElementById('nav-list');
+    slides.forEach(function(s,idx){
+      var h=s.querySelector('h1,h2');var title=h?h.textContent.trim():('第'+(idx+1)+'页');
+      var it=document.createElement('div');it.className='np-item';it.dataset.idx=idx;
+      it.innerHTML='<span class="n"></span><span class="tt"></span>';
+      it.querySelector('.n').textContent=(idx+1);it.querySelector('.tt').textContent=title;it.title=title;
+      it.addEventListener('click',function(e){e.stopPropagation();window.__deck.goto(idx);});
+      list.appendChild(it);
+    });
+    document.addEventListener('deck:change',function(e){
+      var idx=e.detail.index;
+      list.querySelectorAll('.np-item').forEach(function(it){var a=(+it.dataset.idx===idx);it.classList.toggle('active',a);if(a)it.scrollIntoView({block:'nearest'});});
+    });
+    var tgl=document.getElementById('nav-toggle');
+    function toggle(){document.body.classList.toggle('nav-open');}
+    tgl.addEventListener('click',function(e){e.stopPropagation();toggle();});
+    document.getElementById('nav-panel').addEventListener('click',function(e){e.stopPropagation();});
+    document.addEventListener('keydown',function(e){if((e.key==='m'||e.key==='M')&&!e.metaKey&&!e.ctrlKey){toggle();}});
+    // 计时器
+    var elapsed=0,running=true,t0=Date.now();
+    var disp=document.getElementById('tm-disp');
+    function fmt(ms){var s=Math.floor(ms/1000);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;var p=function(x){return String(x).padStart(2,'0');};return (h>0?p(h)+':':'')+p(m)+':'+p(ss);}
+    function tick(){disp.textContent=fmt(elapsed+(running?Date.now()-t0:0));}
+    setInterval(tick,300);tick();
+    document.getElementById('tm-pause').addEventListener('click',function(e){e.stopPropagation();if(running){elapsed+=Date.now()-t0;running=false;}else{t0=Date.now();running=true;}this.textContent=running?'⏸':'▶';});
+    document.getElementById('tm-reset').addEventListener('click',function(e){e.stopPropagation();elapsed=0;t0=Date.now();tick();});
+    document.body.classList.add('nav-open'); // 默认展开
+  }
+  boot();
+})();
+</script>
+<!--NAVFX-END-->
 </body>
 </html>
