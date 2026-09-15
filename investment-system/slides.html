@@ -87,7 +87,7 @@ body.nav-open #nav-panel{transform:none}
 .np-item{padding:6px 10px 6px 26px;border-radius:7px;cursor:pointer;font-size:12.6px;color:#727a88;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .np-item:hover{background:#f1f2f6;color:#2b2f38}
 .np-item.active{background:#edefff;color:#4f46e5;font-weight:600}
-.np-timer{padding:11px 14px;display:flex;align-items:center;gap:9px}
+.np-timer{padding:13px 52px 11px 16px;display:flex;align-items:center;gap:9px;border-bottom:0}
 .np-timer .t{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:#14161c;flex:1}
 .np-timer button{border:1px solid #e6e8ef;background:#fff;border-radius:8px;width:30px;height:30px;cursor:pointer;color:#666;font-size:13px;display:grid;place-items:center}
 .np-timer button:hover{border-color:#4f46e5;color:#4f46e5}
@@ -485,9 +485,8 @@ body.nav-open #nav-panel{transform:none}
 <!--NAVFX-START-->
 <button id="nav-toggle" title="目录 / 隐藏 (M)" aria-label="目录">☰</button>
 <aside id="nav-panel" aria-label="幻灯片目录">
-  <div class="np-head">目录</div>
-  <div id="nav-list"></div>
   <div class="np-timer"><span class="t" id="tm-disp">00:00</span><button id="tm-pause" title="暂停/继续">⏸</button><button id="tm-reset" title="归零">↺</button></div>
+  <div id="nav-list"></div>
 </aside>
 <script>
 (function(){
