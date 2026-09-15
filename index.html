@@ -1,41 +1,454 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>吴斯 · 作品集</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aaron Wu · AI 战略咨询 | 让 AI 真正落地为业务价值</title>
+<meta name="description" content="Aaron Wu 提供面向企业与创业者的 AI 战略咨询服务：从场景诊断、路线图规划到智能体系统与数据智能的工程化落地。以某跨境民宿运营商 AI 动态定价为代表案例。" />
+<meta name="keywords" content="AI战略咨询, AI落地, 智能定价, 多智能体, Agent系统, 数据智能, 收益优化" />
+<meta property="og:title" content="Aaron Wu · AI 战略咨询" />
+<meta property="og:description" content="让 AI 真正落地为业务价值 —— 从战略到工程的一体化咨询。" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
 <style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; }
-  body { margin:0; min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;
-    background:#faf8f4; color:#1c1a17; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 20px; }
-  .wrap { width:100%; max-width:640px; }
-  .kicker { font-size:.8rem; letter-spacing:.18em; color:#9a8f7d; font-weight:700; text-transform:uppercase; margin:0 0 10px; }
-  h1 { font-size:1.9rem; margin:0 0 6px; font-weight:800; }
-  .sub { color:#6f6555; font-size:.95rem; margin:0 0 32px; }
-  .cards { display:grid; gap:14px; }
-  a.card { display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit; background:#fff;
-    border:1px solid #ece5da; border-radius:14px; padding:20px 22px; transition:transform .12s,box-shadow .12s,border-color .12s; }
-  a.card:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(80,60,20,.10); border-color:#d8ad6a; }
-  .ic { font-size:1.7rem; flex-shrink:0; width:48px; height:48px; display:grid; place-items:center; background:#f4efe6; border-radius:12px; }
-  .ct { flex:1; min-width:0; } .ct b { display:block; font-size:1.05rem; margin-bottom:3px; } .ct span { color:#857a67; font-size:.85rem; }
-  .arrow { color:#c9a35e; font-size:1.3rem; }
-  footer { color:#a99f8d; font-size:.8rem; margin-top:30px; text-align:center; }
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f6f7fb;
+    --bg-card:#ffffff;
+    --fg:#14161c;
+    --fg-soft:#4a5060;
+    --fg-faint:#7a8194;
+    --line:#e6e8ef;
+    --brand:#4f46e5;
+    --brand-2:#0ea5e9;
+    --brand-soft:#eef0ff;
+    --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.06);
+    --radius:16px;
+    --maxw:1080px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b0d12;
+      --bg-soft:#0f1219;
+      --bg-card:#12151d;
+      --fg:#eef1f7;
+      --fg-soft:#b3bacb;
+      --fg-faint:#7f889c;
+      --line:#222633;
+      --brand:#7c78ff;
+      --brand-2:#38bdf8;
+      --brand-soft:#171a2b;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b0d12;--bg-soft:#0f1219;--bg-card:#12151d;--fg:#eef1f7;--fg-soft:#b3bacb;--fg-faint:#7f889c;--line:#222633;--brand:#7c78ff;--brand-2:#38bdf8;--brand-soft:#171a2b;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#ffffff;--bg-soft:#f6f7fb;--bg-card:#ffffff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;--brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--shadow:0 1px 2px rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:76px 0}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700}
+  h2{font-size:clamp(24px,3.4vw,34px);line-height:1.25;margin:12px 0 10px;letter-spacing:-.01em}
+  .lead{color:var(--fg-soft);font-size:17px;max-width:640px}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.01em;min-width:0}
+  .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:18px;font-weight:700;flex:none}
+  .brand-sub{color:var(--fg-faint);font-weight:600}
+  .nav-actions{display:flex;align-items:center;gap:8px;flex:none}
+  .nav-toggle{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--fg);cursor:pointer;place-items:center}
+  .nav-toggle svg{width:20px;height:20px;stroke:currentColor}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--fg-soft);font-size:14.5px;font-weight:500}
+  .navlinks a:hover{color:var(--fg)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:11px;font-weight:600;font-size:14.5px;border:1px solid transparent;cursor:pointer;transition:transform .12s ease,box-shadow .2s ease}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--fg);background:var(--bg-card)}
+  .btn-ghost:hover{border-color:var(--brand)}
+  .nav-cta{display:none}
+  /* 桌面导航 */
+  @media(min-width:760px){
+    .nav-toggle{display:none!important}
+    .nav-cta{display:inline-flex}
+    .navlinks{margin-left:auto}
+  }
+  /* 手机导航：汉堡下拉菜单 */
+  @media(max-width:759px){
+    .nav-toggle{display:grid}
+    .brand-sub{display:none}
+    .navlinks{
+      position:absolute;top:62px;left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:2px;
+      padding:10px 22px 16px;
+      background:var(--bg);border-bottom:1px solid var(--line);
+      box-shadow:var(--shadow);display:none;
+    }
+    .navlinks.open{display:flex}
+    .navlinks a{padding:13px 8px;border-radius:9px;font-size:16px}
+    .navlinks a:active,.navlinks a:hover{background:var(--bg-soft)}
+    .nav-cta{display:inline-flex;justify-content:center;margin-top:8px}
+    /* 移动端间距/字号收紧 */
+    section{padding:54px 0}
+    .hero{padding:60px 0 44px}
+    h1{font-size:34px;line-height:1.14}
+    .hero p.sub{font-size:16.5px}
+    .stats{gap:14px;margin-top:40px}
+    .stat span{font-size:12px}
+    .contact{padding:38px 20px}
+  }
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:96px 0 72px}
+  .hero:before{content:"";position:absolute;inset:0;background:
+     radial-gradient(720px 380px at 78% -8%, color-mix(in srgb,var(--brand) 22%,transparent), transparent 70%),
+     radial-gradient(560px 320px at 8% 20%, color-mix(in srgb,var(--brand-2) 16%,transparent), transparent 70%);
+     pointer-events:none}
+  .hero .wrap{position:relative}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-size:13px;color:var(--fg-soft);font-weight:500}
+  .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px color-mix(in srgb,#22c55e 25%,transparent)}
+  h1{font-size:clamp(32px,5.6vw,56px);line-height:1.08;letter-spacing:-.025em;margin:20px 0 0;font-weight:800}
+  h1 .grad{background:linear-gradient(120deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{margin:20px 0 0;font-size:19px;color:var(--fg-soft);max-width:660px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px;max-width:640px}
+  .stat b{display:block;font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .stat span{color:var(--fg-faint);font-size:13.5px}
+
+  /* Sections shared */
+  .grid{display:grid;gap:18px}
+  @media(min-width:720px){.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .card .ic{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;margin-bottom:16px}
+  .card .ic svg{width:22px;height:22px;stroke:var(--brand)}
+  .card h3{margin:0 0 8px;font-size:18.5px;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--fg-soft);font-size:15px}
+  .card ul{margin:12px 0 0;padding-left:0;list-style:none}
+  .card li{color:var(--fg-soft);font-size:14.5px;padding-left:22px;position:relative;margin-top:6px}
+  .card li:before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+
+  .soft{background:var(--bg-soft)}
+
+  /* Case */
+  .case{display:grid;gap:32px;align-items:center}
+  @media(min-width:860px){.case{grid-template-columns:1.05fr .95fr}}
+  .case-panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-card);padding:8px;box-shadow:var(--shadow)}
+  .case-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .win-dots{display:flex;gap:7px}.win-dots i{width:11px;height:11px;border-radius:50%;background:var(--line);display:block}
+  .case-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px}
+  .metric{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .metric b{font-size:24px;font-weight:800;letter-spacing:-.02em;display:block;background:linear-gradient(120deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metric span{font-size:13px;color:var(--fg-faint)}
+  .chip{display:inline-block;padding:5px 11px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:600;margin:0 6px 6px 0}
+
+  /* Approach */
+  .steps{counter-reset:s;display:grid;gap:14px}
+  @media(min-width:720px){.steps{grid-template-columns:repeat(4,1fr)}}
+  .step{position:relative;padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-card)}
+  .step:before{counter-increment:s;content:"0" counter(s);font-size:13px;font-weight:800;color:var(--brand);letter-spacing:.05em}
+  .step h4{margin:8px 0 6px;font-size:16.5px}
+  .step p{margin:0;color:var(--fg-soft);font-size:14px}
+
+  /* About */
+  .about{display:grid;gap:34px}
+  @media(min-width:820px){.about{grid-template-columns:1fr 1.25fr}}
+  .avatar{width:100%;aspect-ratio:1;max-width:300px;border-radius:22px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:96px;font-weight:700;box-shadow:var(--shadow)}
+  .stacklist{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .tag{padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--fg-soft);background:var(--bg-card)}
+
+  /* Contact */
+  .contact{background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 12%,var(--bg)),color-mix(in srgb,var(--brand-2) 10%,var(--bg)));border:1px solid var(--line);border-radius:24px;padding:48px 34px;text-align:center}
+  .contact h2{margin-top:6px}
+  .contact-methods{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+  .cmethod{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid var(--line);border-radius:12px;background:var(--bg-card);font-size:14.5px;font-weight:500;box-shadow:var(--shadow)}
+  .cmethod svg{width:18px;height:18px;stroke:var(--brand)}
+  .qr-card{display:inline-flex;flex-direction:column;align-items:center;margin-top:24px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .qr-card img{width:260px;max-width:78vw;height:auto;border-radius:8px;display:block}
+  .qr-fallback{width:260px;max-width:78vw;aspect-ratio:1;border:1px dashed var(--line);border-radius:10px;display:none;place-items:center;text-align:center;color:var(--fg-faint);font-size:12.5px;padding:12px;line-height:1.5}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:34px 0 46px;color:var(--fg-faint);font-size:13.5px}
+  .foot-in{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .foot-in a{color:var(--fg-faint)}
+  .foot-in a:hover{color:var(--fg)}
+  .beian{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-top:10px}
+  .theme-toggle{border:1px solid var(--line);background:var(--bg-card);color:var(--fg-soft);width:38px;height:38px;border-radius:10px;cursor:pointer;display:grid;place-items:center}
+  .theme-toggle svg{width:18px;height:18px}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <p class="kicker">Works · 作品集</p>
-    <h1>吴斯 · 作品集</h1>
-    <p class="sub">投资 · 交易 · 思考</p>
-    <div class="cards">
-      <a class="card" href="./investment-system/">
-        <div class="ic">📊</div>
-        <div class="ct"><b>构建个人投资交易系统 V1.0</b><span>幻灯片版 + 网页长文版</span></div>
-        <div class="arrow">→</div>
-      </a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="logo">A</span>
+      <span>Aaron Wu<span class="brand-sub"> · AI 战略咨询</span></span>
+    </a>
+    <nav class="navlinks" id="navLinks">
+      <a href="#services">服务</a>
+      <a href="#case">案例</a>
+      <a href="#approach">方法</a>
+      <a href="#about">关于</a>
+      <a href="#works">作品集</a>
+      <a class="btn btn-primary nav-cta" href="#contact">预约咨询</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeBtn" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
-    <footer>© 2026 吴斯 · wsblackmoon</footer>
   </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span> 现开放少量深度合作名额</span>
+    <h1>把 AI 从概念，<br/>变成<span class="grad">可交付的业务成果</span>。</h1>
+    <p class="sub">我是 Aaron Wu，一名 AI 战略顾问与工程实践者。为企业和创业团队提供从场景诊断、路线图规划，到智能体系统与数据智能落地的一体化咨询 —— 不止出方案，也能一起把它跑起来。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">预约一次免费诊断</a>
+      <a class="btn btn-ghost" href="#case">查看落地案例 →</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>10+</b><span>已落地的 AI 应用与系统</span></div>
+      <div class="stat"><b>端到端</b><span>从战略到工程一手交付</span></div>
+      <div class="stat"><b>多领域</b><span>民宿 / 投研 / 地产 / 自动化</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">服务</span>
+    <h2>四类可以立刻开始的合作</h2>
+    <p class="lead">不做华而不实的 PPT，聚焦「哪里能用 AI、怎么用、用了值不值」，并把结论工程化落地。</p>
+    <div class="grid cols-2" style="margin-top:34px">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>AI 战略咨询与落地规划</h3>
+        <p>梳理业务流程与数据现状，识别真正有 ROI 的 AI 场景，输出可执行的优先级路线图与投入产出评估。</p>
+        <ul><li>业务场景诊断与机会盘点</li><li>可行性 / 成本 / 风险评估</li><li>分阶段落地路线图</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+        <h3>智能定价与收益优化</h3>
+        <p>面向民宿、酒店、电商等场景，构建多源数据驱动的动态定价与收益管理系统，把「凭经验」变成「凭数据」。</p>
+        <ul><li>多渠道数据抓取与聚合</li><li>定价因子建模与策略</li><li>收益模拟与可视化看板</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M12 7.4V13M12 13l-5 3M12 13l5 3"/></svg></div>
+        <h3>智能体与自动化工作流</h3>
+        <p>用多智能体（Multi-Agent）与 LLM 编排，把信息采集、分析研判、报告生成等重复劳动交给 AI 自动跑。</p>
+        <ul><li>Agent 系统设计与编排</li><li>信息采集 / 投研 / 项目管理自动化</li><li>与现有工具链集成</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg></div>
+        <h3>数据智能与决策支持</h3>
+        <p>把散落的数据整理成可用于决策的洞察：抓取、结构化、指标监控与智能看板，让判断有据可依。</p>
+        <ul><li>数据抓取与结构化提取</li><li>指标 / 因子监控与预警</li><li>决策看板与报告</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE -->
+<section id="case" class="soft">
+  <div class="wrap">
+    <span class="eyebrow">代表案例（已脱敏）</span>
+    <h2>某跨境民宿运营商 · AI 动态定价实验室</h2>
+    <p class="lead">为一家跨平台运营的日本民宿业务，搭建一套数据驱动的定价与收益优化系统，替代人工凭经验调价。应客户要求，以下为脱敏概述。</p>
+    <div class="case" style="margin-top:34px">
+      <div>
+        <p style="color:var(--fg-soft)">
+          针对日本民宿「多平台、多房源、季节与活动波动大」的定价难题，我们打通了多渠道行情数据的抓取与聚合，围绕节假日、周边活动、供需与竞品价格建立定价因子模型，并把结果沉淀为一套可视化的定价工作台 —— 让运营团队每天只需在一个界面上，看清「今天每套房应该定多少、为什么」。
+        </p>
+        <div style="margin-top:18px">
+          <span class="chip">多渠道数据抓取</span>
+          <span class="chip">定价因子建模</span>
+          <span class="chip">收益模拟</span>
+          <span class="chip">可视化工作台</span>
+          <span class="chip">运营 SOP</span>
+        </div>
+        <p style="color:var(--fg-faint);font-size:13.5px;margin-top:18px">* 以上为脱敏后的项目概述，具体指标可在沟通中提供。</p>
+      </div>
+      <div class="case-panel">
+        <div class="case-head">
+          <div class="win-dots"><i></i><i></i><i></i></div>
+          <span style="font-size:12.5px;color:var(--fg-faint)">pricing-console</span>
+        </div>
+        <div class="case-metrics">
+          <div class="metric"><b>多平台</b><span>渠道数据统一接入</span></div>
+          <div class="metric"><b>每日</b><span>定价建议自动更新</span></div>
+          <div class="metric"><b>因子化</b><span>价格可解释、可回溯</span></div>
+          <div class="metric"><b>一屏</b><span>运营决策工作台</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="wrap">
+    <span class="eyebrow">合作方法</span>
+    <h2>四步，把想法推进到上线</h2>
+    <p class="lead">轻量启动、快速验证、小步交付 —— 每一步都有明确产出，不做无止境的调研。</p>
+    <div class="steps" style="margin-top:34px">
+      <div class="step reveal"><h4>诊断</h4><p>了解业务与数据现状，找出最值得投入的 AI 场景。</p></div>
+      <div class="step reveal"><h4>规划</h4><p>输出路线图、方案与投入产出评估，对齐目标与优先级。</p></div>
+      <div class="step reveal"><h4>构建</h4><p>快速做出可用原型并迭代，用真实数据验证效果。</p></div>
+      <div class="step reveal"><h4>落地</h4><p>集成到日常流程，沉淀 SOP 与看板，交付可持续运行的系统。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="soft">
+  <div class="wrap about">
+    <div style="display:grid;place-items:center">
+      <div class="avatar">A</div>
+    </div>
+    <div>
+      <span class="eyebrow">关于我</span>
+      <h2>既懂战略，也能亲手写代码的 AI 顾问</h2>
+      <p style="color:var(--fg-soft)">
+        我是 Aaron Wu。过去几年里，我把大量精力放在「让 AI 真正解决具体问题」上：从跨平台数据抓取聚合、多智能体投研系统，到民宿智能定价、地产购房辅助工具、信息采集与项目管理自动化 —— 这些不是演示 demo，而是每天在被使用的真实系统。
+      </p>
+      <p style="color:var(--fg-soft)">
+        我相信好的 AI 咨询，交付的不只是一份报告，而是一个能跑起来、能带来价值、团队也能接手维护的成果。如果你正在思考「AI 能为我的业务做什么」，欢迎聊聊。
+      </p>
+      <div class="stacklist">
+        <span class="tag">LLM / 多智能体</span>
+        <span class="tag">RAG 与知识库</span>
+        <span class="tag">数据抓取 / 结构化</span>
+        <span class="tag">动态定价 / 收益优化</span>
+        <span class="tag">FastAPI · React</span>
+        <span class="tag">工程化落地</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS 作品集 -->
+<section id="works" class="soft">
+  <div class="wrap">
+    <span class="eyebrow">作品集</span>
+    <h2>公开分享的思考与作品</h2>
+    <p class="lead">把方法论沉淀成可阅读的作品 —— 点击直接查看。</p>
+    <div class="grid cols-2" style="margin-top:34px">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 1-2-2z"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></div>
+        <h3>构建个人投资交易系统 V1.0</h3>
+        <p>像个人一样持仓、像机构一样执行：了解自己 × 善用工具 × 差异化信息源。</p>
+        <ul><li>先想清楚赚的是什么钱：增长 vs 情绪</li><li>了解自己 · 善用工具 · 差异化信息源</li><li>让投资过程有记录、可改进、可迭代</li></ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <a class="btn btn-primary" href="investment-system/slides.html">🖥️ 幻灯片版</a>
+          <a class="btn btn-ghost" href="investment-system/web.html">📖 网页长文版</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <span class="eyebrow">开始合作</span>
+      <h2>聊聊你的 AI 落地想法</h2>
+      <p class="lead" style="margin:10px auto 0">第一次沟通免费。无论只是想验证一个点子，还是需要完整落地，都欢迎联系。</p>
+      <div class="contact-methods">
+        <a class="cmethod" href="mailto:wsblackmoon@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          wsblackmoon@gmail.com
+        </a>
+      </div>
+      <div class="qr-card">
+        <img src="assets/wechat-qr.png" alt="微信二维码：吴斯_Aaron" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';" />
+        <div class="qr-fallback">请将微信二维码图片<br/>保存为 assets/wechat-qr.png</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <div>© <span id="yr"></span> Aaron Wu · AI 战略咨询</div>
+      <div class="beian">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">【备案号：待填写，如 沪ICP备XXXXXXXX号】</a>
+        <!-- 公安备案（如需）：<a href="http://www.beian.gov.cn/" target="_blank" rel="noopener">沪公网安备 XXXXXXXX 号</a> -->
+      </div>
+    </div>
+    <div style="display:flex;gap:20px">
+      <a href="#services">服务</a>
+      <a href="#case">案例</a>
+      <a href="#works">作品集</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (respects system, remembers choice)
+  (function(){
+    var root=document.documentElement, key="aw-theme";
+    var saved=null; try{saved=localStorage.getItem(key)}catch(e){}
+    if(saved){root.setAttribute("data-theme",saved)}
+    document.getElementById("themeBtn").addEventListener("click",function(){
+      var cur=root.getAttribute("data-theme");
+      if(!cur){cur=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+      var next=cur==="dark"?"light":"dark";
+      root.setAttribute("data-theme",next);
+      try{localStorage.setItem(key,next)}catch(e){}
+    });
+  })();
+  // Mobile hamburger menu
+  (function(){
+    var t=document.getElementById("navToggle"), l=document.getElementById("navLinks");
+    if(!t||!l)return;
+    t.addEventListener("click",function(){
+      var open=l.classList.toggle("open");
+      t.setAttribute("aria-expanded",open?"true":"false");
+    });
+    l.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click",function(){
+        l.classList.remove("open");t.setAttribute("aria-expanded","false");
+      });
+    });
+  })();
+  // Year
+  document.getElementById("yr").textContent=new Date().getFullYear();
+  // Reveal on scroll
+  (function(){
+    var els=document.querySelectorAll(".reveal");
+    if(!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in")});return}
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.14});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
 </body>
 </html>
