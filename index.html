@@ -3,50 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>构建个人投资交易系统 V1.0</title>
+<title>吴斯 · 作品集</title>
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", system-ui, sans-serif;
-    background: #faf8f4; color: #1c1a17;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 40px 20px;
-  }
-  .wrap { width: 100%; max-width: 620px; }
-  .kicker { font-size: .8rem; letter-spacing: .18em; color: #9a8f7d; font-weight: 700; text-transform: uppercase; margin: 0 0 10px; }
-  h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 6px; font-weight: 800; }
-  .sub { color: #6f6555; font-size: .95rem; margin: 0 0 32px; }
-  .cards { display: grid; gap: 14px; }
-  a.card {
-    display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;
-    background: #fff; border: 1px solid #ece5da; border-radius: 14px; padding: 20px 22px;
-    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-  }
-  a.card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(80,60,20,.10); border-color: #d8ad6a; }
-  .ic { font-size: 1.7rem; flex-shrink: 0; width: 48px; height: 48px; display: grid; place-items: center; background: #f4efe6; border-radius: 12px; }
-  .ct { flex: 1; min-width: 0; }
-  .ct b { display: block; font-size: 1.05rem; margin-bottom: 3px; }
-  .ct span { color: #857a67; font-size: .85rem; }
-  .arrow { color: #c9a35e; font-size: 1.3rem; }
-  footer { color: #a99f8d; font-size: .8rem; margin-top: 30px; text-align: center; }
+  body { margin:0; min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;
+    background:#faf8f4; color:#1c1a17; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 20px; }
+  .wrap { width:100%; max-width:640px; }
+  .kicker { font-size:.8rem; letter-spacing:.18em; color:#9a8f7d; font-weight:700; text-transform:uppercase; margin:0 0 10px; }
+  h1 { font-size:1.9rem; margin:0 0 6px; font-weight:800; }
+  .sub { color:#6f6555; font-size:.95rem; margin:0 0 32px; }
+  .cards { display:grid; gap:14px; }
+  a.card { display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit; background:#fff;
+    border:1px solid #ece5da; border-radius:14px; padding:20px 22px; transition:transform .12s,box-shadow .12s,border-color .12s; }
+  a.card:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(80,60,20,.10); border-color:#d8ad6a; }
+  .ic { font-size:1.7rem; flex-shrink:0; width:48px; height:48px; display:grid; place-items:center; background:#f4efe6; border-radius:12px; }
+  .ct { flex:1; min-width:0; } .ct b { display:block; font-size:1.05rem; margin-bottom:3px; } .ct span { color:#857a67; font-size:.85rem; }
+  .arrow { color:#c9a35e; font-size:1.3rem; }
+  footer { color:#a99f8d; font-size:.8rem; margin-top:30px; text-align:center; }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <p class="kicker">Personal Investment &amp; Trading System · V1.0</p>
-    <h1>构建个人投资交易系统</h1>
-    <p class="sub">像个人一样持仓 · 像机构一样执行　—　吴斯 · 2026.09</p>
+    <p class="kicker">Works · 作品集</p>
+    <h1>吴斯 · 作品集</h1>
+    <p class="sub">投资 · 交易 · 思考</p>
     <div class="cards">
-      <a class="card" href="./slides.html">
-        <div class="ic">🖥️</div>
-        <div class="ct"><b>幻灯片版（PPT）</b><span>逐页翻阅 · 适合演讲/分享</span></div>
-        <div class="arrow">→</div>
-      </a>
-      <a class="card" href="./web.html">
-        <div class="ic">📖</div>
-        <div class="ct"><b>网页长文版</b><span>连续滚动阅读 · 适合细读</span></div>
+      <a class="card" href="./investment-system/">
+        <div class="ic">📊</div>
+        <div class="ct"><b>构建个人投资交易系统 V1.0</b><span>幻灯片版 + 网页长文版</span></div>
         <div class="arrow">→</div>
       </a>
     </div>
