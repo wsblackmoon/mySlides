@@ -92,6 +92,11 @@ body.nav-open #nav-panel{transform:none}
 .np-timer button{border:1px solid #e6e8ef;background:#fff;border-radius:8px;width:30px;height:30px;cursor:pointer;color:#666;font-size:13px;display:grid;place-items:center}
 .np-timer button:hover{border-color:#4f46e5;color:#4f46e5}
 @media(max-width:760px){:root{--nav-w:80vw}body.nav-open .slide{padding-left:6vw}}
+#tm-mini{position:fixed;top:12px;left:12px;z-index:121;display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:10px;border:1px solid #e6e8ef;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);color:#14161c;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:0 2px 12px rgba(16,24,40,.1);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+#tm-mini:before{content:"\23f1";font-weight:400;font-size:15px;opacity:.7}
+#tm-mini:hover{border-color:#4f46e5;color:#4f46e5}
+body.nav-open #tm-mini{display:none}
+body:not(.nav-open) #nav-toggle{display:none}
 </style></head>
 <body>
 <div class="deck" id="deck">
@@ -483,6 +488,7 @@ body.nav-open #nav-panel{transform:none}
 </script>
 
 <!--NAVFX-START-->
+<button id="tm-mini" title="展开目录 (M)">00:00</button>
 <button id="nav-toggle" title="目录 / 隐藏 (M)" aria-label="目录">☰</button>
 <aside id="nav-panel" aria-label="幻灯片目录">
   <div class="np-timer"><span class="t" id="tm-disp">00:00</span><button id="tm-pause" title="暂停/继续">⏸</button><button id="tm-reset" title="归零">↺</button></div>
@@ -531,10 +537,10 @@ body.nav-open #nav-panel{transform:none}
     document.addEventListener('keydown',function(e){if((e.key==='m'||e.key==='M')&&!e.metaKey&&!e.ctrlKey){toggle();}});
     var elapsed=0,running=true,t0=Date.now();var disp=document.getElementById('tm-disp');
     function fmt(ms){var s=Math.floor(ms/1000);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;var p=function(x){return String(x).padStart(2,'0');};return (h>0?p(h)+':':'')+p(m)+':'+p(ss);}
-    function tick(){disp.textContent=fmt(elapsed+(running?Date.now()-t0:0));}
+    function tick(){var v=fmt(elapsed+(running?Date.now()-t0:0));disp.textContent=v;var mn=document.getElementById("tm-mini");if(mn)mn.textContent=v;}
     setInterval(tick,300);tick();
     document.getElementById('tm-pause').addEventListener('click',function(e){e.stopPropagation();if(running){elapsed+=Date.now()-t0;running=false;}else{t0=Date.now();running=true;}this.textContent=running?'⏸':'▶';});
-    document.getElementById('tm-reset').addEventListener('click',function(e){e.stopPropagation();elapsed=0;t0=Date.now();tick();});
+    document.getElementById('tm-reset').addEventListener('click',function(e){e.stopPropagation();elapsed=0;t0=Date.now();tick();});var mini=document.getElementById('tm-mini');if(mini)mini.addEventListener('click',function(e){e.stopPropagation();document.body.classList.add('nav-open');});
     if(window.innerWidth>760){document.body.classList.add('nav-open');}
   }
   boot();
