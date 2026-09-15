@@ -99,23 +99,25 @@ body.nav-open #tm-mini{display:none}
 body:not(.nav-open) #nav-toggle{display:none}
 </style><style id="matrix-fx">
 .mtx .body{justify-content:center}
-.qmx{display:grid;grid-template-columns:48px 1fr;grid-template-rows:auto 1fr;gap:10px 14px;margin-top:1vh}
-.qmx-xhead{grid-column:2;grid-row:1;display:grid;grid-template-columns:1fr 1fr;gap:2vh 1.4vw}
-.qmx-xhead .xl{text-align:center;font-weight:800;font-size:clamp(14px,1.45vw,21px);color:var(--dim);padding-bottom:8px;position:relative}
-.qmx-xhead .xl:after{content:"";position:absolute;left:18%;right:18%;bottom:0;height:2px;border-radius:2px}
-.qmx-xhead .xl.l{color:var(--red)}
-.qmx-xhead .xl.l:after{background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 25%,transparent))}
-.qmx-xhead .xl.r{color:var(--green)}
-.qmx-xhead .xl.r:after{background:linear-gradient(90deg,color-mix(in srgb,var(--green) 25%,transparent),var(--green))}
-.qmx-yaxis{grid-column:1;grid-row:2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:relative;padding:1.5vh 0}
-.qmx-yaxis:before{content:"";position:absolute;left:50%;top:2%;bottom:2%;width:2px;transform:translateX(-50%);border-radius:2px;background:linear-gradient(var(--green),color-mix(in srgb,var(--green) 18%,transparent),color-mix(in srgb,var(--red) 18%,transparent),var(--red))}
-.qmx-yaxis .yl{writing-mode:vertical-rl;font-weight:800;font-size:clamp(14px,1.45vw,21px);letter-spacing:.22em;background:var(--bg);padding:8px 0;position:relative;z-index:1}
-.qmx-yaxis .yl.up{color:var(--green)}
-.qmx-yaxis .yl.dn{color:var(--red)}
-.qmx-grid{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2vh 1.4vw}
-.qmx-grid .q{min-height:19vh;display:flex;flex-direction:column;justify-content:center}
-.qmx-grid .q .pt{font-size:clamp(15px,1.42vw,22px);margin-top:.4vh}
-@media(max-width:760px){.qmx{grid-template-columns:1fr;grid-template-rows:auto}.qmx-xhead,.qmx-yaxis{display:none}.qmx-grid{grid-column:1;grid-template-columns:1fr;grid-template-rows:auto}.qmx-grid .q{min-height:0}}
+.qcross{position:relative;height:62vh;margin:2vh auto 0;width:min(84vw,1200px)}
+.qcross:before{content:"";position:absolute;left:50%;top:30px;bottom:30px;width:2px;transform:translateX(-50%);border-radius:2px;background:linear-gradient(var(--green),color-mix(in srgb,var(--green) 14%,transparent) 46%,color-mix(in srgb,var(--red) 14%,transparent) 54%,var(--red))}
+.qcross:after{content:"";position:absolute;top:50%;left:120px;right:120px;height:2px;transform:translateY(-50%);border-radius:2px;background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 14%,transparent) 46%,color-mix(in srgb,var(--green) 14%,transparent) 54%,var(--green))}
+.qcross .ax{position:absolute;font-weight:800;font-size:clamp(15px,1.6vw,24px);z-index:2;background:var(--bg);padding:2px 10px}
+.qcross .ax-t{top:-6px;left:50%;transform:translateX(-50%);color:var(--green)}
+.qcross .ax-b{bottom:-6px;left:50%;transform:translateX(-50%);color:var(--red)}
+.qcross .ax-l{left:0;top:50%;transform:translateY(-50%);color:var(--red)}
+.qcross .ax-r{right:0;top:50%;transform:translateY(-50%);color:var(--green)}
+.qcg{position:absolute;inset:36px 120px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.qcross .qc{display:flex;flex-direction:column;justify-content:center}
+.qcross .qc .pt{font-size:clamp(16px,1.75vw,27px);line-height:1.5;font-weight:600;margin:0}
+.qcross .qc b{color:var(--ink)}
+.qcross .qc .pt{padding-left:0}
+.qcross .qc .pt::before{display:none}
+.qc.pn{padding:0 3vw 5vh 0;color:var(--amber);align-items:flex-start;text-align:left}
+.qc.py{padding:0 0 5vh 3vw;color:var(--green)}
+.qc.ln{padding:5vh 3vw 0 0;color:var(--red)}
+.qc.ly{padding:5vh 0 0 3vw;color:var(--blue)}
+@media(max-width:760px){.qcross{height:auto;width:100%}.qcross:before,.qcross:after,.qcross .ax{display:none}.qcg{position:static;inset:auto;grid-template-columns:1fr;gap:2vh}.qcross .qc{padding:1.4vh 0!important}}
 </style></head>
 <body>
 <div class="deck" id="deck">
@@ -244,14 +246,16 @@ body:not(.nav-open) #nav-toggle{display:none}
 <div class="kick">PART 2 <span class="dim">/ 工具篇 · 复盘模板</span></div>
 <h2>复盘模板:<span class="g">四象限,评估每一笔的决策质量</span></h2>
 <div class="body">
-<div class="qmx">
-<div class="qmx-xhead"><div class="xl l">不符合预期</div><div class="xl r">符合预期</div></div>
-<div class="qmx-yaxis"><div class="yl up">盈利</div><div class="yl dn">亏损</div></div>
-<div class="qmx-grid">
-<div class="q pn"><div class="qt">盈利,不符合预期</div><div class="pt">虽然盈利,但<b>不符合自己的投资原则</b></div></div>
-<div class="q py"><div class="qt">盈利,符合预期</div><div class="pt">目前浮盈,且<b>符合自己的投资原则</b></div></div>
-<div class="q ln"><div class="qt">亏损,不符合预期</div><div class="pt">投资亏损,也<b>不符合自己的投资原则</b></div></div>
-<div class="q ly"><div class="qt">亏损,符合预期</div><div class="pt">目前浮亏,且<b>符合自己的投资原则</b></div></div>
+<div class="qcross">
+<span class="ax ax-t">盈利</span>
+<span class="ax ax-b">亏损</span>
+<span class="ax ax-l">不符合预期</span>
+<span class="ax ax-r">符合预期</span>
+<div class="qcg">
+<div class="qc pn"><div class="pt">虽然盈利,但<b>不符合</b>自己的投资原则</div></div>
+<div class="qc py"><div class="pt">目前浮盈,且<b>符合</b>自己的投资原则</div></div>
+<div class="qc ln"><div class="pt">投资亏损,也<b>不符合</b>自己的投资原则</div></div>
+<div class="qc ly"><div class="pt">目前浮亏,且<b>符合</b>自己的投资原则</div></div>
 </div>
 </div>
 </div>
