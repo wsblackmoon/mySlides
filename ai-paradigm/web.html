@@ -1,0 +1,119 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 应用范式（一） · 网页阅读版</title><style>
+:root{--bg:#ffffff;--bg-soft:#f6f7fb;--card:#fff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;--brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--ink:#0b0d12;--shadow:0 1px 2px rgba(16,24,40,.04),0 10px 30px rgba(16,24,40,.07)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d12;--bg-soft:#0f1219;--card:#12151d;--fg:#eef1f7;--fg-soft:#b3bacb;--fg-faint:#7f889c;--line:#222633;--brand:#7c78ff;--brand-2:#38bdf8;--brand-soft:#171a2b;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4)}}
+*{box-sizing:border-box}a{color:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-size:14px}
+.bar a{color:var(--fg-soft);text-decoration:none;font-weight:600;white-space:nowrap}.bar a:hover{color:var(--fg)}
+.bar .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--fg-faint);font-weight:600}
+.bar .btn{padding:7px 13px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+/* slide card */
+.slide{border-radius:20px;overflow:hidden}
+.slide .in{padding:44px 46px}
+.head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.ic{flex:none;width:46px;height:46px;border-radius:13px;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand)}
+.ic svg{width:24px;height:24px}
+.num{font-size:12.5px;font-weight:800;color:var(--brand);letter-spacing:.14em}
+.kick{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);font-weight:700;margin-top:2px}
+.slide h2{font-size:clamp(21px,2.9vw,30px);line-height:1.25;margin:6px 0 0;letter-spacing:-.01em}
+ul.pts{list-style:none;margin:22px 0 0;padding:0}
+ul.pts li{position:relative;padding:11px 0 11px 30px;font-size:16.5px;color:var(--fg-soft);border-top:1px solid var(--line)}
+ul.pts li:first-child{border-top:0}
+ul.pts li:before{content:"";position:absolute;left:4px;top:19px;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+ul.pts li b{color:var(--fg);font-weight:700}
+.is-principle .ic{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+.is-pitfall .ic{background:#fee2e2;color:#dc2626}
+@media(prefers-color-scheme:dark){.is-pitfall .ic{background:#3a1d1d;color:#f87171}}
+.is-pitfall ul.pts li:before{background:#ef4444}
+/* quotes */
+.quotes{margin-top:20px;display:grid;gap:16px}
+blockquote.mkt{margin:0;padding:20px 22px;background:var(--bg-soft);border-radius:14px;border:1px solid var(--line)}
+blockquote.mkt p{margin:0;font-size:16px;color:var(--fg)}
+blockquote.mkt cite{display:block;margin-top:12px;font-style:normal;font-size:13.5px;color:var(--fg-faint);font-weight:600}
+blockquote.prompt{margin:22px 0 0;padding:22px 24px;background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 8%,var(--bg)),color-mix(in srgb,var(--brand-2) 7%,var(--bg)));border:1px solid var(--line);border-radius:14px;font-size:17px;color:var(--fg)}
+blockquote.prompt .q{color:var(--brand);font-weight:800;font-size:20px}
+.note{margin:16px 0 0;color:var(--fg-faint);font-size:15px}
+/* compare */
+.s-compare figure{margin:22px 0 0}
+.s-compare img{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);display:block}
+.s-compare figcaption{margin-top:12px;color:var(--fg-faint);font-size:14px}
+/* cover / statement / closing (dark) */
+.s-cover,.s-statement,.s-closing{background:linear-gradient(135deg,#0b0d12,#141a2e);color:#eef1f7}
+.s-cover .in,.s-statement .in,.s-closing .in{padding:72px 46px}
+.s-cover .kick,.s-closing .kick{color:#8ea2ff}
+.s-cover h1{font-size:clamp(32px,6vw,58px);line-height:1.06;margin:16px 0 0;font-weight:800;letter-spacing:-.02em;background:linear-gradient(120deg,#a5b4ff,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover-sub{font-size:clamp(17px,2.4vw,22px);color:#cbd3e6;margin:18px 0 0}
+.cover-by{margin-top:34px;color:#7f889c;font-size:14px}
+.s-statement .big{font-size:clamp(26px,5vw,44px);line-height:1.2;color:#fff;font-weight:800;margin:10px 0 0}
+.s-statement .num{color:#8ea2ff}
+.s-closing h2{font-size:clamp(26px,4.6vw,40px);color:#fff;margin:8px 0 0;font-weight:800}
+.s-closing h2 b{background:linear-gradient(120deg,#a5b4ff,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.closing-lines{margin-top:22px}.closing-lines p{margin:8px 0;font-size:18px;color:#cbd3e6}
+.closing-lines b{color:#fff}
+@media(max-width:640px){.slide .in{padding:30px 22px}.s-cover .in,.s-statement .in,.s-closing .in{padding:52px 24px}.head{gap:12px}ul.pts li{font-size:15.5px;padding-left:26px}}
+
+.reader{max-width:920px;margin:0 auto;padding:26px 18px 90px}
+.reader .slide{margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.reader .lead{padding:6px 4px 4px}.reader .lead .k{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:700}
+.reader h1.dt{font-size:clamp(24px,4vw,34px);margin:8px 0 2px;font-weight:800}
+.reader .dsub{color:var(--fg-soft);font-size:17px;margin:0 0 6px}.reader .dby{color:var(--fg-faint);font-size:14px}
+</style></head><body><div class="bar"><a href="../">← 作品集</a><div class="t">AI 应用范式（一） · AI 是什么、不是什么、如何参与</div><a class="btn" href="slides.html">🖥️ 幻灯片播放</a></div>
+<div class="reader">
+ <div class="lead"><div class="k">华博 · 企业 AI 培训</div><h1 class="dt">AI 应用范式（一）</h1><p class="dsub">AI 是什么、不是什么、如何参与</p><p class="dby">吴斯 · Aaron Wu · 2026</p></div>
+ <article class="slide s-cover">
+  <div class="in">
+    <div class="kick">华博 · 企业 AI 培训</div>
+    <h1>AI 应用范式（一）</h1>
+    <p class="cover-sub">AI 是什么、不是什么、如何参与</p>
+    <div class="cover-by">吴斯 · Aaron Wu · 2026</div>
+  </div></article><article class="slide s-points ">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></span><div><div class="num">01</div><div class="kick">现象</div><h2>如火如荼的 AI 大模型，它究竟是个啥？</h2></div></div>
+    <ul class='pts'><li>每天都被 AI 新闻刷屏，各种贩卖焦虑的软文满天飞。</li><li><b>豆包：</b>写 PPT、批改孩子作业、陪独处的老人聊天，已经渗进日常。</li><li><b>Claude 这类模型：</b>一个 agent 就能编排若干 subagent，独立把一整件事做完。</li><li>AI 一步步渗透进工作与生活——<b>我的工作，会不会被替代？</b></li><li>三星、海力士、美光又涨了……这趟车，我还能上吗？</li></ul>
+  </div></article><article class="slide s-points ">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-1 5 3 3 0 0 0 2 5 3 3 0 0 0 5 1V4.5A2.5 2.5 0 0 0 9 4zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 1 5 3 3 0 0 1-2 5 3 3 0 0 1-5 1"/></svg></span><div><div class="num">02</div><div class="kick">一个形象的类比</div><h2>AI 是什么？把它想成一位远程实习生</h2></div></div>
+    <ul class='pts'><li>一位<b>牛津、斯坦福</b>刚毕业的博士生，来你公司实习。</li><li>身处异地、无法见面，所有协作都在<b>网上</b>进行。</li><li>极其勤奋、从不抱怨；但怕转正失败，容易<b>过度迎合</b>领导。</li><li>而且，这样的应届生，一次<b>给你 5 个</b>。</li><li><b>真正的问题：</b>不是他强不强，而是——你如何让他们融入团队、<b>协同工作</b>？</li></ul>
+  </div></article><article class="slide s-points">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h5v6a5 5 0 0 1-5 5M15 7h5v6a5 5 0 0 1-5 5"/></svg></span><div><div class="num">03</div><div class="kick">市场观察 · 一线声音</div><h2>AI 到底带来了什么？两段真实的话</h2></div></div>
+    <div class="quotes"><blockquote class="mkt"><p>有了 AI，大厂码农原来要 8 小时的活，一小时内就做完了。资深员工觉得回不去了，省下的时间用来处理家庭琐事、闲逛、发展兴趣爱好。至于对公司的影响，那就不知道了。</p><cite>—— 某硅谷考察团</cite></blockquote><blockquote class="mkt"><p>员工深度用 AI 确实提效，但对最终业务产出帮助没那么大——提效不代表他们会把省下的时间用来创造更大价值。得从原点，由老板、合伙人基于对 agent 的理解重构工作流，减少人的参与，这样的组织才是新物种。</p><cite>—— 国内最大 AI 实战社群</cite></blockquote></div>
+  </div></article><article class="slide s-points">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="6" rx="1"/><rect x="3" y="15" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M12 9v3M12 12H6v3M12 12h6v3"/></svg></span><div><div class="num">04</div><div class="kick">市场观察 · AI 原生组织</div><h2>“三个人的公司”，正在成为可能</h2></div></div>
+    <div class="quotes"><blockquote class="mkt"><p>我现在的项目要求 AI 原生组织，其实就三个人。理念是：用上下文替代管理，用 Token 替代劳动力，用结果替代过程。</p><cite>—— 某上市公司董事长</cite></blockquote></div><ul class='pts'><li><b>以客户为目标：</b>一切行动围绕客户价值。</li><li><b>以交付结果为唯一标准：</b>只看交付，不管过程。</li><li><b>以 Agent 为主体：</b>用 Agent 替代人力，用上下文替代管理。</li><li><b>以燃烧 Token 为方法：</b>Token 就是生产力，燃烧 Token 就是解决问题。</li></ul>
+  </div></article><article class="slide s-points ">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><div><div class="num">05</div><div class="kick">趋势</div><h2>我看到的三个关键词</h2></div></div>
+    <ul class='pts'><li><b>焦虑：</b>每个人都怕赶不上这趟车、怕被替代。</li><li><b>降本：</b>AI 极擅长重复性劳动，确实做到了极度降本。</li><li><b>利润：</b>尚未规模化提升利润，但规模化会催生<b>新的业务场景</b>。</li></ul>
+  </div></article><article class="slide s-statement">
+  <div class="in"><div class="kick">Part 2</div><h2 class="big">AI 大模型时代，<br>我该如何参与？</h2></div></article><article class="slide s-points is-principle">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><div><div class="num">原则 1</div><div class="kick">实战原则</div><h2>科学上网，用最好的模型</h2></div></div>
+    <ul class='pts'><li>学会科学上网，使用世界上<b>最先进的付费大模型</b>。</li><li>每月 20 美金，等于请一位斯坦福博士生<b>跪式服务</b>——极划算的生意。</li><li>既然已经花时间用它，就该用最好的模型完成任务。</li><li><b>本质是智力杠杆：</b>杠杆拉满，才能达到最好的效果。</li></ul>
+  </div></article><article class="slide s-points is-principle">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6.5a1.5 1.5 0 0 1 3 0V13a6 6 0 0 1-6 6H10a5 5 0 0 1-4-2l-2.5-3a1.5 1.5 0 0 1 2.3-1.9L8 14"/></svg></span><div><div class="num">原则 2</div><div class="kick">实战原则</div><h2>亲自上手，人人都用</h2></div></div>
+    <ul class='pts'><li>AI 不只是基层员工的事，是公司里<b>每一位参与者</b>的事。</li><li>今天就开始用，每个人都要用；每个人都是生产者，每个人都是“老板”。</li><li><b>层级越高、用得越多：</b>AI 本质是<b>决策者的智力放大器</b>。</li></ul>
+  </div></article><article class="slide s-points is-principle">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10M12 10a5 5 0 0 0-5-5H4a5 5 0 0 0 5 5zM12 10a5 5 0 0 1 5-5h3a5 5 0 0 1-5 5z"/></svg></span><div><div class="num">原则 3</div><div class="kick">实战原则</div><h2>像培养接班人一样培养 AI</h2></div></div>
+    <ul class='pts'><li>在真实工作 / 生活里，拿一个<b>具体任务</b>交给 AI，看结果。</li><li>结果不好，就告诉它哪里不好——像教导应届生一样教导它。</li><li>把任何想法、任何工作，一步步交给 AI 尝试；<b>像培养接班人一样培养它</b>。</li></ul>
+  </div></article><article class="slide s-points is-pitfall">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg></span><div><div class="num">误区 1</div><div class="kick">常见误区</div><h2>只用免费 AI</h2></div></div>
+    <ul class='pts'><li>豆包、百度、Google，在<b>生活查询</b>类场景表现优异。</li><li>但切到<b>深度理解、逻辑判断</b>，付费模型远远好于免费模型。</li><li><b>本质是算力：</b>付费购买更多算力，换取更深的推理过程。</li></ul>
+  </div></article><article class="slide s-points">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span><div><div class="num">举例 · 简单问题</div><div class="kick">眼见为实</div><h2>同一个问题，先问一个“简单”的</h2></div></div>
+    <blockquote class="prompt"><span class="q">“</span>我想健康、有意义地活到 100 岁。基于你对我的理解，帮我设计具体的执行计划——身体健康能生活自理，心理健康、社交有意义，财富健康有足够的被动现金流支撑前两者。<span class="q">”</span></blockquote>
+  </div></article><article class="slide s-compare">
+  <div class="in"><div class="kick">豆包  vs  Gemini · 活到 100 岁</div><h2>泛泛的框架，还是专家级的方案？</h2>
+    <figure><img loading="lazy" src="img/compare-100.jpg" alt="模型对比"><figcaption>左：豆包给出“三阶段框架”；右：Gemini 直接给出 Zone 2 有氧、VO2 Max、蓝区饮食、蛋白质前置等可执行细节——差距一目了然。</figcaption></figure>
+  </div></article><article class="slide s-points">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span><div><div class="num">举例 · 复杂问题</div><div class="kick">把问题加难</div><h2>再问一个“不讲道理”的</h2></div></div>
+    <blockquote class="prompt"><span class="q">“</span>100 岁的规划不错，但我的实际目标是活到 1000 岁，请制定详细的计划。<span class="q">”</span></blockquote><p class="note">到这一步，模型之间的差异才真正被拉开。</p>
+  </div></article><article class="slide s-compare">
+  <div class="in"><div class="kick">豆包  vs  Gemini · 活到 1000 岁</div><h2>越难的问题，越见高下</h2>
+    <figure><img loading="lazy" src="img/compare-1000.jpg" alt="模型对比"><figcaption>面对超出常识的目标，弱模型容易“泛泛而谈或答非所问”，强模型仍能给出结构化、可推进的路径。</figcaption></figure>
+  </div></article><article class="slide s-points is-pitfall">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a3.5 3.5 0 0 0-4.8 4L4 16.2V20h3.8l5.7-5.7a3.5 3.5 0 0 0 4-4.8l-2.2 2.2-2-2z"/></svg></span><div><div class="num">误区 2</div><div class="kick">常见误区</div><h2>把 AI 当“工具人”用</h2></div></div>
+    <ul class='pts'><li>“数据整理得不错，但报表还得我亲自来。”</li><li>“代码生成得还行，但我得改成我想要的才能上线。”</li><li>“必须严格按照我设计的流程执行。”</li><li><b>反过来想：</b>你把它当工具人，它就只能是工具人——真正的杠杆，是让它承担<b>更完整的一段工作</b>。</li></ul>
+  </div></article><article class="slide s-points is-pitfall">
+  <div class="in"><div class="head"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg></span><div><div class="num">误区 3</div><div class="kick">常见误区</div><h2>以为 AI 无所不能</h2></div></div>
+    <ul class='pts'><li>AI 本质是<b>概率模型</b>，概率上就会出错。</li><li>它给的是“概率上最优”的答案，但<b>赚钱的答案，往往是低概率</b>的。</li><li>AI 无法承担责任（背锅）。</li><li>AI 没有欲望，不会主动<b>提出需求</b>。</li><li><b>AI 没有判断力：</b>判断力是人给的。<b>what you feed decides what you get</b>。</li></ul>
+  </div></article><article class="slide s-closing">
+  <div class="in"><div class="kick">and one more thing</div><h2>用 AI 的<b>人</b>，很重要</h2><div class="closing-lines"><p>AI 让牛逼的人，变得更牛逼；</p><p>让平庸的人……（此处留白）。</p><p>所以——先成为那个<b>值得被放大</b>的人。</p></div></div></article>
+</div></body></html>

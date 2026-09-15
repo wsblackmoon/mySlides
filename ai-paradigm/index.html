@@ -1,0 +1,69 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 应用范式（一）</title><style>
+:root{--bg:#ffffff;--bg-soft:#f6f7fb;--card:#fff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;--brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--ink:#0b0d12;--shadow:0 1px 2px rgba(16,24,40,.04),0 10px 30px rgba(16,24,40,.07)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d12;--bg-soft:#0f1219;--card:#12151d;--fg:#eef1f7;--fg-soft:#b3bacb;--fg-faint:#7f889c;--line:#222633;--brand:#7c78ff;--brand-2:#38bdf8;--brand-soft:#171a2b;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4)}}
+*{box-sizing:border-box}a{color:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-size:14px}
+.bar a{color:var(--fg-soft);text-decoration:none;font-weight:600;white-space:nowrap}.bar a:hover{color:var(--fg)}
+.bar .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--fg-faint);font-weight:600}
+.bar .btn{padding:7px 13px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+/* slide card */
+.slide{border-radius:20px;overflow:hidden}
+.slide .in{padding:44px 46px}
+.head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.ic{flex:none;width:46px;height:46px;border-radius:13px;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand)}
+.ic svg{width:24px;height:24px}
+.num{font-size:12.5px;font-weight:800;color:var(--brand);letter-spacing:.14em}
+.kick{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);font-weight:700;margin-top:2px}
+.slide h2{font-size:clamp(21px,2.9vw,30px);line-height:1.25;margin:6px 0 0;letter-spacing:-.01em}
+ul.pts{list-style:none;margin:22px 0 0;padding:0}
+ul.pts li{position:relative;padding:11px 0 11px 30px;font-size:16.5px;color:var(--fg-soft);border-top:1px solid var(--line)}
+ul.pts li:first-child{border-top:0}
+ul.pts li:before{content:"";position:absolute;left:4px;top:19px;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+ul.pts li b{color:var(--fg);font-weight:700}
+.is-principle .ic{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+.is-pitfall .ic{background:#fee2e2;color:#dc2626}
+@media(prefers-color-scheme:dark){.is-pitfall .ic{background:#3a1d1d;color:#f87171}}
+.is-pitfall ul.pts li:before{background:#ef4444}
+/* quotes */
+.quotes{margin-top:20px;display:grid;gap:16px}
+blockquote.mkt{margin:0;padding:20px 22px;background:var(--bg-soft);border-radius:14px;border:1px solid var(--line)}
+blockquote.mkt p{margin:0;font-size:16px;color:var(--fg)}
+blockquote.mkt cite{display:block;margin-top:12px;font-style:normal;font-size:13.5px;color:var(--fg-faint);font-weight:600}
+blockquote.prompt{margin:22px 0 0;padding:22px 24px;background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 8%,var(--bg)),color-mix(in srgb,var(--brand-2) 7%,var(--bg)));border:1px solid var(--line);border-radius:14px;font-size:17px;color:var(--fg)}
+blockquote.prompt .q{color:var(--brand);font-weight:800;font-size:20px}
+.note{margin:16px 0 0;color:var(--fg-faint);font-size:15px}
+/* compare */
+.s-compare figure{margin:22px 0 0}
+.s-compare img{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);display:block}
+.s-compare figcaption{margin-top:12px;color:var(--fg-faint);font-size:14px}
+/* cover / statement / closing (dark) */
+.s-cover,.s-statement,.s-closing{background:linear-gradient(135deg,#0b0d12,#141a2e);color:#eef1f7}
+.s-cover .in,.s-statement .in,.s-closing .in{padding:72px 46px}
+.s-cover .kick,.s-closing .kick{color:#8ea2ff}
+.s-cover h1{font-size:clamp(32px,6vw,58px);line-height:1.06;margin:16px 0 0;font-weight:800;letter-spacing:-.02em;background:linear-gradient(120deg,#a5b4ff,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover-sub{font-size:clamp(17px,2.4vw,22px);color:#cbd3e6;margin:18px 0 0}
+.cover-by{margin-top:34px;color:#7f889c;font-size:14px}
+.s-statement .big{font-size:clamp(26px,5vw,44px);line-height:1.2;color:#fff;font-weight:800;margin:10px 0 0}
+.s-statement .num{color:#8ea2ff}
+.s-closing h2{font-size:clamp(26px,4.6vw,40px);color:#fff;margin:8px 0 0;font-weight:800}
+.s-closing h2 b{background:linear-gradient(120deg,#a5b4ff,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.closing-lines{margin-top:22px}.closing-lines p{margin:8px 0;font-size:18px;color:#cbd3e6}
+.closing-lines b{color:#fff}
+@media(max-width:640px){.slide .in{padding:30px 22px}.s-cover .in,.s-statement .in,.s-closing .in{padding:52px 24px}.head{gap:12px}ul.pts li{font-size:15.5px;padding-left:26px}}
+
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 20px}
+.wrap{width:100%;max-width:620px}.k{font-size:.8rem;letter-spacing:.16em;color:var(--brand);font-weight:700;text-transform:uppercase;margin:0 0 10px}
+h1{font-size:1.9rem;margin:0 0 6px;font-weight:800}.sub{color:var(--fg-soft);margin:0 0 4px}.by{color:var(--fg-faint);font-size:.9rem;margin:0 0 30px}
+a.card{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow);transition:transform .12s,border-color .12s}
+a.card:hover{transform:translateY(-2px);border-color:var(--brand)}
+.ci{font-size:1.6rem;width:46px;height:46px;display:grid;place-items:center;background:var(--brand-soft);border-radius:12px;flex:none}
+.ct b{display:block;font-size:1.05rem;margin-bottom:2px}.ct span{color:var(--fg-faint);font-size:.85rem}.ar{margin-left:auto;color:var(--brand-2);font-size:1.2rem}
+.back{color:var(--fg-faint);text-decoration:none;font-size:.85rem}footer{margin-top:24px;text-align:center}
+</style></head><body><div class="wrap">
+<p class="k">华博 · 企业 AI 培训</p><h1>AI 应用范式（一）</h1><p class="sub">AI 是什么、不是什么、如何参与</p><p class="by">吴斯 · Aaron Wu · 2026</p>
+<a class="card" href="slides.html"><div class="ci">🖥️</div><div class="ct"><b>幻灯片版</b><span>逐页翻阅 · 键盘/滑动切换</span></div><div class="ar">→</div></a>
+<a class="card" href="web.html"><div class="ci">📖</div><div class="ct"><b>网页阅读版</b><span>整页滚动 · 适合细读</span></div><div class="ar">→</div></a>
+<footer><a class="back" href="../">← 返回作品集</a></footer>
+</div></body></html>
