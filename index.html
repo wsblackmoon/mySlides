@@ -138,6 +138,7 @@
   .xp .card h3{margin:0;font-size:17px}
   .xp .card .yr{font-size:12.5px;color:var(--brand);font-weight:700;white-space:nowrap}
   .xp .card p{margin-top:8px;font-size:14.5px}
+  .xp-label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-top:58px}
 
   /* Case */
   .case{display:grid;gap:32px;align-items:center}
@@ -221,21 +222,8 @@
       <a class="btn btn-primary" data-view="home" data-scroll="works">看我的作品集</a>
       <a class="btn btn-ghost" data-view="consulting">了解我的 AI 战略咨询 →</a>
     </div>
-    <div class="stats">
-      <div class="stat"><b>16 年</b><span>工程 / 创业经验</span></div>
-      <div class="stat"><b>多领域</b><span>互金 · 保险 · 投资 · AI</span></div>
-      <div class="stat"><b>10+</b><span>已落地的系统与作品</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 背景介绍 -->
-<section id="background" class="soft">
-  <div class="wrap">
-    <span class="eyebrow">背景介绍</span>
-    <h2>一个既写代码、也做业务的长期实践者</h2>
-    <p class="lead">从工程到业务，从创业到投资 —— 我习惯把复杂问题拆开、动手做出来、再用真实数据迭代。下面是几段主要经历。</p>
-    <div class="grid cols-3 xp" style="margin-top:34px">
+    <div class="xp-label">主要经历</div>
+    <div class="grid cols-3 xp" style="margin-top:20px">
       <div class="card reveal"><div class="role"><h3>互联网金融创业</h3><span class="yr">8 年</span></div><p>主导过百亿级信贷规模落地，拿过雷军千万美金 B 轮融资。</p></div>
       <div class="card reveal"><div class="role"><h3>上市险企私域负责人</h3><span class="yr">5 年</span></div><p>操盘千万用户保险私域，主导 AI 项目落地，利润上亿。</p></div>
       <div class="card reveal"><div class="role"><h3>数字货币量化创业</h3><span class="yr">2 年</span></div><p>套利 / CTA / 做市商策略，穿越币圈熊市，控住风险。</p></div>
@@ -260,17 +248,9 @@
     <span class="eyebrow">作品集</span>
     <h2>公开分享的思考与作品</h2>
     <p class="lead">把方法论沉淀成可阅读的作品 —— 点击直接查看。</p>
-    <div class="grid cols-2" style="margin-top:34px">
-      <div class="card reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 1-2-2z"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></div>
-        <h3>构建个人投资交易系统 V1.0</h3>
-        <p>像个人一样持仓、像机构一样执行：了解自己 × 善用工具 × 差异化信息源。</p>
-        <ul><li>先想清楚赚的是什么钱：增长 vs 情绪</li><li>了解自己 · 善用工具 · 差异化信息源</li><li>让投资过程有记录、可改进、可迭代</li></ul>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
-          <a class="btn btn-primary" href="investment-system/slides.html">🖥️ 幻灯片版</a>
-          <a class="btn btn-ghost" href="investment-system/web.html">📖 网页长文版</a>
-        </div>
-      </div>
+    <!-- 企业服务 -->
+    <div class="xp-label" style="margin-top:40px">企业服务</div>
+    <div class="grid cols-2" style="margin-top:18px">
       <div class="card reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg></div>
         <h3>从小阵地到大私域</h3>
@@ -288,6 +268,21 @@
         <ul><li>多渠道行情数据抓取与聚合</li><li>定价因子建模 · 价格可解释可回溯</li><li>一屏看清「今天每套房定多少、为什么」</li></ul>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
           <a class="btn btn-primary" data-view="consulting" data-scroll="case">查看案例详情 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 个人思考 -->
+    <div class="xp-label" style="margin-top:44px">个人思考</div>
+    <div class="grid cols-2" style="margin-top:18px">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 1-2-2z"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></div>
+        <h3>构建个人投资交易系统 V1.0</h3>
+        <p>像个人一样持仓、像机构一样执行：了解自己 × 善用工具 × 差异化信息源。</p>
+        <ul><li>先想清楚赚的是什么钱：增长 vs 情绪</li><li>了解自己 · 善用工具 · 差异化信息源</li><li>让投资过程有记录、可改进、可迭代</li></ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <a class="btn btn-primary" href="investment-system/slides.html">🖥️ 幻灯片版</a>
+          <a class="btn btn-ghost" href="investment-system/web.html">📖 网页长文版</a>
         </div>
       </div>
     </div>
