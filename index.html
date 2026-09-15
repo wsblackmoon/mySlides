@@ -71,8 +71,8 @@
   .btn-primary:hover{transform:translateY(-1px)}
   .btn-ghost{border-color:var(--line);color:var(--fg);background:var(--bg-card)}
   .btn-ghost:hover{border-color:var(--brand)}
-  .nav-cta{display:none;padding:8px 16px;font-size:13.5px;font-weight:700;border-radius:10px;box-shadow:0 4px 12px color-mix(in srgb,var(--brand) 26%,transparent)}
-  .nav-cta:hover{box-shadow:0 6px 16px color-mix(in srgb,var(--brand) 34%,transparent)}
+  .nav-cta{display:none;padding:8px 16px;font-size:13.5px;font-weight:700;border-radius:10px;background:transparent;border:1.5px solid var(--brand);color:var(--brand);box-shadow:none}
+  .nav-cta:hover{background:color-mix(in srgb,var(--brand) 10%,transparent);color:var(--brand);transform:none}
   @media(min-width:760px){
     .nav-toggle{display:none!important}
     .nav-cta{display:inline-flex}
@@ -209,7 +209,7 @@
       <a class="tab" data-view="home">个人主页</a>
       <a class="tab-link" data-view="home" data-scroll="works">作品集</a>
       <a class="tab" data-view="consulting">AI 战略咨询</a>
-      <a class="btn btn-primary nav-cta" data-view="home" data-scroll="contact">联系我</a>
+      <a class="btn nav-cta" data-view="home" data-scroll="contact">联系我</a>
     </nav>
     <div class="nav-actions">
       <button class="theme-toggle" id="themeBtn" aria-label="切换主题">
