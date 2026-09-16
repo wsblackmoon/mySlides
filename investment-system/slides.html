@@ -99,7 +99,7 @@ body.nav-open #tm-mini{display:none}
 body:not(.nav-open) #nav-toggle{display:none}
 </style><style id="matrix-fx">
 .mtx .body{justify-content:center}
-.qcross{position:relative;height:62vh;margin:2vh auto 0;width:min(84vw,1200px)}
+.qcross{position:relative;height:62vh;margin:2vh auto 0;width:min(85vw,1220px)}
 .qcross:before{content:"";position:absolute;left:50%;top:30px;bottom:30px;width:2px;transform:translateX(-50%);border-radius:2px;background:linear-gradient(var(--green),color-mix(in srgb,var(--green) 14%,transparent) 46%,color-mix(in srgb,var(--red) 14%,transparent) 54%,var(--red))}
 .qcross:after{content:"";position:absolute;top:50%;left:120px;right:120px;height:2px;transform:translateY(-50%);border-radius:2px;background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 14%,transparent) 46%,color-mix(in srgb,var(--green) 14%,transparent) 54%,var(--green))}
 .qcross .ax{position:absolute;font-weight:800;font-size:clamp(15px,1.6vw,24px);z-index:2;background:var(--bg);padding:2px 10px}
@@ -109,15 +109,29 @@ body:not(.nav-open) #nav-toggle{display:none}
 .qcross .ax-r{right:0;top:50%;transform:translateY(-50%);color:var(--green)}
 .qcg{position:absolute;inset:36px 120px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
 .qcross .qc{display:flex;flex-direction:column;justify-content:center}
-.qcross .qc .pt{font-size:clamp(16px,1.75vw,27px);line-height:1.5;font-weight:600;margin:0}
 .qcross .qc b{color:var(--ink)}
-.qcross .qc .pt{padding-left:0}
-.qcross .qc .pt::before{display:none}
-.qc.pn{padding:0 3vw 5vh 0;color:var(--amber);align-items:flex-start;text-align:left}
-.qc.py{padding:0 0 5vh 3vw;color:var(--green)}
-.qc.ln{padding:5vh 3vw 0 0;color:var(--red)}
-.qc.ly{padding:5vh 0 0 3vw;color:var(--blue)}
-@media(max-width:760px){.qcross{height:auto;width:100%}.qcross:before,.qcross:after,.qcross .ax{display:none}.qcg{position:static;inset:auto;grid-template-columns:1fr;gap:2vh}.qcross .qc{padding:1.4vh 0!important}}
+/* 模板页：单行、去圆点、放大 */
+.mtx .qcross .qc .pt{padding-left:0;font-size:clamp(16px,1.75vw,27px);line-height:1.5;font-weight:600;margin:0}
+.mtx .qcross .qc .pt::before{display:none}
+.mtx .qc.pn{padding:0 3vw 5vh 0}
+.mtx .qc.py{padding:0 0 5vh 3vw}
+.mtx .qc.ln{padding:5vh 3vw 0 0}
+.mtx .qc.ly{padding:5vh 0 0 3vw}
+/* 案例页：标的标题(按象限上色) + 要点 */
+.qcross.ex{height:64vh}
+.qcross.ex .qcg{inset:40px 122px}
+.qcross.ex .qc .tk{font-size:clamp(15px,1.5vw,23px);font-weight:800;margin-bottom:.5vh}
+.qcross.ex .qc.pn .tk{color:var(--amber)}
+.qcross.ex .qc.py .tk{color:var(--green)}
+.qcross.ex .qc.ln .tk{color:var(--red)}
+.qcross.ex .qc.ly .tk{color:var(--blue)}
+.qcross.ex .qc .pt{font-size:clamp(12.5px,1.2vw,18px);line-height:1.45;margin:.7vh 0;padding-left:1.2em;color:var(--sub)}
+.qcross.ex .qc .pt::before{top:.5em;width:.34em;height:.34em;background:var(--gold)}
+.qcross.ex .qc.pn{padding:0 2.4vw 2.4vh 0}
+.qcross.ex .qc.py{padding:0 0 2.4vh 2.4vw}
+.qcross.ex .qc.ln{padding:2.4vh 2.4vw 0 0}
+.qcross.ex .qc.ly{padding:2.4vh 0 0 2.4vw}
+@media(max-width:760px){.qcross,.qcross.ex{height:auto;width:100%}.qcross:before,.qcross:after,.qcross .ax{display:none}.qcg,.qcross.ex .qcg{position:static;inset:auto;grid-template-columns:1fr;gap:2vh}.qcross .qc{padding:1.4vh 0!important}}
 </style></head>
 <body>
 <div class="deck" id="deck">
@@ -264,20 +278,26 @@ body:not(.nav-open) #nav-toggle{display:none}
   <div class="kick">PART 2 <span class="dim">/ 工具篇 · 定期复盘</span></div>
   <h2>每季度 1 小时:<span class="g">评的是决策质量,不是盈亏</span><span style="color:var(--dim);font-size:.55em;font-weight:600">　2026.09.15</span></h2>
 <div class="body">
-  <div class="quad">
-    <div class="q pn"><div class="qt">盈利,不符合预期</div><div class="tk">两倍做多海力士 +10%</div>
+  <div class="qcross ex">
+<span class="ax ax-t">盈利</span>
+<span class="ax ax-b">亏损</span>
+<span class="ax ax-l">不符合预期</span>
+<span class="ax ax-r">符合预期</span>
+<div class="qcg">
+<div class="qc pn"><div class="tk">两倍做多海力士 +10%</div>
       <div class="pt">波动太大,涨到 100% 没卖,跌到 50% 也没卖</div>
       <div class="pt">带杠杆的股票磨损风险大,<b>不适合长期持有</b></div></div>
-    <div class="q py"><div class="qt">盈利,符合预期</div><div class="tk">TSM +11%</div>
+<div class="qc py"><div class="tk">TSM +11%</div>
       <div class="pt">无论 AI 半导体如何发展,<b>台积电永远是绕不过的节点</b></div>
       <div class="pt">高端代工拼规模化投资壁垒与精细化执行,只赚合理利润</div></div>
-    <div class="q ln"><div class="qt">亏损,不符合预期</div><div class="tk">CRDO −5%</div>
+<div class="qc ln"><div class="tk">CRDO −5%</div>
       <div class="pt">群里有人喊单 + 盘前在涨,<b>FOMO 进场</b></div>
       <div class="pt">根本不知道这家公司是做啥的,只知道波动大</div></div>
-    <div class="q ly"><div class="qt">亏损,符合预期</div><div class="tk">GOOG −5%</div>
+<div class="qc ly"><div class="tk">GOOG −5%</div>
       <div class="pt">唯一具备 TPU/云/大模型/分发/一线团队的<b>全栈 AI 平台</b></div>
       <div class="pt">拿现金置换 GOOG,增加 AI 时代 beta 红利可能性</div></div>
-  </div>
+</div>
+</div>
 </div>
 </section>
 
@@ -286,20 +306,26 @@ body:not(.nav-open) #nav-toggle{display:none}
   <div class="kick">PART 2 <span class="dim">/ 工具篇 · 定期复盘</span></div>
   <h2>结果好 ≠ 决策对,<span class="g">结果差 ≠ 决策错</span><span style="color:var(--dim);font-size:.55em;font-weight:600">　2026.01.28</span></h2>
 <div class="body">
-  <div class="quad">
-    <div class="q pn"><div class="qt">盈利,不符合预期</div><div class="tk">蔚来 +50%</div>
+  <div class="qcross ex">
+<span class="ax ax-t">盈利</span>
+<span class="ax ax-b">亏损</span>
+<span class="ax ax-l">不符合预期</span>
+<span class="ax ax-r">符合预期</span>
+<div class="qcg">
+<div class="qc pn"><div class="tk">蔚来 +50%</div>
       <div class="pt">自己没开过,只是<b>听别人讲</b>、朋友圈看到利好</div>
       <div class="pt">不了解产品,也没看过财报</div></div>
-    <div class="q py"><div class="qt">盈利,符合预期</div><div class="tk">BTC 盈利变现 2/3</div>
+<div class="qc py"><div class="tk">BTC 盈利变现 2/3</div>
       <div class="pt"><b>亲自研究过</b>算法、冷钱包、ledger;忍受 70% 回撤</div>
       <div class="pt">1/3 放冷钱包<b>留给下一代</b></div></div>
-    <div class="q ln"><div class="qt">亏损,不符合预期</div><div class="tk">ETH 合约 止损 100 ETH</div>
+<div class="qc ln"><div class="tk">ETH 合约 止损 100 ETH</div>
       <div class="pt">22 年币安开多 ETH、开空 BTC</div>
       <div class="pt">只记得止损那一刻<b>如释重负</b>,可以安心睡觉</div></div>
-    <div class="q ly"><div class="qt">亏损,符合预期</div><div class="tk">CRCL 浮亏</div>
+<div class="qc ly"><div class="tk">CRCL 浮亏</div>
       <div class="pt">认可<b>资产上链</b>的前提是稳定币普世化</div>
       <div class="pt">稳定币牌照本质是<b>垄断生意</b></div></div>
-  </div>
+</div>
+</div>
 </div>
 </section>
 
