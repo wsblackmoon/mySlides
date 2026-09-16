@@ -556,7 +556,7 @@ body:not(.nav-open) #nav-toggle{display:none}
 <button id="tm-mini" title="展开目录 (M)">00:00</button>
 <button id="nav-toggle" title="目录 / 隐藏 (M)" aria-label="目录">☰</button>
 <aside id="nav-panel" aria-label="幻灯片目录">
-  <div class="np-timer"><span class="t" id="tm-disp">00:00</span><button id="tm-pause" title="暂停/继续">⏸</button><button id="tm-reset" title="归零">↺</button></div>
+  <div class="np-timer"><span class="t" id="tm-disp">00:00</span><button id="tm-pause" title="暂停/继续">▶</button><button id="tm-reset" title="归零">↺</button></div>
   <div id="nav-list"></div>
 </aside>
 <script>
@@ -600,7 +600,7 @@ body:not(.nav-open) #nav-toggle{display:none}
     tgl.addEventListener('click',function(e){e.stopPropagation();toggle();});
     document.getElementById('nav-panel').addEventListener('click',function(e){e.stopPropagation();});
     document.addEventListener('keydown',function(e){if((e.key==='m'||e.key==='M')&&!e.metaKey&&!e.ctrlKey){toggle();}});
-    var elapsed=0,running=true,t0=Date.now();var disp=document.getElementById('tm-disp');
+    var elapsed=0,running=false,t0=Date.now();var disp=document.getElementById('tm-disp');
     function fmt(ms){var s=Math.floor(ms/1000);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;var p=function(x){return String(x).padStart(2,'0');};return (h>0?p(h)+':':'')+p(m)+':'+p(ss);}
     function tick(){var v=fmt(elapsed+(running?Date.now()-t0:0));disp.textContent=v;var mn=document.getElementById("tm-mini");if(mn)mn.textContent=v;}
     setInterval(tick,300);tick();
