@@ -345,10 +345,9 @@ body:not(.nav-open) #nav-toggle{display:none}
   <h2>构建<span class="g">差异化信息源</span></h2>
 <div class="body">
   <div class="punch" style="margin-top:0;margin-bottom:2vh">你的<span class="g">认知天花板</span>,由你的<span class="g">信息源质量</span>决定。必须像管理饮食一样,精心管理你的信息摄入。</div>
-  <div class="pt"><b>去除噪音:</b>多看高价值群、深度访谈、X;<span class="bad">少看朋友圈,删除抖音</span></div>
-  <div class="pt"><b>建立信息清单,三条直接过滤:</b>没有明确出处的 / 没有独立观点与可验证逻辑框架的 / <span class="bad">人品不行的人或机构</span></div>
-  <div class="pt"><b>多看付费内容,限制数量:</b>公众号 <span class="hl">50</span> 个、推特 <span class="hl">200</span> 个、知识星球 <span class="hl">5</span> 个、付费社群 <span class="hl">3</span> 个</div>
-  <div class="pt">给长期使用的信息源建立<b>评估框架,有进有出</b>,良性循环</div>
+  <div class="pt"><b>去除噪音:</b>多看高价值群、多看深度访谈、多看 X;<span class="bad">少看朋友圈,删除抖音</span></div>
+  <div class="pt"><b>建立信息清单:</b>限制数量——公众号 <span class="hl">50</span>、推特 <span class="hl">200</span>、知识星球 <span class="hl">5</span>、付费社群 <span class="hl">3</span>;三条直接过滤——没有明确出处 / 没有独立观点与可验证逻辑框架 / <span class="bad">人品不行的人或机构</span></div>
+  <div class="pt"><b>多看付费内容:</b>付费即门槛,<b>浓度远大于免费</b>;付费公众号 / 社群 / 知识星球 / 付费 X / substack / 华尔街日报 / 巴伦周刊;给信息源建立<b>评估框架</b>,有进有出、良性循环</div>
 </div>
 </section>
 
@@ -540,11 +539,13 @@ body:not(.nav-open) #nav-toggle{display:none}
     if(e.clientX>window.innerWidth*0.66){next();}
     else if(e.clientX<window.innerWidth*0.15){prev();}
   });
-  var tx=null;
-  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;});
+  var tx=null,ty=null;
+  document.addEventListener('touchstart',function(e){if(e.target.closest&&e.target.closest('#nav-panel')){tx=null;return;}tx=e.touches[0].clientX;ty=e.touches[0].clientY;});
   document.addEventListener('touchend',function(e){
-    if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;
-    if(dx<-40){next();}else if(dx>40){prev();}tx=null;
+    if(tx===null)return;var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dy)>Math.abs(dx)){if(dy<-40){next();}else if(dy>40){prev();}}
+    else{if(dx<-40){next();}else if(dx>40){prev();}}
+    tx=null;ty=null;
   });
   window.__deck={goto:function(k){show(k,true);},next:next,prev:prev,count:n,get index(){return i;}};
   show(0,false);
