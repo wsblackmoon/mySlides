@@ -1,0 +1,75 @@
+/* mySlides 演示引擎 · 与 deck.js 配套使用（用法见 CLAUDE.md「幻灯片演示工具」）
+   只负责演示外壳：翻页、分步揭示、进度条、左侧目录、计时器。幻灯片内容的样式由各页面自己写。 */
+:root{
+  --nav-w:266px;
+  --ui-fg:#2b2f38;--ui-dim:#9098a6;--ui-sub:#727a88;--ui-strong:#14161c;
+  --ui-hover:#eef0f4;--ui-hover2:#f1f2f6;--ui-accent:#4f46e5;--ui-accent-bg:#edefff;
+  --ui-line:#e6e8ef;--ui-card:#fff;--ui-scroll:#cfd4de;
+  --deck-ease:cubic-bezier(.2,.7,.2,1);
+  --deck-font:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",system-ui,sans-serif;
+}
+/* 深色外壳：<body class="deck-dark"> */
+body.deck-dark{
+  --ui-fg:#dfe3ec;--ui-dim:#7f889c;--ui-sub:#9aa3b5;--ui-strong:#eef1f7;
+  --ui-hover:#1a1e29;--ui-hover2:#161a23;--ui-accent:#8b87ff;--ui-accent-bg:#1c1f35;
+  --ui-line:#262b38;--ui-card:#12151d;--ui-scroll:#394054;
+}
+html,body{height:100%;margin:0;overflow:hidden}
+
+/* 舞台：目录展开时整体右移 */
+.deck{position:fixed;inset:0;transition:left .28s var(--deck-ease)}
+body.nav-open .deck{left:var(--nav-w)}
+.deck>.slide{position:absolute;inset:0;display:none;flex-direction:column;box-sizing:border-box}
+.deck>.slide.on{display:flex}
+
+/* 分步揭示：有 .body 的页，第一下只显示标题，第二下显示 .body */
+.slide .body{opacity:0;transform:translateY(16px);transition:opacity .55s var(--deck-ease),transform .55s var(--deck-ease)}
+.slide.on.reveal .body{opacity:1;transform:none}
+
+/* 底部进度条 + 右上角提示 */
+.deck-hud{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;padding:10px 22px;z-index:9;color:var(--ui-dim);font:12.5px/1.4 var(--deck-font);user-select:none;transition:left .28s var(--deck-ease)}
+body.nav-open .deck-hud{left:var(--nav-w)}
+.deck-hud .bar{flex:1;height:3px;background:var(--ui-bar,var(--ui-line));border-radius:2px;margin:0 16px;overflow:hidden}
+.deck-hud .bar i{display:block;height:100%;background:var(--ui-prog,var(--ui-accent));width:0;transition:width .25s}
+.deck-hud .no{font-variant-numeric:tabular-nums}
+.deck-hint{position:fixed;top:14px;right:20px;color:var(--ui-dim);font:12px/1.4 var(--deck-font);z-index:9;user-select:none}
+
+/* 左侧目录 */
+#deck-nav{position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);z-index:110;background:transparent;transform:translateX(-100%);transition:transform .28s var(--deck-ease);display:flex;flex-direction:column;font-family:var(--deck-font)}
+body.nav-open #deck-nav{transform:none}
+#deck-nav-toggle{position:fixed;top:12px;left:calc(var(--nav-w) - 42px);z-index:120;width:36px;height:36px;border-radius:9px;border:0;background:transparent;color:var(--ui-dim);cursor:pointer;display:grid;place-items:center;font-size:17px}
+#deck-nav-toggle:hover{color:var(--ui-accent);background:var(--ui-hover)}
+body:not(.nav-open) #deck-nav-toggle{display:none}
+.np-timer{padding:13px 52px 11px 16px;display:flex;align-items:center;gap:9px}
+.np-timer .t{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ui-strong);flex:1}
+.np-timer button{border:1px solid var(--ui-line);background:var(--ui-card);border-radius:8px;width:30px;height:30px;cursor:pointer;color:var(--ui-sub);font-size:13px;display:grid;place-items:center}
+.np-timer button:hover{border-color:var(--ui-accent);color:var(--ui-accent)}
+.np-list{flex:1;overflow-y:auto;overflow-x:hidden;padding:2px 10px 8px;scrollbar-width:none}
+.np-list:hover{scrollbar-width:thin;scrollbar-color:var(--ui-scroll) transparent}
+.np-list::-webkit-scrollbar{width:0;height:0}
+.np-list:hover::-webkit-scrollbar{width:6px}
+.np-list::-webkit-scrollbar-thumb{background:var(--ui-scroll);border-radius:3px}
+.np-g{padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ui-fg);line-height:1.4;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.np-g:hover{background:var(--ui-hover)}
+.np-g.active{color:var(--ui-accent);background:var(--ui-accent-bg)}
+.np-item{padding:6px 10px 6px 26px;border-radius:7px;cursor:pointer;font-size:12.6px;color:var(--ui-sub);line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.np-item:hover{background:var(--ui-hover2);color:var(--ui-fg)}
+.np-item.active{background:var(--ui-accent-bg);color:var(--ui-accent);font-weight:600}
+.np-foot{padding:10px 20px 14px;font-size:12.5px}
+.np-foot a{color:var(--ui-dim);text-decoration:none;font-weight:600}
+.np-foot a:hover{color:var(--ui-accent)}
+
+/* 目录收起时左上角的迷你计时器（点击展开目录） */
+#deck-tm-mini{position:fixed;top:12px;left:12px;z-index:121;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:8px;border:1px solid var(--ui-line);background:color-mix(in srgb,var(--ui-card) 92%,transparent);backdrop-filter:blur(6px);color:var(--ui-strong);font:800 13px/1.4 var(--deck-font);font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:0 2px 12px rgba(16,24,40,.1)}
+#deck-tm-mini:before{content:"\23f1";font-weight:400;font-size:11px;opacity:.7}
+#deck-tm-mini:hover{border-color:var(--ui-accent);color:var(--ui-accent)}
+body.nav-open #deck-tm-mini{display:none}
+
+/* 手机：目录浮在内容上方，不推开舞台 */
+@media(max-width:760px){
+  :root{--nav-w:80vw}
+  body.nav-open .deck,body.nav-open .deck-hud{left:0}
+  #deck-nav{background:var(--ui-card)}
+  body.nav-open #deck-nav{box-shadow:4px 0 24px rgba(0,0,0,.18)}
+  .deck-hint{display:none}
+}
