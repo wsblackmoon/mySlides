@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>科学上网清单 V1.3</title>
+<meta name="description" content="一份自用、能跑通的科学上网配置清单：付费机场 + Clash Verge 客户端 + TUN 虚拟网卡 + 美区 Gmail 登录 Claude。">
+<style>
+:root{--bg:#ffffff;--card:#f6f7f9;--card2:#f2f0ea;--line:#e2e6ee;--ink:#1b2334;--sub:#49566d;--dim:#939cad;--gold:#b57e14;--goldbg:#e8b45a;--red:#c8423d;--green:#15895a;--blue:#2e6bbf}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1219;--card:#161a23;--card2:#1b1e28;--line:#28303f;--ink:#eef1f7;--sub:#b3bacb;--dim:#7f889c;--gold:#e0a63f;--goldbg:#5a4622}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif}
+b,strong{color:var(--gold)}
+a{color:var(--blue);text-decoration:none}
+.wrap{max-width:980px;margin:0 auto;padding:40px 28px 80px}
+.back{display:inline-block;color:var(--dim);font-size:14px;margin-bottom:20px}
+.back:hover{color:var(--gold)}
+.hero{text-align:center;padding:24px 0 40px;border-bottom:1px solid var(--line)}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--dim);border:1px solid var(--line);border-radius:20px;padding:3px 14px;margin-bottom:18px}
+.hero h1{font-size:40px;font-weight:800;line-height:1.3}
+.hero h1 .g{color:var(--gold)}
+.hero .sub{color:var(--sub);margin-top:10px;font-size:17px}
+.hero .meta{margin-top:16px;color:var(--dim);font-size:13px}
+.part{margin-top:48px}
+.kick{font-size:13px;letter-spacing:4px;color:var(--gold);font-weight:800;text-transform:uppercase}
+.kick .dim{color:var(--dim);letter-spacing:2px;font-weight:600}
+h2{font-size:28px;font-weight:800;line-height:1.35;margin:6px 0 18px}
+h2 .g{color:var(--gold)}
+h3{font-size:20px;font-weight:800;margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+.stepno{flex:none;width:30px;height:30px;border-radius:9px;background:var(--goldbg);color:#3a2a05;display:grid;place-items:center;font-size:15px;font-weight:800}
+@media (prefers-color-scheme:dark){.stepno{color:#f7e6c2}}
+.pt{position:relative;padding-left:1.5em;margin:11px 0;color:var(--sub)}
+.pt::before{content:"";position:absolute;left:0;top:.68em;width:.42em;height:.42em;border-radius:50%;background:var(--gold)}
+.pt b{color:var(--ink);font-weight:700}
+.pt .hl{color:var(--gold);font-weight:700}
+.pt .bad{color:var(--red);font-weight:700}
+.punch{margin:20px 0;background:var(--card2);border-left:4px solid var(--goldbg);border-radius:0 12px 12px 0;padding:14px 18px;font-weight:600;font-size:15.5px;color:var(--sub)}
+.punch b{color:var(--gold)}
+.linkbtn{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#c8792e,#e0a63f);color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:14.5px;margin:10px 0}
+.linkbtn:hover{filter:brightness(1.05)}
+.shot{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px;margin:16px 0 6px;box-shadow:0 8px 28px rgba(23,32,52,.1)}
+.shot img{width:100%;display:block;border-radius:8px}
+.shot.half{max-width:520px}
+.cap{color:var(--dim);font-size:12.5px;text-align:center;margin-bottom:14px}
+.end{margin-top:56px;text-align:center;border-top:1px solid var(--line);padding-top:34px}
+.end .big{font-size:20px;font-weight:800}
+.end .big .g{color:var(--gold)}
+.credit{margin-top:22px;color:var(--dim);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html#works">← 返回个人主页</a>
+
+  <div class="hero">
+    <span class="tag">个人思考 · 工具</span>
+    <h1>科学上网清单 <span class="g">V1.3</span></h1>
+    <p class="sub">一份自用的、能跑通的配置清单。</p>
+    <p class="meta">吴斯 Aaron · 更新于 2026-07-23</p>
+  </div>
+
+  <p class="punch">一次性把梯子说清楚：<b>付费机场 → 装 Clash 客户端 → 导入订阅 → 开 TUN 虚拟网卡 → 用美区 Gmail 登录</b>。以下是我自己在用、目前还算稳定的一套。这是个人自用记录，仅供参考，请自行判断、合规使用，风险自负；链接中的注册码为我的个人邀请码。</p>
+
+  <div class="part">
+    <div class="kick">STEP 01 · <span class="dim">科学上网</span></div>
+    <h2>把梯子<span class="g">搭起来</span></h2>
+
+    <h3><span class="stepno">1</span>购买付费 VPN（机场）</h3>
+    <div class="pt">我用的是这个，目前还算稳定。</div>
+    <a class="linkbtn" href="https://v2.suda.moe/auth/register?code=S9S7" target="_blank" rel="noopener nofollow">前往注册 →</a>
+
+    <h3><span class="stepno">2</span>下载安装 VPN 客户端</h3>
+    <div class="pt">机场网站里一般有客户端下载链接；也可以直接去 <b>Clash Verge</b> 的 GitHub 下载对应系统安装包。</div>
+    <div class="pt"><span class="hl">一定要用管理员模式安装：</span><a href="https://github.com/clash-verge-rev/clash-verge-rev/releases" target="_blank" rel="noopener">github.com/clash-verge-rev/clash-verge-rev/releases</a></div>
+    <div class="shot"><img src="images/kxsw-01-clash-download.png" alt="Clash Verge GitHub Releases 下载页"></div>
+    <div class="cap">Clash Verge 的 GitHub Releases 下载页</div>
+
+    <h3><span class="stepno">3</span>复制 Clash 订阅地址</h3>
+    <div class="pt">在机场后台复制你的 Clash 订阅链接。</div>
+    <div class="shot"><img src="images/kxsw-02-copy-sub.png" alt="复制 Clash 订阅地址"></div>
+    <div class="cap">机场后台 · 复制订阅地址</div>
+
+    <h3><span class="stepno">4</span>把订阅地址导入客户端</h3>
+    <div class="pt">回到 Clash Verge，粘贴订阅地址并导入，拉取节点。</div>
+    <div class="shot"><img src="images/kxsw-03-import-sub.png" alt="导入 Clash 订阅地址"></div>
+    <div class="cap">导入订阅 · 拉取节点</div>
+
+    <h3><span class="stepno">5</span>开启 TUN 虚拟网卡模式</h3>
+    <div class="pt">进入设置页，找到「虚拟网卡 / TUN 模式」，右侧有一个<b>小扳手图标</b>，点击并安装；</div>
+    <div class="pt">安装完毕后，<b>退出并重启 Clash</b>；</div>
+    <div class="pt">Mac 上一定要用<span class="hl">管理员模式</span>安装虚拟网卡，否则会出现<span class="bad">「明明开了却依然翻不出去」</span>的问题。</div>
+    <div class="shot"><img src="images/kxsw-04-tun-mode.png" alt="开启 TUN 虚拟网卡模式"></div>
+    <div class="cap">开启 TUN 虚拟网卡 · 点小扳手安装</div>
+
+    <h3><span class="stepno">6</span>设置好并开启 VPN</h3>
+    <div class="shot"><img src="images/kxsw-05-enable-vpn.png" alt="设置并开启 VPN"></div>
+    <div class="cap">选好节点 · 开启代理</div>
+
+    <h3><span class="stepno">7</span>测试是否成功</h3>
+    <div class="pt">打开测试页面确认已经出墙、节点可用。</div>
+    <div class="shot"><img src="images/kxsw-06-test.png" alt="测试连接是否成功"></div>
+    <div class="cap">测试 · 确认已出墙</div>
+  </div>
+
+  <div class="part">
+    <div class="kick">STEP 02 · <span class="dim">登录 Claude</span></div>
+    <h2>用美区 Gmail <span class="g">登录</span></h2>
+    <h3><span class="stepno">8</span>准备美区 Gmail，登录 Claude</h3>
+    <div class="pt">准备一个 Gmail 账户（注册时<b>居住地区选择美国</b>，填一个美国地址）。</div>
+    <div class="pt">打开 Claude 客户端 → 选择「用 Google 账号登录」→ 选这个<b>美区 Gmail</b>，搞定。</div>
+  </div>
+
+  <div class="end">
+    <div class="big">付费机场 <span class="g">×</span> Clash Verge <span class="g">×</span> TUN 网卡 <span class="g">×</span> 美区 Gmail</div>
+    <div class="credit">© <span id="yr"></span> 吴斯 Aaron Wu · 个人自用记录，仅供参考</div>
+  </div>
+</div>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
