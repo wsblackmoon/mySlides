@@ -18,7 +18,7 @@ assets/                 # 微信二维码等公共图
   └─ deck/              # 幻灯片演示工具(deck.css + deck.js),所有 slides.html 共用
 ```
 
-现有作品:`ai-paradigm/`、`private-domain/`、`investment-system/`、`kexue-shangwang/`(科学上网清单，个人思考首篇)。
+现有作品:`ai-paradigm/`、`private-domain/`、`investment-system/`(投资交易系统·上:工具与信息)、`investment-system-2/`(下:分析与执行)、`kexue-shangwang/`(科学上网清单，个人思考首篇)。
 
 ## 加一篇「个人思考」文章
 
