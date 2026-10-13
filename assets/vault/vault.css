@@ -1,0 +1,41 @@
+/* 私享会 · 口令页与目录页样式(配套 vault.js) */
+:root{--bg:#f6f7fb;--card:#fff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;--brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--shadow:0 1px 2px rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+
+/* 口令门 */
+.vg{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.vg-card{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 30px 26px;box-shadow:var(--shadow);text-align:center}
+.vg-ic{width:52px;height:52px;margin:0 auto 14px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+.vg-ic svg{width:24px;height:24px}
+.vg-card h1{margin:0;font-size:24px;letter-spacing:.02em}
+.vg-sub{margin:6px 0 22px;color:var(--fg-faint);font-size:14px}
+.vg-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px;font-size:16px;outline:none;background:#fff;color:var(--fg)}
+.vg-card input:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.vg-card button{width:100%;margin-top:12px;padding:12px;border:0;border-radius:11px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+.vg-card button:disabled{opacity:.7;cursor:default}
+.vg-err{min-height:20px;margin-top:10px;color:#c8423d;font-size:13.5px}
+.vg-back{display:inline-block;margin-top:8px;color:var(--fg-faint);font-size:13.5px}
+.vg-back:hover{color:var(--brand)}
+
+/* 目录页 */
+.vh{max-width:1000px;margin:0 auto;padding:40px 22px 70px}
+.vh-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vh-top a,.vh-top button{color:var(--fg-faint);font-size:14px;font-weight:600;background:none;border:0;cursor:pointer;padding:0}
+.vh-top a:hover,.vh-top button:hover{color:var(--brand)}
+.vh-eyebrow{margin-top:34px;font-size:13px;letter-spacing:.14em;color:var(--brand);font-weight:700}
+.vh h1{margin:8px 0 6px;font-size:clamp(26px,4vw,34px);letter-spacing:-.01em}
+.vh-lead{margin:0;color:var(--fg-soft)}
+.vh-grid{display:grid;gap:16px;margin-top:30px}
+@media(min-width:720px){.vh-grid{grid-template-columns:repeat(3,1fr)}}
+.vh-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.vh-card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.vh-card .d{font-size:12.5px;color:var(--brand);font-weight:700}
+.vh-card h3{margin:6px 0;font-size:16.5px}
+.vh-card p{margin:0;color:var(--fg-soft);font-size:13.5px;line-height:1.55}
+.vh-card ul{margin:10px 0 0;padding:0;list-style:none}
+.vh-card li{position:relative;padding-left:16px;margin-top:5px;color:var(--fg-soft);font-size:12.8px}
+.vh-card li:before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+.vh-card .go{margin-top:auto;padding-top:14px;color:var(--brand);font-size:13.5px;font-weight:700}

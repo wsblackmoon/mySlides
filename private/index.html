@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>私享会 · 吴斯 Aaron Wu</title>
+<link rel="stylesheet" href="../assets/vault/vault.css">
+</head>
+<body>
+<div id="vault-gate" class="vg" hidden>
+  <form class="vg-card">
+    <div class="vg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <h1>私享会</h1>
+    <p class="vg-sub">仅对受邀朋友开放,请输入口令</p>
+    <input type="password" autocomplete="current-password" placeholder="口令" aria-label="口令">
+    <button type="submit">进入</button>
+    <div class="vg-err" role="alert"></div>
+    <a class="vg-back" href="../index.html#works">← 返回个人主页</a>
+  </form>
+</div>
+<main id="vault-hub" class="vh" hidden></main>
+<script>
+window.vaultRenderHub=function(items){
+  var hub=document.getElementById('vault-hub');
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+  var top=el('div','vh-top');var back=el('a',null,'← 返回个人主页');back.href='../index.html#works';
+  var lock=el('button',null,'🔒 锁定');lock.onclick=window.vaultLock;top.append(back,lock);
+  var grid=el('div','vh-grid');
+  items.forEach(function(it){
+    var c=el('a','vh-card');c.href=it.href;
+    c.append(el('div','d',it.date||''),el('h3',null,it.title),el('p',null,it.desc||''));
+    var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul,el('div','go','阅读 →'));
+    grid.append(c);
+  });
+  hub.append(top,el('div','vh-eyebrow','私享会'),el('h1',null,'仅对受邀朋友开放的内容'),el('p','vh-lead','持仓复盘、私密研究与一手信息整理。请勿外传。'),grid);
+  hub.hidden=false;
+};
+</script>
+<script type="application/json" id="vault-data">{"kind":"hub","salt":"FsN6i8HTndV7WpwJIGZ0ow==","iter":600000,"iv":"mD9CHWHTcP9YHtgz","ct":"6RDhXAzesMRO5IcrqunNSd9X8L4UdYFYWGh+VMTZi+LURTRyoKpp18ieS526kD6ajm8LXKIHDlFk0txLuPz3/1IF+CLr3KvKstCSClETcYmLcvfX74rj6LufQXr0iCG6qG+8VSokHy5A/JuByulf6NgT4+b6FhlLUaQmFmYbl52ZiICjBwgtCqMwspXosMsWJYkepmhh+Fc409po6wUlrE/NtKCsETyRuvUfE2017e9w12Px4+DMqF4iprO+OlZn1yA94b9DuiqLO0RZibbA9vagosDqJiY4eKzDIG/4JvYeQBVsV5YdqDM9CNm02B3njYcTpX305rNjmd5TQqd+Z/mbL146iQCpHMA2aNOwfqB3rPw31qlZJ4tO880yooel0vFckpSRKkROD8G6wwDkSAnV6L2da8RcCxj+47CuO2tqKF25L8ccTb44QmRfDifZs9/Ts0ux+3lvj5TCX43Zmgp6715hk392gX5Lg3EPu8PUUABLCgeQ/D+l35KWM+gMVHo="}</script>
+<script src="../assets/vault/vault.js"></script>
+</body>
+</html>

@@ -14,11 +14,14 @@ index.html              # 主页：导航(个人主页/作品集/AI战略咨询)
   ├─ slides.html        # 幻灯片版(可选)
   ├─ web.html           # 网页阅读版
   └─ images/            # 该文的配图
+private/                # 私享会:构建生成的加密页面(勿手改)
+tools/vault-build.mjs   # 私享会加密构建脚本
 assets/                 # 微信二维码等公共图
+  ├─ vault/             # 私享会口令页(vault.css + vault.js)
   └─ deck/              # 幻灯片演示工具(deck.css + deck.js),所有 slides.html 共用
 ```
 
-现有作品:`ai-paradigm/`、`private-domain/`、`investment-system/`(投资交易系统·上:工具与信息)、`investment-system-2/`(下:分析与执行)、`kexue-shangwang/`(科学上网清单，个人思考首篇)、`semis-ai-sensors/`(半导体/AI 双传感器总控页)。
+现有作品:`ai-paradigm/`、`private-domain/`、`investment-system/`(投资交易系统·上:工具与信息)、`investment-system-2/`(下:分析与执行)、`kexue-shangwang/`(科学上网清单，个人思考首篇)。私享会内容在 `private/`(加密,见下)。
 
 ## 加一篇「个人思考」文章
 
@@ -47,6 +50,16 @@ assets/                 # 微信二维码等公共图
 - **配色**:在页面里覆盖 `--ui-prog`(进度条)、`--ui-bar`(进度条底)、`--ui-accent`(目录高亮)等变量。
 - 图片可以写 `loading="lazy"`,引擎会提前加载当前页和下一页。
 - 参考:`investment-system/slides.html`(整屏排版)、`ai-paradigm/slides.html`(居中卡片)、`private-domain/slides.html`(整页图片 + 深色)。
+
+## 私享会(需口令)
+
+私密内容(持仓、群内信息等)只放在主页「私享会」分类下,**仓库里只能有密文**(仓库是公开的)。
+
+- 明文源放在仓库外:`~/AItools/mySlides-private/`(`manifest.json` + 各页 HTML,图片放同目录,构建时会内联进密文)。
+- 新增/修改一篇:改源目录 → 在仓库根目录运行 `VAULT_PASS='口令' node tools/vault-build.mjs` → 提交 `private/` 并推送。
+- 口令只在命令行传入,**不要写进仓库、提交信息或本文件**;换口令就用新口令重跑构建。
+- 原理:PBKDF2(60 万次)派生密钥 + AES-GCM,浏览器本地解密;解锁一次后本机记住,目录页「锁定」可清除。
+- **绝不**把私享会内容放进普通 `<slug>/` 目录或「个人思考」卡片。
 
 ## 内容/发布约定(重要)
 
