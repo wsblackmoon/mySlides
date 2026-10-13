@@ -8,36 +8,36 @@
 <link rel="stylesheet" href="../assets/vault/vault.css">
 </head>
 <body>
-<div id="vault-gate" class="vg" hidden>
-  <form class="vg-card">
-    <div class="vg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-    <h1>私享会</h1>
-    <p class="vg-sub">仅对受邀朋友开放,请输入口令</p>
-    <input type="password" autocomplete="current-password" placeholder="口令" aria-label="口令">
-    <button type="submit">进入</button>
-    <div class="vg-err" role="alert"></div>
-    <a class="vg-back" href="../index.html#works">← 返回个人主页</a>
-  </form>
-</div>
-<main id="vault-hub" class="vh" hidden></main>
+<main class="vh">
+  <div class="vh-top"><a href="../index.html#works">← 返回个人主页</a><button id="vh-lock" hidden onclick="vaultLock()">🔒 锁定本机</button></div>
+  <div class="vh-eyebrow">私享会</div>
+  <h1>仅对受邀朋友开放的内容</h1>
+  <p class="vh-lead">每份资料有独立口令,输入口令即可打开对应资料。请勿外传。</p>
+  <div id="vault-gate" class="vh-gate">
+    <form class="vg-card">
+      <div class="vg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+      <input type="password" autocomplete="current-password" placeholder="输入资料口令" aria-label="口令">
+      <button type="submit">进入</button>
+      <div class="vg-err" role="alert"></div>
+    </form>
+  </div>
+  <div id="vh-list" hidden><div class="vh-sub">本机已解锁</div><div class="vh-grid"></div></div>
+</main>
 <script>
 window.vaultRenderHub=function(items){
-  var hub=document.getElementById('vault-hub');
+  if(!items.length)return;
   function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
-  var top=el('div','vh-top');var back=el('a',null,'← 返回个人主页');back.href='../index.html#works';
-  var lock=el('button',null,'🔒 锁定');lock.onclick=window.vaultLock;top.append(back,lock);
-  var grid=el('div','vh-grid');
+  var grid=document.querySelector('#vh-list .vh-grid');
   items.forEach(function(it){
     var c=el('a','vh-card');c.href=it.href;
     c.append(el('div','d',it.date||''),el('h3',null,it.title),el('p',null,it.desc||''));
     var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul,el('div','go','阅读 →'));
     grid.append(c);
   });
-  hub.append(top,el('div','vh-eyebrow','私享会'),el('h1',null,'仅对受邀朋友开放的内容'),el('p','vh-lead','持仓复盘、私密研究与一手信息整理。请勿外传。'),grid);
-  hub.hidden=false;
+  document.getElementById('vh-list').hidden=false;document.getElementById('vh-lock').hidden=false;
 };
 </script>
-<script type="application/json" id="vault-data">{"kind":"hub","salt":"FsN6i8HTndV7WpwJIGZ0ow==","iter":600000,"iv":"mD9CHWHTcP9YHtgz","ct":"6RDhXAzesMRO5IcrqunNSd9X8L4UdYFYWGh+VMTZi+LURTRyoKpp18ieS526kD6ajm8LXKIHDlFk0txLuPz3/1IF+CLr3KvKstCSClETcYmLcvfX74rj6LufQXr0iCG6qG+8VSokHy5A/JuByulf6NgT4+b6FhlLUaQmFmYbl52ZiICjBwgtCqMwspXosMsWJYkepmhh+Fc409po6wUlrE/NtKCsETyRuvUfE2017e9w12Px4+DMqF4iprO+OlZn1yA94b9DuiqLO0RZibbA9vagosDqJiY4eKzDIG/4JvYeQBVsV5YdqDM9CNm02B3njYcTpX305rNjmd5TQqd+Z/mbL146iQCpHMA2aNOwfqB3rPw31qlZJ4tO880yooel0vFckpSRKkROD8G6wwDkSAnV6L2da8RcCxj+47CuO2tqKF25L8ccTb44QmRfDifZs9/Ts0ux+3lvj5TCX43Zmgp6715hk392gX5Lg3EPu8PUUABLCgeQ/D+l35KWM+gMVHo="}</script>
+<script type="application/json" id="vault-data">{"salt":"FsN6i8HTndV7WpwJIGZ0ow==","iter":600000,"kind":"hub","entries":[{"iv":"jVA4JoFcWqSRJN6Q","ct":"JcKH+UHWyJjkrQUWOk64Yyi+kW7ygi1476bEyQe+eBYW+QnFxDeM6zy57UI19rP+U3JAJC4oZutPYF6YxkjPt8xvh8/AzPvZRJdgu6zPmTI1AC4Qyt29wChEXUuw+7zcrF4etFerVjo6XK2eWYmEi5a2VtoiFy0sl4lXabkF5PTIQXPyFkcN2H8BHhuxo1N4+7BTgsB6Msi2MIM9wMrWmyW1212TtLsTtYKNjhHZcYpL0k1iL+TwgFVYTzfX54gE1+cJWmbYs+Eeu9wkyeb6dIFTtMPRmScqVNBSazHvHYOqasv2bBGWAvFhM6yOVWiawcgUgNLPuWI06D1Zgg7FRUQ+HoYNQba+abjblQ60CPFzbLMNMQCydR43DEi1xPzxt016JAOsCwBoYgOgRM7R81VB9k37GTO+nfxk5XfOi1eGGDuIjA7kGWOTPxvE+4JfShwb1l44M1g7XmoYsULki99d4D+RYGrzyIT0sxpGBsdLYnfanbDVBiIs6Yc2dXvOBV2VIPKdVgyJXHW8rx0J4xKE/T/scrqhrZA="}]}</script>
 <script src="../assets/vault/vault.js"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ index.html              # 主页：导航(个人主页/作品集/AI战略咨询)
   ├─ web.html           # 网页阅读版
   └─ images/            # 该文的配图
 private/                # 私享会:构建生成的加密页面(勿手改)
-tools/vault-build.mjs   # 私享会加密构建脚本
+tools/vault-build.mjs   # 私享会加密构建脚本(每份资料独立口令)
 assets/                 # 微信二维码等公共图
   ├─ vault/             # 私享会口令页(vault.css + vault.js)
   └─ deck/              # 幻灯片演示工具(deck.css + deck.js),所有 slides.html 共用
@@ -51,14 +51,15 @@ assets/                 # 微信二维码等公共图
 - 图片可以写 `loading="lazy"`,引擎会提前加载当前页和下一页。
 - 参考:`investment-system/slides.html`(整屏排版)、`ai-paradigm/slides.html`(居中卡片)、`private-domain/slides.html`(整页图片 + 深色)。
 
-## 私享会(需口令)
+## 私享会(每份资料独立口令)
 
 私密内容(持仓、群内信息等)只放在主页「私享会」分类下,**仓库里只能有密文**(仓库是公开的)。
 
-- 明文源放在仓库外:`~/AItools/mySlides-private/`(`manifest.json` + 各页 HTML,图片放同目录,构建时会内联进密文)。
-- 新增/修改一篇:改源目录 → 在仓库根目录运行 `VAULT_PASS='口令' node tools/vault-build.mjs` → 提交 `private/` 并推送。
-- 口令只在命令行传入,**不要写进仓库、提交信息或本文件**;换口令就用新口令重跑构建。
-- 原理:PBKDF2(60 万次)派生密钥 + AES-GCM,浏览器本地解密;解锁一次后本机记住,目录页「锁定」可清除。
+- 明文源放在仓库外:`~/AItools/mySlides-private/`——`manifest.json`(每条含 slug/file/title/desc/bullets/date/**pass**)+ 各页 HTML,图片放同目录,构建时会内联进密文。
+- **一份资料一个口令**(manifest 里的 `pass`)。口令只存在这个本地目录,**不要写进仓库、提交信息或本文件**。
+- 新增/修改/换口令:改源目录 → 仓库根目录运行 `node tools/vault-build.mjs` → 提交 `private/` 并推送。
+- 访问方式:目录页 `private/` 只有一个口令框,不公开任何标题;输入哪份的口令就打开哪份,本机解锁过的资料会列在下面。资料页 `private/<slug>.html` 也可直接分享,打开时要求输入该资料的口令。
+- 原理:PBKDF2(60 万次)派生密钥 + AES-GCM,浏览器本地解密;解锁后本机按资料记住密钥,目录页「锁定本机」清除。
 - **绝不**把私享会内容放进普通 `<slug>/` 目录或「个人思考」卡片。
 
 ## 内容/发布约定(重要)
