@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#c08a1e"/>
+    </marker>
+    <marker id="ah2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#c08a1e"/>
+    </marker>
+  </defs>
+
+  <!-- 顺时针箭头 -->
+  <g fill="none" stroke="#c08a1e" stroke-width="12" stroke-linecap="round">
+    <path d="M648 176 Q748 238 776 352" marker-end="url(#ah)"/>
+    <path d="M612 628 Q480 676 360 632" marker-end="url(#ah)"/>
+    <path d="M182 372 Q200 236 300 178" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- 跟单回测 -->
+  <circle cx="480" cy="148" r="136" fill="#f4f0e7" stroke="#e1d7c2" stroke-width="2.5"/>
+  <g fill="none" stroke="#1f2a44" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="444" y="64" width="72" height="50" rx="6"/>
+    <path d="M466 130 H494 M480 114 V130"/>
+  </g>
+  <polyline points="456,102 470,90 480,96 500,78" fill="none" stroke="#c08a1e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M489 77 H501 V89" fill="none" stroke="#c08a1e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="480" y="188" text-anchor="middle" font-size="34" font-weight="800" fill="#1f2a44">跟单回测</text>
+  <text x="480" y="228" text-anchor="middle" font-size="21" fill="#5b6478">模拟跟单 · 收益曲线</text>
+
+  <!-- 筛选信息源 -->
+  <circle cx="780" cy="548" r="136" fill="#f4f0e7" stroke="#e1d7c2" stroke-width="2.5"/>
+  <g fill="none" stroke="#1f2a44" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M790 518 V472 a6 6 0 0 0 -6 -6 H750 a6 6 0 0 0 -6 6 V534 a6 6 0 0 0 6 6 H774"/>
+    <path d="M756 484 H762 M770 484 H780 M756 498 H762 M770 498 H784 M756 512 H768"/>
+  </g>
+  <circle cx="792" cy="532" r="17" fill="#f4f0e7" stroke="#c08a1e" stroke-width="5"/>
+  <path d="M784 532 L790 538 L800 526" fill="none" stroke="#c08a1e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="780" y="594" text-anchor="middle" font-size="34" font-weight="800" fill="#1f2a44">筛选信息源</text>
+  <text x="780" y="634" text-anchor="middle" font-size="21" fill="#5b6478">加入优质 · 剔除低质</text>
+
+  <!-- AI 摘要 -->
+  <circle cx="180" cy="548" r="136" fill="#f4f0e7" stroke="#e1d7c2" stroke-width="2.5"/>
+  <g fill="none" stroke="#1f2a44" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="150" y="458" width="60" height="60" rx="8"/>
+    <path d="M166 446 V458 M180 446 V458 M194 446 V458 M166 518 V530 M180 518 V530 M194 518 V530 M138 472 H150 M138 488 H150 M138 504 H150 M210 472 H222 M210 488 H222 M210 504 H222"/>
+  </g>
+  <text x="180" y="499" text-anchor="middle" font-size="25" font-weight="800" fill="#c08a1e">AI</text>
+  <text x="180" y="594" text-anchor="middle" font-size="34" font-weight="800" fill="#1f2a44">AI 摘要</text>
+  <text x="180" y="634" text-anchor="middle" font-size="21" fill="#5b6478">观点 · 标的 · 方向</text>
+
+  <!-- 中心：正反馈闭环 -->
+  <circle cx="480" cy="418" r="104" fill="#efebe2"/>
+  <g fill="none" stroke="#c08a1e" stroke-width="6" stroke-linecap="round">
+    <path d="M454 386 A30 30 0 0 1 508 376" marker-end="url(#ah2)"/>
+    <path d="M506 410 A30 30 0 0 1 452 420" marker-end="url(#ah2)"/>
+  </g>
+  <text x="480" y="470" text-anchor="middle" font-size="32" font-weight="800" fill="#1f2a44">正反馈闭环</text>
+</svg>

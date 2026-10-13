@@ -47,11 +47,7 @@ h3 .g{color:var(--gold)}
 @media(max-width:680px){.grid3{grid-template-columns:1fr}}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
 @media(max-width:680px){.duo{grid-template-columns:1fr}}
-.loop{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
-.loop .nd{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px;text-align:center}
-.loop .nd b{display:block;font-size:17px;color:var(--ink)}
-.loop .nd span{display:block;color:var(--sub);font-size:13.5px}
-.loop .ar{color:var(--gold);font-size:22px;font-weight:800}
+.loop-pic img{width:100%;max-width:560px;display:block;margin:16px auto 0}
 .quad{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
 @media(max-width:680px){.quad{grid-template-columns:1fr}}
 .q{border-radius:12px;padding:14px 16px;border:1px solid var(--line);background:var(--card)}
@@ -286,14 +282,7 @@ h3 .g{color:var(--gold)}
     <div class="pt">对<span class="ok">收益好、回撤低</span>的曲线,重点关注它的<b>模拟跟单订单流</b></div>
 
     <h3>正反馈循环:<span class="g">信息源越用越好</span></h3>
-    <div class="loop">
-      <div class="nd"><b>跟单回测</b><span>模拟跟单 · 收益曲线</span></div>
-      <div class="ar">→</div>
-      <div class="nd"><b>筛选信息源</b><span>加入优质 · 剔除低质</span></div>
-      <div class="ar">→</div>
-      <div class="nd"><b>AI 摘要</b><span>观点 · 标的 · 方向</span></div>
-      <div class="ar">↺</div>
-    </div>
+    <div class="loop-pic"><img loading="lazy" src="images/analysis-loop.svg" alt="正反馈闭环:跟单回测 → 筛选信息源 → AI 摘要 → 跟单回测"></div>
   </div>
 
   <!-- Part5 执行篇 -->
