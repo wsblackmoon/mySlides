@@ -43,8 +43,11 @@ h3 .g{color:var(--gold)}
 .split{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:center}
 .split img{width:100%;max-width:400px;display:block;margin:0 auto}
 @media(max-width:680px){.split{grid-template-columns:1fr}.split img{max-width:300px}}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
-@media(max-width:680px){.grid3{grid-template-columns:1fr}}
+.dim3{display:grid;gap:10px;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.dim3 .row{display:flex;gap:14px;align-items:baseline;color:var(--sub);font-size:15.5px}
+.dim3 .ct{flex:none;font-weight:800;font-size:16.5px}
+.dim3 .ct.gold{color:var(--gold)}.dim3 .ct.bl{color:var(--blue)}.dim3 .ct.g{color:var(--green)}
+.dim3 b{color:var(--ink)}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
 @media(max-width:680px){.duo{grid-template-columns:1fr}}
 .loop-pic img{width:100%;max-width:560px;display:block;margin:16px auto 0}
@@ -236,16 +239,16 @@ h3 .g{color:var(--gold)}
     <h2>信息看不完,<span class="g">交给 AI 来分析</span></h2>
     <div class="split">
       <div>
-        <div class="sub2">信息量爆炸的时代,作为人类,看不完,根本看不完。</div>
+        <div class="pt">信息量爆炸的时代,作为人类,<b>看不完,根本看不完</b></div>
         <div class="pt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
         <div class="pt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
+        <div class="dim3">
+          <div class="row"><span class="ct gold">信息广度</span><span>利用标签做<b>聚类分析</b>,感知市场情绪</span></div>
+          <div class="row"><span class="ct bl">信息维度</span><span>寻找多维度信息源的<b>共识与差异</b>,潜在 alpha</span></div>
+          <div class="row"><span class="ct g">信息深度</span><span>对信息源做 <b>AI 跟单</b>,生成收益曲线,订单流分析</span></div>
+        </div>
       </div>
       <img loading="lazy" src="images/analysis-ai.svg" alt="多源信息汇入 AI,分出广度、维度、深度">
-    </div>
-    <div class="grid3">
-      <div class="card"><div class="ct gold">信息广度</div><div class="pt">利用标签做<b>聚类分析</b>,感知市场情绪</div></div>
-      <div class="card"><div class="ct bl">信息维度</div><div class="pt">寻找多维度信息源的<b>共识与差异</b>,潜在 alpha</div></div>
-      <div class="card"><div class="ct g">信息深度</div><div class="pt">对信息源做 <b>AI 跟单</b>,生成收益曲线,订单流分析</div></div>
     </div>
 
     <h3>数据采集:<span class="g">把平时看的信息源采集入库</span></h3>

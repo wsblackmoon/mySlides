@@ -61,10 +61,12 @@ h2 .g{color:var(--gold)}
 .imgrow.split{grid-template-columns:1.3fr 1fr}
 .art-pic{display:flex;align-items:center;justify-content:center;min-height:0}
 .art-pic img{max-width:100%;max-height:68vh;display:block}
-.dim3{display:grid;gap:1.4vh;margin-top:2.6vh}
-.dim3 .card{display:flex;align-items:center;gap:1.4vw;padding:1.7vh 1.5vw}
-.dim3 .card .ct{margin:0;flex:none}
-.dim3 .card .pt{margin:0}
+.split .pt.nt{font-size:clamp(15px,1.45vw,22px);margin:1.3vh 0}
+.dim3{display:grid;gap:1.8vh;margin-top:3.4vh;padding-top:3.4vh;border-top:1px solid var(--line)}
+.dim3 .card{display:flex;align-items:baseline;gap:1.4vw;padding:0;background:none;border:0;border-radius:0}
+.dim3 .card .ct{margin:0;flex:none;font-size:clamp(15px,1.5vw,22px)}
+.dim3 .card .pt{margin:0;padding-left:0;font-size:clamp(14px,1.35vw,20px)}
+.dim3 .card .pt::before{display:none}
 .shot.duo{flex-direction:row;gap:.8vw;padding:1vh .8vw}
 .shot.duo img{max-width:49%;max-height:68vh}
 @media (max-aspect-ratio:1/1){.imgrow.split{grid-template-columns:1fr}.art-pic{display:none}.dim3 .card{flex-direction:column;align-items:flex-start;gap:.4vh}.shot.duo{flex-direction:column}.shot.duo img{max-width:100%;max-height:36vh}}
@@ -457,7 +459,7 @@ h2 .g{color:var(--gold)}
 <div class="body">
   <div class="imgrow split">
     <div class="notes">
-      <div class="sub" style="margin-bottom:1vh">信息量爆炸的时代,作为人类,看不完,根本看不完</div>
+      <div class="pt nt">信息量爆炸的时代,作为人类,<b>看不完,根本看不完</b></div>
       <div class="pt nt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
       <div class="pt nt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
       <div class="dim3">
