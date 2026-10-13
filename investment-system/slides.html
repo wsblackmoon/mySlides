@@ -56,8 +56,13 @@ h2 .g{color:var(--gold)}
 .notes .nt{font-size:clamp(15px,1.65vw,25px)}
 .cap{color:var(--dim);font-size:clamp(11px,1vw,14px);text-align:center;margin-top:.6vh}
 :root{--ui-bar:var(--line);--ui-prog:var(--goldbg)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;margin-top:2.4vh}
-.grid3 .card .pt{margin:.6vh 0}
+.imgrow.split{grid-template-columns:1.3fr 1fr}
+.art-pic{display:flex;align-items:center;justify-content:center;min-height:0}
+.art-pic img{max-width:100%;max-height:68vh;display:block}
+.dim3{display:grid;gap:1.4vh;margin-top:2.6vh}
+.dim3 .card{display:flex;align-items:center;gap:1.4vw;padding:1.7vh 1.5vw}
+.dim3 .card .ct{margin:0;flex:none}
+.dim3 .card .pt{margin:0}
 .shot.duo{flex-direction:row;gap:.8vw;padding:1vh .8vw}
 .shot.duo img{max-width:49%;max-height:68vh}
 .loop{display:flex;align-items:center;justify-content:center;gap:1.4vw;flex-wrap:wrap;margin:5vh 0 3vh}
@@ -65,7 +70,7 @@ h2 .g{color:var(--gold)}
 .loop .nd b{display:block;font-size:clamp(18px,2.1vw,32px);color:var(--ink)}
 .loop .nd span{display:block;color:var(--sub);font-size:clamp(13px,1.35vw,20px);margin-top:.8vh}
 .loop .ar{color:var(--gold);font-size:clamp(22px,2.6vw,40px);font-weight:800}
-@media (max-aspect-ratio:1/1){.grid3{grid-template-columns:1fr}.shot.duo{flex-direction:column}.shot.duo img{max-width:100%;max-height:36vh}}
+@media (max-aspect-ratio:1/1){.imgrow.split{grid-template-columns:1fr}.art-pic{display:none}.dim3 .card{flex-direction:column;align-items:flex-start;gap:.4vh}.shot.duo{flex-direction:column}.shot.duo img{max-width:100%;max-height:36vh}}
 @media (max-aspect-ratio:1/1){.grid2,.quad,.imgrow,.imgrow.tall,.imgrow.rev{grid-template-columns:1fr}.shot img{max-height:48vh}}
 </style>
 <style id="matrix-fx">
@@ -453,13 +458,18 @@ h2 .g{color:var(--gold)}
   <div class="kick">PART 4 <span class="dim">/ 分析篇</span></div>
   <h2>信息看不完,<span class="g">交给 AI 来分析</span></h2>
 <div class="body">
-  <div class="sub" style="margin-bottom:1vh">信息量爆炸的时代,作为人类,看不完,根本看不完</div>
-  <div class="pt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
-  <div class="pt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
-  <div class="grid3">
-    <div class="card"><div class="ct gold">信息广度</div><div class="pt">利用标签做<b>聚类分析</b>,感知市场情绪</div></div>
-    <div class="card"><div class="ct bl">信息维度</div><div class="pt">寻找多维度信息源的<b>共识与差异</b>,潜在 alpha</div></div>
-    <div class="card"><div class="ct g">信息深度</div><div class="pt">对信息源做 <b>AI 跟单</b>,生成收益曲线,订单流分析</div></div>
+  <div class="imgrow split">
+    <div class="notes">
+      <div class="sub" style="margin-bottom:1vh">信息量爆炸的时代,作为人类,看不完,根本看不完</div>
+      <div class="pt nt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
+      <div class="pt nt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
+      <div class="dim3">
+        <div class="card"><div class="ct gold">信息广度</div><div class="pt">利用标签做<b>聚类分析</b>,感知市场情绪</div></div>
+        <div class="card"><div class="ct bl">信息维度</div><div class="pt">寻找多维度信息源的<b>共识与差异</b>,潜在 alpha</div></div>
+        <div class="card"><div class="ct g">信息深度</div><div class="pt">对信息源做 <b>AI 跟单</b>,生成收益曲线,订单流分析</div></div>
+      </div>
+    </div>
+    <div class="art-pic"><img src="images/analysis-ai.svg" alt="多源信息汇入 AI,分出广度、维度、深度"></div>
   </div>
 </div>
 </section>

@@ -40,6 +40,9 @@ h3 .g{color:var(--gold)}
 .punch{margin:20px 0;background:var(--card2);border-left:4px solid var(--goldbg);border-radius:0 12px 12px 0;padding:14px 18px;font-weight:700;font-size:17.5px}
 .punch .g{color:var(--gold)}
 .punch.green{border-left-color:var(--green)}.punch.green .g{color:var(--green)}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:center}
+.split img{width:100%;max-width:400px;display:block;margin:0 auto}
+@media(max-width:680px){.split{grid-template-columns:1fr}.split img{max-width:300px}}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
 @media(max-width:680px){.grid3{grid-template-columns:1fr}}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
@@ -235,9 +238,14 @@ h3 .g{color:var(--gold)}
   <div class="part">
     <div class="kick">PART 4 <span class="dim">/ 分析篇</span></div>
     <h2>信息看不完,<span class="g">交给 AI 来分析</span></h2>
-    <div class="sub2">信息量爆炸的时代,作为人类,看不完,根本看不完。</div>
-    <div class="pt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
-    <div class="pt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
+    <div class="split">
+      <div>
+        <div class="sub2">信息量爆炸的时代,作为人类,看不完,根本看不完。</div>
+        <div class="pt">利用 AI <b>采集</b>感兴趣的信息源:推特、微信、公众号、知识星球……</div>
+        <div class="pt">利用 AI 进行<b>摘要分析、标签分类、多空判断</b></div>
+      </div>
+      <img loading="lazy" src="images/analysis-ai.svg" alt="多源信息汇入 AI,分出广度、维度、深度">
+    </div>
     <div class="grid3">
       <div class="card"><div class="ct gold">信息广度</div><div class="pt">利用标签做<b>聚类分析</b>,感知市场情绪</div></div>
       <div class="card"><div class="ct bl">信息维度</div><div class="pt">寻找多维度信息源的<b>共识与差异</b>,潜在 alpha</div></div>
