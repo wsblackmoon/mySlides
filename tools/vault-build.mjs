@@ -127,6 +127,7 @@ for (const f of fs.readdirSync(out)) if (f.endsWith('.html')) fs.rmSync(path.joi
 
 const entries = [];
 for (const it of manifest.items) {
+  if (it.offline) { console.log('  - 已下线,跳过:', it.slug); continue; }
   if (!it.pass) { console.error(`  ✗ ${it.slug} 缺少 pass(每份资料需要独立口令)`); process.exit(1); }
   const html = inlineImages(fs.readFileSync(path.join(src, it.file), 'utf8'));
   fs.writeFileSync(path.join(out, `${it.slug}.html`), head + tail(box({ kind: 'page', slug: it.slug, ...await seal(it.pass, html) })));
@@ -137,4 +138,4 @@ for (const it of manifest.items) {
 // 目录条目打乱顺序,不暴露先后
 entries.sort(() => Math.random() - 0.5);
 fs.writeFileSync(path.join(out, 'index.html'), hubPage(box({ kind: 'hub', entries })));
-console.log('  ✓ private/index.html  共', manifest.items.length, '份');
+console.log('  ✓ private/index.html  共', entries.length, '份');
