@@ -33,12 +33,28 @@
     });
     var s=slides[i];s.scrollTop=0;if(s.firstElementChild)s.firstElementChild.scrollTop=0;
     cur.textContent=i+1;prog.style.width=((i+1)/n*100)+'%';
-    highlight();
+    highlight();fit();
   }
+  // 自动适配:当前页内容超出一屏时,整页按比例缩小直到放得下(最小 55%)
+  function fit(){
+    var s=slides[i];if(!s)return;
+    s.style.zoom='';
+    for(var k=0;k<3;k++){
+      var over=s.scrollHeight/s.clientHeight;
+      if(over<=1.005)break;
+      var z=(parseFloat(s.style.zoom)||1)/over;
+      s.style.zoom=Math.max(0.55,Math.floor(z*100)/100);
+      if(z<=0.55)break;
+    }
+  }
+  var fitTimer;
+  function refit(delay){clearTimeout(fitTimer);fitTimer=setTimeout(fit,delay||80);}
+  window.addEventListener('resize',function(){refit();});
+  window.addEventListener('load',function(){refit();});
   function show(k,rev){i=Math.max(0,Math.min(n-1,k));render(rev);}
   function next(){var s=slides[i];if(hasBody(s)&&!s.classList.contains('reveal')){s.classList.add('reveal');return;}show(i+1,false);}
   function prev(){var s=slides[i];if(hasBody(s)&&s.classList.contains('reveal')){s.classList.remove('reveal');return;}show(i-1,true);}
-  function toggleNav(){document.body.classList.toggle('nav-open');}
+  function toggleNav(){document.body.classList.toggle('nav-open');refit(320);}
   function overlayNav(){return window.innerWidth<=760&&document.body.classList.contains('nav-open');}
 
   document.addEventListener('keydown',function(e){
@@ -127,9 +143,9 @@
     this.textContent=running?'⏸':'▶';
   });
   $('deck-tm-reset').addEventListener('click',function(){elapsed=0;t0=Date.now();tick();});
-  mini.addEventListener('click',function(){document.body.classList.add('nav-open');});
+  mini.addEventListener('click',function(){document.body.classList.add('nav-open');refit(320);});
 
   window.__deck={goto:function(k){show(k,true);},next:next,prev:prev,count:n,get index(){return i;}};
-  if(window.innerWidth>760)document.body.classList.add('nav-open');
+  if(window.innerWidth>760){document.body.classList.add('nav-open');refit(320);}
   show(0,false);
 })();

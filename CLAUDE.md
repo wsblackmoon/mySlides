@@ -49,6 +49,7 @@ assets/                 # 微信二维码等公共图
 - **分步揭示**:页内有 `.body` 时,第一下只显示标题,第二下显示 `.body`;不想分步就不写 `.body`。
 - **配色**:在页面里覆盖 `--ui-prog`(进度条)、`--ui-bar`(进度条底)、`--ui-accent`(目录高亮)等变量。
 - 图片可以写 `loading="lazy"`,引擎会提前加载当前页和下一页。
+- **自动适配**:某页内容超出一屏(窗口矮、目录展开)时,引擎会把整页按比例缩小到放得下(最低 55%)。前提是溢出要能被测到:不要给表格等容器设 `max-height` + 内部滚动,弹性布局里的内容子项设 `flex-shrink:0`。
 - 参考:`investment-system/slides.html`(整屏排版)、`ai-paradigm/slides.html`(居中卡片)、`private-domain/slides.html`(整页图片 + 深色)。
 
 ## 私享会(每份资料独立口令)
