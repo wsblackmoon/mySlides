@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>私享会 · 吴斯 Aaron Wu</title>
-<link rel="stylesheet" href="../assets/vault/vault.css">
+<link rel="stylesheet" href="../assets/vault/vault.css?v=aafa2fd1">
 </head>
 <body>
 <main class="vh">
@@ -28,16 +28,28 @@ window.vaultRenderHub=function(items){
   if(!items.length)return;
   function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
   var grid=document.querySelector('#vh-list .vh-grid');
+  // 同一份资料的网页版/幻灯片版合并成一张卡片(按 card 归并,卡片信息取网页版)
+  var cards={},order=[];
   items.forEach(function(it){
-    var c=el('a','vh-card');c.href=it.href;
+    var k=it.card||it.slug;
+    if(!cards[k]){cards[k]={info:it,versions:{}};order.push(k);}
+    if((it.version||'web')==='web')cards[k].info=it;
+    cards[k].versions[it.version||'web']=it.href;
+  });
+  order.sort(function(a,b){return (cards[b].info.date||'').localeCompare(cards[a].info.date||'');});
+  order.forEach(function(k){
+    var it=cards[k].info,v=cards[k].versions,c=el('div','vh-card');
     c.append(el('div','d',it.date||''),el('h3',null,it.title),el('p',null,it.desc||''));
-    var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul,el('div','go','阅读 →'));
-    grid.append(c);
+    var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul);
+    var btns=el('div','vh-btns');
+    if(v.slides){var a=el('a','vh-btn primary','🖥️ 幻灯片版');a.href=v.slides;btns.append(a);}
+    if(v.web){var w=el('a','vh-btn'+(v.slides?'':' primary'),'📖 网页长文版');w.href=v.web;btns.append(w);}
+    c.append(btns);grid.append(c);
   });
   document.getElementById('vh-list').hidden=false;document.getElementById('vh-lock').hidden=false;
 };
 </script>
-<script type="application/json" id="vault-data">{"salt":"FsN6i8HTndV7WpwJIGZ0ow==","iter":600000,"kind":"hub","entries":[{"iv":"aJZT/q+j2nQOkKsi","ct":"A+9gG4lmSXpiSzNwiNsX+AXIvbVEr3TmTuBBwzcqte8hiAhTJqUjGKIm88ZBPgtVkbN/QuHG4j2EFN85eaU6R1ui1G5Z8KEt1rsQO3ul9D9UJ7ql5RWD5VT1h/A/Xt9biH7NrZOcO6n6wtq8/TZNf+cdENHmKL6fHIiuOrMPct8GhalaG+XYb88tGQWe2dgyl6WoODXMG8QAbSHV5DCy0DRiLsLsz2y1ffbd/6SUMpJ/X1FhFSvsi9Q4rFLhbw/J+J1ptWhztixGERkMxQY58cu28Bnkle1x9aan1DtWLqUHC0FRlm3P2HRzO5GtfmRlcsL4TuriGA65B4MirOintMCf9ChQlKCH/4q86CWzRRsTRcOW+PZVu2+hwP6cxtT6LIJBv2RjUhnUViiNPXW1b8A17hMV3hjSIFn7p//i/RrEmlOkvW7HmQ3uJA4PA6Ig0ycAdw=="},{"iv":"yYVRSSZEgZKVCsjY","ct":"+QYtxgsHEWKmSp46zvKzLAfn9liFzQN6G4MwxPX/n9311FlRj/OycN01kOkFmCTf8A4R++0ukYmUhdDCjl5gG9zXnPTVGYl1xQ2gBFNkowuVqKLx7zWX5R2DWDndSvA7+MM7MqmzrMswruLvm93Wdd7yFwntNDkqyrBAYVKJTwItK0K9K1qbgWMca3OAkl9WzQ+Wyqr6Fi7O++MWVh0hmrQ2xEqEU57yPbF4w78xncJ1yB5ilCXPYOcwnrgL6dUzPICoe6TZx289DX5ZXX/Up9/zYXzPIoMeH98dIAjobud2WlIraJWQdkPeFlhjvxov9tv62r3V2G7wfX2wg/ECyevK9gycVaXLfYXFj75aC37D46KvLOi+cEoUAXOtepVA4m/k+XVx+bswHkBez1wQqW1injsjL8g9q8wbwoWLBoRfosDZ4dTa+rJdJzDWlzBY/MSHiehvRwy5MlrNTGLqDqR9M4rbDuZNIZm/++c2d3wsUfbG1Qwbi1/BBKWD5fw1X45dNuo1T7o="}]}</script>
-<script src="../assets/vault/vault.js"></script>
+<script type="application/json" id="vault-data">{"salt":"FsN6i8HTndV7WpwJIGZ0ow==","iter":600000,"kind":"hub","entries":[{"iv":"/ojSWXppwJapBxEX","ct":"4NSFaT9sMwC0aG2vYyKjlYR/6Vtamwxlmp8AQfLlqB7qgJGJoaA+zmZeC6DSdUcZzeGkdW5yEJ9AaXu4skJMOLdC+5HbyrFTlbe6ja8Rt9qzF3p2465LNsfwfVTwaFFL5n9xEexLIUJedrFvdPtbZvnqJr6JtYLDi0k3otDuGktY4ahzziLj22BgEVCuekxg0bduFOOi18Lf2sD8Wd3aM8fV9ZUicfylvreqyYvXgbaxHXp4GQX9FhRyiM69UNjyYwcz/sunaPJg58zoDRwe1g9rkDC3Tv2wuajYTqYDzMy9zCelRi8g34ZOlci04j3I5r+KHm/7HjSHAt9EG5NlncFlyhewffCNxr9lt9uiJV3KvB1iNJ5Hc4xnqEcQ2byjVH4mDWDy992Q2y3jLmYzgH2GF67Wlu4y0jYxutEa7Di197XLzpFX8xXgvvHxIPcxgwQvbdNIzEZoNlpylAh4vNl8dPYLs7RP1ma5mCn+KqFhmV1qscuw6vIaEU6xBh959Q=="},{"iv":"dxVRzf8jcZmuS+ql","ct":"1M/98oyWCpkaGgFbl2jKySd3BbPOCMdAIvytF7EzLufe5NAMjHJH/vnvwcEgdJ+TUv02X/FB2Cm/qNbBDqXrLxG2ZEkvnqFC4EXDkfD+Muca+jnR3jSpJ2nlAyVZJzj+8TF+qFQMJipt4qzGsPhorzZkY6ud/fUbSYRcWdMaLZ3ugWAHT3Xzsq/m9kTBsVqZhVjNFLYYTo1Jdvt2JEohzqcqVOWLE9tSRN0egyWI+tMGuwoxQEu2lpM+hGxuQ9+dS+wYs2K7bWxXQnc4vqkF9MrSnziXgUYo5tcYOkWqcK5f/KEbQmGfrnJEiFHfsTgWHjuMrruDYZdJYOvS7gaiui5FxmfjhY9sGnxCd3ExoOrf3+E7J9WPq/OUKHxDpKAzUHZ4RwgJvgwtC9peBMy7vjNAIruQGYl0EdILNURn92X90mGmyOCU7z5KgLdQsxvSRneOG39uQ11PMZpxl8V0X9DNlKBEj3/ZGWLe3oDwxxK1TJIaK83GjAVL4hP/uB6deh0BADLcUO4u+pOHJGwx+bi1IcmG578HgqmqLyIaRKw1gecHN+caUti3u2hrBTCWy3w="}]}</script>
+<script src="../assets/vault/vault.js?v=aafa2fd1"></script>
 </body>
 </html>

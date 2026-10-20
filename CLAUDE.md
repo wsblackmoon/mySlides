@@ -57,6 +57,7 @@ assets/                 # 微信二维码等公共图
 
 - 明文源放在仓库外:`~/AItools/mySlides-private/`——`manifest.json`(每条含 slug/file/title/desc/bullets/date/**pass**)+ 各页 HTML,图片放同目录,构建时会内联进密文。
 - **一份资料一个口令**(manifest 里的 `pass`)。口令只存在这个本地目录,**不要写进仓库、提交信息或本文件**。
+- 同一份资料的幻灯片版:单独一条(自己的 slug/file/pass),加 `"card": "<网页版 slug>", "version": "slides"`,目录页会和网页版合并成一张卡片(两个按钮)。
 - 临时下线某份:在 manifest 该条加 `"offline": true` 后重新构建(源文件和口令保留,删掉该字段即可恢复)。
 - 新增/修改/换口令:改源目录 → 仓库根目录运行 `node tools/vault-build.mjs` → 提交 `private/` 并推送。
 - 访问方式:目录页 `private/` 只有一个口令框,不公开任何标题;输入哪份的口令就打开哪份,本机解锁过的资料会列在下面。资料页 `private/<slug>.html` 也可直接分享,打开时要求输入该资料的口令。

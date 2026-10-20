@@ -49,6 +49,9 @@ function inlineImages(html) {
   });
 }
 
+// 资源带内容哈希版本号,改了 vault.css/vault.js 后访客不会用到旧缓存
+import { createHash } from 'node:crypto';
+const ASSET_V = createHash('sha1').update(fs.readFileSync(path.join(repo, 'assets/vault/vault.css'))).update(fs.readFileSync(path.join(repo, 'assets/vault/vault.js'))).digest('hex').slice(0, 8);
 const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 const head = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -57,7 +60,7 @@ const head = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>私享会 · 吴斯 Aaron Wu</title>
-<link rel="stylesheet" href="../assets/vault/vault.css">
+<link rel="stylesheet" href="../assets/vault/vault.css?v=${ASSET_V}">
 </head>
 <body>
 <div id="vault-gate" class="vg" hidden>
@@ -73,7 +76,7 @@ const head = `<!DOCTYPE html>
 </div>
 `;
 const tail = (data) => `<script type="application/json" id="vault-data">${data}</script>
-<script src="../assets/vault/vault.js"></script>
+<script src="../assets/vault/vault.js?v=${ASSET_V}"></script>
 </body>
 </html>
 `;
@@ -84,7 +87,7 @@ const hubPage = (data) => `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>私享会 · 吴斯 Aaron Wu</title>
-<link rel="stylesheet" href="../assets/vault/vault.css">
+<link rel="stylesheet" href="../assets/vault/vault.css?v=${ASSET_V}">
 </head>
 <body>
 <main class="vh">
@@ -107,17 +110,29 @@ window.vaultRenderHub=function(items){
   if(!items.length)return;
   function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
   var grid=document.querySelector('#vh-list .vh-grid');
+  // 同一份资料的网页版/幻灯片版合并成一张卡片(按 card 归并,卡片信息取网页版)
+  var cards={},order=[];
   items.forEach(function(it){
-    var c=el('a','vh-card');c.href=it.href;
+    var k=it.card||it.slug;
+    if(!cards[k]){cards[k]={info:it,versions:{}};order.push(k);}
+    if((it.version||'web')==='web')cards[k].info=it;
+    cards[k].versions[it.version||'web']=it.href;
+  });
+  order.sort(function(a,b){return (cards[b].info.date||'').localeCompare(cards[a].info.date||'');});
+  order.forEach(function(k){
+    var it=cards[k].info,v=cards[k].versions,c=el('div','vh-card');
     c.append(el('div','d',it.date||''),el('h3',null,it.title),el('p',null,it.desc||''));
-    var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul,el('div','go','阅读 →'));
-    grid.append(c);
+    var ul=el('ul');(it.bullets||[]).forEach(function(b){ul.append(el('li',null,b));});c.append(ul);
+    var btns=el('div','vh-btns');
+    if(v.slides){var a=el('a','vh-btn primary','🖥️ 幻灯片版');a.href=v.slides;btns.append(a);}
+    if(v.web){var w=el('a','vh-btn'+(v.slides?'':' primary'),'📖 网页长文版');w.href=v.web;btns.append(w);}
+    c.append(btns);grid.append(c);
   });
   document.getElementById('vh-list').hidden=false;document.getElementById('vh-lock').hidden=false;
 };
 </script>
 <script type="application/json" id="vault-data">${data}</script>
-<script src="../assets/vault/vault.js"></script>
+<script src="../assets/vault/vault.js?v=${ASSET_V}"></script>
 </body>
 </html>
 `;
@@ -131,7 +146,7 @@ for (const it of manifest.items) {
   if (!it.pass) { console.error(`  ✗ ${it.slug} 缺少 pass(每份资料需要独立口令)`); process.exit(1); }
   const html = inlineImages(fs.readFileSync(path.join(src, it.file), 'utf8'));
   fs.writeFileSync(path.join(out, `${it.slug}.html`), head + tail(box({ kind: 'page', slug: it.slug, ...await seal(it.pass, html) })));
-  const meta = { slug: it.slug, title: it.title, desc: it.desc, bullets: it.bullets, date: it.date, href: `${it.slug}.html` };
+  const meta = { slug: it.slug, card: it.card || it.slug, version: it.version || 'web', title: it.title, desc: it.desc, bullets: it.bullets, date: it.date, href: `${it.slug}.html` };
   entries.push(await seal(it.pass, JSON.stringify(meta)));
   console.log('  ✓', `private/${it.slug}.html`);
 }
