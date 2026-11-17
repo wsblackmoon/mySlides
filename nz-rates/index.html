@@ -428,6 +428,7 @@
         if(!top)return;
         var k=el('div','q');
         k.append(el('div','k',x[1]),el('div','v',pct(top.rate)),bankEl(top.bank,'b'),el('div','t',top.product+(top.notice_days?' · 提前 '+top.notice_days+' 天':'')));
+        if(top.cond)k.append(el('div','t','条件：'+top.cond));
         grid.append(k);
       });
       var pr=sav.revolut&&sav.revolut.promo;

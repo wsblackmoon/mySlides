@@ -50,7 +50,8 @@
    "rate": 2.65,
    "base": 1.0,
    "note": "月末余额（不含当月利息）比月初至少多 $50 才有奖励利率；只对 10 万以内的余额有效。",
-   "source": "https://www.rabobank.co.nz/online-savings/online-savings-interest-rates"
+   "source": "https://www.rabobank.co.nz/online-savings/online-savings-interest-rates",
+   "cond": "月末余额比月初多 $50"
   },
   {
    "bank": "Rabobank",
@@ -84,7 +85,8 @@
    "rate": 2.4,
    "base": 0.6,
    "note": "月末余额（不含利息）高于月初，且当月取款不超过一次，才有奖励利率。",
-   "source": "https://www.co-operativebank.co.nz/rates"
+   "source": "https://www.co-operativebank.co.nz/rates",
+   "cond": "余额增加，且最多取款一次"
   },
   {
    "bank": "SBS Bank",
@@ -117,7 +119,8 @@
    "rate": 2.5,
    "base": 0.0,
    "note": "当月没有取款才有利息，取过一次当月就没有利息；只能在网银开户。",
-   "source": "https://nz.icbc.com.cn/en/column/1438058492316762157.html"
+   "source": "https://nz.icbc.com.cn/en/column/1438058492316762157.html",
+   "cond": "当月不取款"
   },
   {
    "bank": "Bank of China",
@@ -167,7 +170,8 @@
    "rate": 2.05,
    "base": 0.05,
    "note": "当月没有取款，并且存入至少 $20（不含利息），才有奖励利率。",
-   "source": "https://www.anz.co.nz/rates-fees-agreements/personal-accounts/"
+   "source": "https://www.anz.co.nz/rates-fees-agreements/personal-accounts/",
+   "cond": "当月不取款，并存入 $20"
   },
   {
    "bank": "ASB",
@@ -184,7 +188,8 @@
    "rate": 2.05,
    "base": 0.05,
    "note": "当月不取款，或只在每月第一天取一次，才有奖励利率。",
-   "source": "https://www.asb.co.nz/bank-accounts/interest-rates-fees.html"
+   "source": "https://www.asb.co.nz/bank-accounts/interest-rates-fees.html",
+   "cond": "当月不取款"
   },
   {
    "bank": "BNZ",
@@ -209,7 +214,8 @@
    "rate": 1.75,
    "base": 0.05,
    "note": "月末余额（不含利息和手续费）比上月末至少多 $20，才有奖励利率。",
-   "source": "https://www.westpac.co.nz/about-us/legal-information-privacy/savings-accounts-terms-fees-rates/"
+   "source": "https://www.westpac.co.nz/about-us/legal-information-privacy/savings-accounts-terms-fees-rates/",
+   "cond": "月末余额比上月多 $20"
   },
   {
    "bank": "Westpac",
