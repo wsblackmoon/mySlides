@@ -99,6 +99,9 @@
   th:first-child,td:first-child{position:sticky;left:0;z-index:1;text-align:left;background:var(--bg-card);border-right:1px solid var(--line);min-width:150px}
   thead th:first-child{background:var(--bg-soft);z-index:3}
   .bn{font-weight:700;color:var(--fg);font-size:14px;line-height:1.3;white-space:normal}
+  a.bl{color:inherit}
+  a.bl:after{content:" ↗";font-weight:400;font-size:.8em;color:var(--fg-faint)}
+  a.bl:hover{color:var(--brand)}a.bl:hover:after{color:var(--brand)}
   .bm{font-size:11.5px;color:var(--fg-soft);margin-top:3px;line-height:1.4;white-space:normal}
   .tag{display:inline-block;padding:0 6px;border-radius:5px;font-size:11px;font-weight:700;margin-right:4px;background:var(--bg-soft);color:var(--fg-soft)}
   .tag.cn{background:#fdecec;color:#c8423d}.tag.big4{background:var(--brand-soft);color:var(--brand)}
@@ -354,6 +357,21 @@
   function pct(r){return r.toFixed(2)+'%';}
   function money(n){return '$'+Math.round(n).toLocaleString('en-NZ');}
   var GROUP_TAG={big4:'四大行',cn:'中资'};
+  // 各银行官网;银行名点击后在新窗口打开
+  var BANK_URL={
+    'ANZ':'https://www.anz.co.nz/','ASB':'https://www.asb.co.nz/','BNZ':'https://www.bnz.co.nz/','Westpac':'https://www.westpac.co.nz/',
+    'Kiwibank':'https://www.kiwibank.co.nz/','Rabobank':'https://www.rabobank.co.nz/','Heartland Bank':'https://www.heartland.co.nz/',
+    'Co-operative Bank':'https://www.co-operativebank.co.nz/','SBS Bank':'https://www.sbsbank.co.nz/','TSB Bank':'https://www.tsb.co.nz/',
+    'Bank of China':'https://www.bankofchina.com/nz/en/','China Construction Bank':'https://nz.ccb.com/newzealand/en/index.html','ICBC':'https://nz.icbc.com.cn/',
+    'Bank of Baroda':'https://www.barodanzltd.co.nz/','Bank of Baroda Freedom 60':'https://www.barodanzltd.co.nz/','Bank of India':'https://bankofindia.co.nz/',
+    'Revolut':'https://www.revolut.com/en-NZ/'
+  };
+  function bankEl(name,cls,text){
+    var d=el('div',cls),u=BANK_URL[name];
+    if(!u){d.textContent=text||name;return d;}
+    var a=el('a','bl',text||name);a.href=u;a.target='_blank';a.rel='noopener';a.title='打开 '+name+' 官网（新窗口）';
+    d.append(a);return d;
+  }
 
   var sav=null,data=null,state={prod:'td',group:'all',term:'all',sort:12};
   function prod(p){return (p||state.prod)==='pie'&&data.pie?data.pie:data;}
@@ -390,13 +408,13 @@
     [['普通定存',data,''],['PIE 定存',data.pie,'按 PIR 计税，最高 28%']].forEach(function(row){
       var d=row[1];if(!d)return;
       var lab=el('div','qlabel',row[0]);if(row[2]){lab.append(el('small',null,row[2]));}
-      var grid=el('div','quick'),all={rate:0,banks:[],term:null};
-      d.terms.forEach(function(t){var b=best(t,d.banks);if(b.rate>all.rate){all={rate:b.rate,banks:b.banks,term:t};}});
-      var cards=[['全场最高',all.term,all]];
-      [6,12,24].forEach(function(t){if(d.terms.indexOf(t)>=0)cards.push([termLabel(t)+'最高',t,best(t,d.banks)]);});
+      var grid=el('div','quick'),cards=[];
+      // 四张卡片:6 个月、12 个月、2 年、5 年(没有 5 年时用最长的期限)
+      var last=d.terms.indexOf(60)>=0?60:d.terms[d.terms.length-1];
+      [6,12,24,last].forEach(function(t){if(d.terms.indexOf(t)>=0)cards.push([termLabel(t)+'最高',t,best(t,d.banks)]);});
       cards.forEach(function(c){
         var k=el('div','q');
-        k.append(el('div','k',c[0]),el('div','v',pct(c[2].rate)),el('div','b',whoText(c[2].banks)),el('div','t','存期 '+termLabel(c[1])));
+        k.append(el('div','k',c[0]),el('div','v',pct(c[2].rate)),c[2].banks.length===1?bankEl(c[2].banks[0].name,'b'):el('div','b',whoText(c[2].banks)),el('div','t','存期 '+termLabel(c[1])));
         grid.append(k);
       });
       q.append(lab,grid);
@@ -409,12 +427,12 @@
         var top=sav.accounts.filter(function(a){return a.type===x[0];}).sort(function(a,b){return b.rate-a.rate;})[0];
         if(!top)return;
         var k=el('div','q');
-        k.append(el('div','k',x[1]),el('div','v',pct(top.rate)),el('div','b',top.bank),el('div','t',top.product+(top.notice_days?' · 提前 '+top.notice_days+' 天':'')));
+        k.append(el('div','k',x[1]),el('div','v',pct(top.rate)),bankEl(top.bank,'b'),el('div','t',top.product+(top.notice_days?' · 提前 '+top.notice_days+' 天':'')));
         grid.append(k);
       });
       var pr=sav.revolut&&sav.revolut.promo;
       if(pr&&Date.now()<new Date(pr.until+'T23:59:59+13:00').getTime()){
-        var k=el('div','q');k.append(el('div','k','新客优惠'),el('div','v',pct(pr.rate)),el('div','b','Revolut'),el('div','t',pr.short));grid.append(k);
+        var k=el('div','q');k.append(el('div','k','新客优惠'),el('div','v',pct(pr.rate)),bankEl('Revolut','b'),el('div','t',pr.short));grid.append(k);
       }
       q.append(lab,grid);
     }
@@ -459,7 +477,7 @@
     var tops={};terms.forEach(function(t){tops[t]=best(t,banks).rate;});
     banks.forEach(function(b){
       var tr=el('tr'),td=el('td');
-      td.append(el('div','bn',b.name));
+      td.append(bankEl(b.name,'bn'));
       var meta=el('div','bm');
       if(GROUP_TAG[b.group])meta.append(el('span','tag '+b.group,GROUP_TAG[b.group]));
       meta.append(document.createTextNode((b.rating?'评级 '+b.rating+' · ':'')+(b.min_deposit?'起存 '+money(b.min_deposit):'')));
@@ -503,7 +521,7 @@
     var tb=document.querySelector('#sav tbody');tb.textContent='';
     sav.accounts.filter(function(a){return savType==='all'||a.type===savType;}).sort(function(a,b){return b.rate-a.rate||a.bank.localeCompare(b.bank);}).forEach(function(a){
       var tr=el('tr'),td=el('td');
-      td.append(el('div','bn',a.bank),el('div','bm',a.product));
+      td.append(bankEl(a.bank,'bn'),el('div','bm',a.product));
       var m=el('div','bm');m.append(el('span','tag '+a.type,TYPE[a.type]));td.append(m);
       var r=el('td','r',pct(a.rate));
       if(a.type==='bonus'&&a.base!=null)r.append(el('small',null,'基础 '+pct(a.base)));
@@ -582,7 +600,7 @@
     var hr=el('tr');['银行','年利率',tax?'税后利息':'到手利息','税前利息','到期本息'].forEach(function(h){hr.append(el('th',null,h));});thead.append(hr);
     rows.forEach(function(x){
       var tr=el('tr',x.ok?'':'dim'),td=el('td');
-      td.append(el('div','bn',x.b.name));
+      td.append(bankEl(x.b.name,'bn'));
       if(!x.ok)td.append(el('div','bm','起存 '+money(x.b.min_deposit)));
       tr.append(td,el('td',null,pct(x.rate)),el('td','net',money(x.net)),el('td',null,money(x.gross)),el('td',null,money(P+x.net)));
       tbody.append(tr);
