@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>新西兰存款利率 · 各银行定存利率对比与计算器 | 吴斯 Aaron Wu</title>
+<meta name="description" content="新西兰各银行定期存款（Term Deposit）利率中文对比：ANZ、ASB、BNZ、Westpac、Kiwibank、中国银行、建设银行、工商银行等 1 个月到 5 年利率，每日更新，附税后收益计算器。" />
+<meta property="og:title" content="新西兰存款利率 · 各银行定存利率对比" />
+<meta property="og:description" content="1 个月到 5 年定存利率一页看全，每日更新，附税后收益计算器。" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+<style>
+  :root{
+    --bg:#ffffff;--bg-soft:#f6f7fb;--bg-card:#ffffff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;
+    --brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--good:#15895a;--good-soft:#e8f6ef;--warn:#b45309;--warn-soft:#fdf3e1;
+    --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.06);--radius:16px;--maxw:1080px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0b0d12;--bg-soft:#0f1219;--bg-card:#12151d;--fg:#eef1f7;--fg-soft:#b3bacb;--fg-faint:#7f889c;--line:#222633;--brand:#7c78ff;--brand-2:#38bdf8;--brand-soft:#171a2b;--good:#34d399;--good-soft:#10261d;--warn:#fbbf24;--warn-soft:#2a2110;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35)}
+  }
+  :root[data-theme="dark"]{--bg:#0b0d12;--bg-soft:#0f1219;--bg-card:#12151d;--fg:#eef1f7;--fg-soft:#b3bacb;--fg-faint:#7f889c;--line:#222633;--brand:#7c78ff;--brand-2:#38bdf8;--brand-soft:#171a2b;--good:#34d399;--good-soft:#10261d;--warn:#fbbf24;--warn-soft:#2a2110;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35)}
+  :root[data-theme="light"]{--bg:#ffffff;--bg-soft:#f6f7fb;--bg-card:#ffffff;--fg:#14161c;--fg-soft:#4a5060;--fg-faint:#7a8194;--line:#e6e8ef;--brand:#4f46e5;--brand-2:#0ea5e9;--brand-soft:#eef0ff;--good:#15895a;--good-soft:#e8f6ef;--warn:#b45309;--warn-soft:#fdf3e1;--shadow:0 1px 2px rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.06)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
+  a{color:inherit;text-decoration:none}
+  [hidden]{display:none!important}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:44px 0;scroll-margin-top:74px}
+  .eyebrow{font-size:13px;letter-spacing:.14em;color:var(--brand);font-weight:700}
+  h2{font-size:clamp(21px,3vw,28px);line-height:1.3;margin:8px 0 6px;letter-spacing:-.01em}
+  .lead{color:var(--fg-soft);font-size:15.5px;margin:0;max-width:720px}
+
+  /* 导航(与主页一致) */
+  header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.01em;min-width:0}
+  .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:18px;font-weight:700;flex:none}
+  .brand-sub{color:var(--fg-faint);font-weight:600}
+  .nav-actions{display:flex;align-items:center;gap:8px;flex:none}
+  .nav-toggle,.theme-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--fg-soft);cursor:pointer;place-items:center}
+  .theme-toggle{display:grid}.nav-toggle{display:none}
+  .nav-toggle svg,.theme-toggle svg{width:19px;height:19px;stroke:currentColor}
+  .navlinks{display:flex;gap:24px;align-items:center}
+  .navlinks a{color:var(--fg-soft);font-size:14.5px;font-weight:600;position:relative}
+  .navlinks a:hover,.navlinks a.active{color:var(--fg)}
+  .navlinks a.active:after{content:"";position:absolute;left:0;right:0;bottom:-21px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));border-radius:2px}
+  .nav-cta{padding:8px 16px;font-size:13.5px!important;font-weight:700!important;border-radius:10px;border:1.5px solid var(--brand);color:var(--brand)!important}
+  @media(min-width:760px){.navlinks{margin-left:auto}}
+  @media(max-width:759px){
+    .nav-toggle{display:grid}.brand-sub{display:none}
+    .navlinks{position:absolute;top:62px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;padding:10px 22px 16px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:var(--shadow);display:none}
+    .navlinks.open{display:flex}
+    .navlinks a{padding:13px 8px;border-radius:9px;font-size:16px}
+    .navlinks a.active:after{display:none}.navlinks a.active{background:var(--bg-soft)}
+    .nav-cta{text-align:center;margin-top:8px}
+  }
+
+  /* 头部 */
+  .hero{position:relative;overflow:hidden;padding:52px 0 8px}
+  .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(720px 340px at 80% -10%,color-mix(in srgb,var(--brand) 18%,transparent),transparent 70%),radial-gradient(520px 300px at 6% 10%,color-mix(in srgb,var(--brand-2) 13%,transparent),transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative}
+  h1{font-size:clamp(28px,4.6vw,44px);line-height:1.15;letter-spacing:-.02em;margin:12px 0 0;font-weight:800}
+  h1 .grad{white-space:nowrap;background:linear-gradient(120deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{margin:14px 0 0;font-size:16.5px;color:var(--fg-soft);max-width:680px}
+  .stamp{display:inline-flex;align-items:baseline;gap:8px;margin-top:18px;padding:7px 14px;border:1px solid var(--line);border-radius:14px;line-height:1.5;background:var(--bg-card);font-size:13px;color:var(--fg-soft)}
+  .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px color-mix(in srgb,#22c55e 25%,transparent);flex:none;position:relative;top:-1px}
+  .stale{margin-top:14px;padding:11px 15px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:14px;font-weight:600;border:1px solid color-mix(in srgb,var(--warn) 30%,transparent)}
+
+  /* 速览 */
+  .quick{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-top:26px}
+  @media(min-width:760px){.quick{grid-template-columns:repeat(4,1fr)}}
+  .q{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+  .q .k{font-size:12.5px;color:var(--fg-faint);font-weight:700;letter-spacing:.04em}
+  .q .v{font-size:clamp(26px,4vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-top:4px;background:linear-gradient(120deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+  .q .b{font-size:13.5px;color:var(--fg);font-weight:600;margin-top:2px}
+  .q .t{font-size:12.5px;color:var(--fg-faint)}
+
+  /* 筛选 */
+  .filters{display:flex;flex-wrap:wrap;gap:8px 18px;margin:20px 0 12px;align-items:center}
+  .fgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .flabel{font-size:12.5px;color:var(--fg-faint);font-weight:700;margin-right:2px}
+  .chipbtn{border:1px solid var(--line);background:var(--bg-card);color:var(--fg-soft);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+  .chipbtn:hover{border-color:var(--brand)}
+  .chipbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+
+  /* 利率表 */
+  .tablewrap{border:1px solid var(--line);border-radius:var(--radius);overflow:auto;background:var(--bg-card);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+  th,td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  thead th{background:var(--bg-soft);font-size:12.5px;color:var(--fg-soft);font-weight:700;position:sticky;top:0;z-index:2}
+  thead th.sortable{cursor:pointer;user-select:none}
+  thead th.sortable:hover{color:var(--brand)}
+  thead th.sorted{color:var(--brand)}
+  th:first-child,td:first-child{position:sticky;left:0;z-index:1;text-align:left;background:var(--bg-card);border-right:1px solid var(--line);min-width:150px}
+  thead th:first-child{background:var(--bg-soft);z-index:3}
+  .bn{font-weight:700;color:var(--fg);font-size:14px;line-height:1.3;white-space:normal}
+  .be{font-size:11.5px;color:var(--fg-faint);line-height:1.3;white-space:normal}
+  .bm{font-size:11.5px;color:var(--fg-soft);margin-top:3px;line-height:1.4;white-space:normal}
+  .tag{display:inline-block;padding:0 6px;border-radius:5px;font-size:11px;font-weight:700;margin-right:4px;background:var(--bg-soft);color:var(--fg-soft)}
+  .tag.cn{background:#fdecec;color:#c8423d}.tag.big4{background:var(--brand-soft);color:var(--brand)}
+  :root[data-theme="dark"] .tag.cn{background:#3a1d1d;color:#f87171}
+  td.rate{color:var(--fg);font-weight:600}
+  td.none{color:var(--fg-faint);font-weight:400}
+  td.top{background:var(--good-soft);color:var(--good);font-weight:800}
+  tbody tr:hover td{background:var(--bg-soft)}
+  tbody tr:hover td.top{background:var(--good-soft)}
+  .legend{font-size:12.5px;color:var(--fg-faint);margin-top:10px}
+  .legend b{color:var(--good)}
+
+  /* 计算器 */
+  .calc{display:grid;gap:18px;margin-top:20px}
+  @media(min-width:900px){.calc{grid-template-columns:320px 1fr;align-items:start}}
+  .calc>.panel{min-width:0}
+  .panel{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .field{margin-bottom:14px}.field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13px;font-weight:700;color:var(--fg-soft);margin-bottom:6px}
+  .field input,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--bg);color:var(--fg);font-family:inherit;outline:none}
+  .field input:focus,.field select:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+  .field .hint{font-size:12px;color:var(--fg-faint);margin-top:5px}
+  .money{position:relative}.money span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--fg-faint);font-weight:600}
+  .money input{padding-left:44px}
+  .summary{padding:14px 16px;border-radius:12px;background:var(--brand-soft);font-size:15px;margin-bottom:14px;line-height:1.7}
+  .summary b{color:var(--brand)}
+  .res td,.res th{padding:9px 10px}
+  .res td:first-child,.res th:first-child{min-width:112px}
+  .res tr.dim td{opacity:.5}
+  .res .net{font-weight:800;color:var(--good)}
+
+  /* 说明 */
+  .faq{display:grid;gap:14px;margin-top:20px}
+  @media(min-width:760px){.faq{grid-template-columns:1fr 1fr}}
+  .faq .panel h3{margin:0 0 8px;font-size:16.5px}
+  .faq .panel p{margin:0 0 8px;color:var(--fg-soft);font-size:14.5px}
+  .faq .panel p:last-child{margin-bottom:0}
+  .faq .panel b{color:var(--fg)}
+  .faq a,.disc a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  .mini{width:100%;font-size:13.5px;margin:6px 0 8px}
+  .mini td,.mini th{padding:6px 8px;text-align:left;border-bottom:1px solid var(--line);position:static;background:none;min-width:0;border-right:0;white-space:normal}
+  .mini th{font-size:12px;color:var(--fg-faint)}
+  .disc{margin-top:22px;padding:16px 18px;border-radius:14px;background:var(--bg-soft);border:1px solid var(--line);font-size:13.5px;color:var(--fg-soft)}
+  .disc b{color:var(--fg)}
+  .soft{background:var(--bg-soft)}
+  footer{border-top:1px solid var(--line);padding:30px 0 42px;color:var(--fg-faint);font-size:13.5px}
+  .foot-in{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .foot-in a:hover{color:var(--fg)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="../index.html">
+      <span class="logo">A</span>
+      <span>吴斯<span class="brand-sub"> · Aaron Wu</span></span>
+    </a>
+    <nav class="navlinks" id="navLinks">
+      <a href="../index.html#home">个人主页</a>
+      <a href="../index.html#works">作品集</a>
+      <a href="../index.html#consulting">AI 战略咨询</a>
+      <a class="active" href="./">新西兰存款利率</a>
+      <a class="nav-cta" href="../index.html#contact">联系我</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeBtn" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">新西兰存款利率</span>
+    <h1>新西兰各银行定存利率，<span class="grad">一页看全</span></h1>
+    <p class="sub">把新西兰主要银行 1 个月到 5 年的定期存款（Term Deposit）利率放在一张表里，每天更新一次。可以按期限排序、筛选银行，并用计算器估算税后能拿到多少利息。</p>
+    <div class="stamp"><span class="dot"></span><span id="stamp">正在加载最新利率…</span></div>
+    <div class="stale" id="stale" hidden></div>
+    <noscript><div class="stale">这个页面需要开启 JavaScript 才能显示利率表。</div></noscript>
+    <div class="quick" id="quick"></div>
+  </div>
+</section>
+
+<section id="table">
+  <div class="wrap">
+    <span class="eyebrow">利率总表</span>
+    <h2>各银行定存年利率（%）</h2>
+    <p class="lead">点击某个期限的表头，可以按这个期限的利率从高到低排序。利率为税前年利率。</p>
+    <div class="filters">
+      <div class="fgroup" id="fGroup"><span class="flabel">银行</span>
+        <button class="chipbtn on" data-g="all">全部</button>
+        <button class="chipbtn" data-g="big4">四大行</button>
+        <button class="chipbtn" data-g="cn">中资银行</button>
+        <button class="chipbtn" data-g="other">其他银行</button>
+      </div>
+      <div class="fgroup" id="fTerm"><span class="flabel">期限</span>
+        <button class="chipbtn on" data-t="all">全部</button>
+        <button class="chipbtn" data-t="short">短期（≤12 个月）</button>
+        <button class="chipbtn" data-t="long">长期（18 个月以上）</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="rates"><thead></thead><tbody></tbody></table></div>
+    <div class="legend"><b>绿色</b> = 当前列表中该期限的最高利率 · 「—」= 该银行不提供这个期限 · 手机上可左右滑动表格</div>
+  </div>
+</section>
+
+<section id="calc" class="soft">
+  <div class="wrap">
+    <span class="eyebrow">计算器</span>
+    <h2>存这笔钱，到期能拿多少利息？</h2>
+    <p class="lead">输入金额和期限，按当前利率列出每家银行的税前、税后利息。结果是估算，实际以银行为准。</p>
+    <div class="calc">
+      <div class="panel">
+        <div class="field"><label for="cAmt">存款金额（纽币）</label>
+          <div class="money"><span>NZ$</span><input id="cAmt" type="text" inputmode="numeric" value="50,000" autocomplete="off"></div></div>
+        <div class="field"><label for="cTerm">存期</label><select id="cTerm"></select></div>
+        <div class="field"><label for="cTax">利息预扣税（RWT）税率</label>
+          <select id="cTax">
+            <option value="0.105">10.5%（年收入 ≤ $15,600）</option>
+            <option value="0.175">17.5%（$15,601 – $53,500）</option>
+            <option value="0.30">30%（$53,501 – $78,100）</option>
+            <option value="0.33" selected>33%（$78,101 – $180,000）</option>
+            <option value="0.39">39%（$180,001 以上）</option>
+            <option value="0">不计税（只看税前）</option>
+          </select>
+          <div class="hint">按你的全年应税总收入选择，适用于新西兰税务居民。</div></div>
+        <div class="field" id="cModeField"><label for="cMode">付息方式（存期超过 1 年时）</label>
+          <select id="cMode"><option value="simple">到期一次付息（单利）</option><option value="compound">每年复利一次</option></select></div>
+      </div>
+      <div class="panel">
+        <div class="summary" id="cSummary"></div>
+        <div class="tablewrap" style="box-shadow:none"><table class="res" id="cRes"><thead></thead><tbody></tbody></table></div>
+        <div class="legend">灰色行 = 金额低于该银行的最低起存额</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guide">
+  <div class="wrap">
+    <span class="eyebrow">看懂定存</span>
+    <h2>几个常被问到的问题</h2>
+    <div class="faq">
+      <div class="panel"><h3>定期存款（Term Deposit）是什么？</h3>
+        <p>把一笔钱存进银行，约定一个固定期限，利率在存入那天就锁定。期间市场利率涨也好、跌也好，都不影响你这笔存款。</p>
+        <p>代价是<b>流动性</b>：没到期想取出来，一般要提前通知银行，利息也会被扣减。所以只适合放一段时间内确定用不到的钱。</p></div>
+      <div class="panel"><h3>表里的利率怎么读？</h3>
+        <p>都是<b>税前年利率</b>。存 6 个月、年利率 3.6%，拿到的利息大约是本金的 1.8%，再扣掉利息税。</p>
+        <p>每家银行有<b>最低起存额</b>，从 $1,000 到 $100,000 不等。金额特别大或走特殊渠道时，银行给的利率可能和挂牌利率不一样，可以直接问银行。</p></div>
+      <div class="panel"><h3>信用评级怎么看？</h3>
+        <p>评级是独立评级机构对银行偿债能力的评估，<b>AA 高于 A，A 高于 BBB</b>，后面的 + / − 是同一档里的微调。BBB− 及以上属于通常所说的「投资级」。</p>
+        <p>表里多数是标普或惠誉的评级；Kiwibank 的 A1 是穆迪的写法，大致相当于标普的 A+。评级越低，银行给的利率往往越高，这是对风险的补偿。评级只是参考，不是保证。</p></div>
+      <div class="panel"><h3>银行倒闭了，存款有保障吗？</h3>
+        <p>新西兰从 <b>2025 年 7 月 1 日</b>起实行存款保障计划（Depositor Compensation Scheme）：每位存款人在<b>每家</b>持牌存款机构最多保障 <b>10 万纽币</b>，超出的部分不在保障范围内。</p>
+        <p>金额较大时，可以分散存到几家机构。具体产品是否在保障范围内，请向银行确认，或查看<a href="https://www.rbnz.govt.nz/dcs" target="_blank" rel="noopener">新西兰储备银行的说明</a>。</p></div>
+      <div class="panel"><h3>利息怎么扣税？</h3>
+        <p>银行在付息时直接代扣<b>利息预扣税（RWT）</b>，税率按你的全年应税总收入选择（2024 年 7 月 31 日起的档位）：</p>
+        <table class="mini"><tr><th>全年应税总收入</th><th>RWT 税率</th></tr>
+          <tr><td>$15,600 及以下</td><td>10.5%</td></tr><tr><td>$15,601 – $53,500</td><td>17.5%</td></tr><tr><td>$53,501 – $78,100</td><td>30%</td></tr><tr><td>$78,101 – $180,000</td><td>33%</td></tr><tr><td>$180,001 及以上</td><td>39%</td></tr></table>
+        <p>没有向银行提供 IRD 号时，会按 <b>45%</b> 扣。税率选低了，年底可能要补税。非新西兰税务居民适用另一套规则，请咨询银行或税务顾问。来源：<a href="https://www.ird.govt.nz/income-tax/withholding-taxes/resident-withholding-tax-rwt/using-the-right-rwt-tax-rate" target="_blank" rel="noopener">新西兰税务局（IRD）</a>。</p></div>
+      <div class="panel"><h3>PIE 定存是什么？</h3>
+        <p>部分银行另外提供 PIE 形式的定存。它的利息不按 RWT 扣税，而是按你的 PIR 税率，<b>最高 28%</b>。对个人税率在 30% 及以上的人，同样的利率下，PIE 的税后收益更高。</p>
+        <p>PIE 的起存额通常更高，可选期限也少一些。本页目前只收录普通定存利率，PIE 利率之后再加。</p></div>
+    </div>
+    <div class="disc">
+      <p style="margin:0 0 6px"><b>数据来源与更新：</b>利率数据每天从 <a href="https://www.termdepositrates.co.nz/" target="_blank" rel="noopener">termdepositrates.co.nz</a> 采集一次，它汇总的是各银行公开挂牌的利率。数据不是实时的，也不是银行直接提供的，偶尔会和银行当前的实际利率有出入。</p>
+      <p style="margin:0"><b>免责声明：</b>本页只提供事实信息，按利率高低排列，不构成任何投资或理财建议，也没有考虑你的个人财务状况。存款前请到银行官网或向银行确认最新利率和完整条款。</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="yr"></span> 吴斯 · Aaron Wu</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <a href="../index.html#home">个人主页</a>
+      <a href="../index.html#works">作品集</a>
+      <a href="../index.html#consulting">AI 战略咨询</a>
+      <a href="../index.html#contact">联系</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // 主题(与主页共用 aw-theme)与手机菜单
+  var root=document.documentElement,key='aw-theme',saved=null;
+  try{saved=localStorage.getItem(key)}catch(e){}
+  if(saved)root.setAttribute('data-theme',saved);
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark';root.setAttribute('data-theme',next);
+    try{localStorage.setItem(key,next)}catch(e){}
+  });
+  var nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');
+  nt.addEventListener('click',function(){nt.setAttribute('aria-expanded',nl.classList.toggle('open')?'true':'false');});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  function $(id){return document.getElementById(id);}
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+  function termLabel(m){return m<24?m+' 个月':(m/12)+' 年';}
+  function pct(r){return r.toFixed(2)+'%';}
+  function money(n){return '$'+Math.round(n).toLocaleString('en-NZ');}
+  var GROUP_TAG={big4:'四大行',cn:'中资'};
+
+  var data=null,state={group:'all',term:'all',sort:12};
+
+  fetch('data/rates.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
+    data=d;
+    if(d.terms.indexOf(state.sort)<0)state.sort=d.terms[Math.floor(d.terms.length/2)];
+    renderStamp();renderQuick();renderTable();initCalc();
+  }).catch(function(){
+    $('stamp').textContent='利率数据加载失败';
+    $('stale').hidden=false;$('stale').textContent='暂时无法加载利率数据，请稍后刷新页面。';
+  });
+
+  function renderStamp(){
+    var u=new Date(data.updated);
+    // 按新西兰时间显示源站的更新时间
+    var s=u.toLocaleString('zh-CN',{timeZone:'Pacific/Auckland',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
+    $('stamp').textContent='数据更新于 '+s+'（新西兰时间）· 每日更新 · 共 '+data.banks.length+' 个产品';
+    var days=Math.floor((Date.now()-u.getTime())/864e5);
+    if(days>=3){$('stale').hidden=false;$('stale').textContent='注意：利率数据已有 '+days+' 天没有更新，可能与银行当前利率不一致，请以银行官网为准。';}
+  }
+
+  function best(term,banks){
+    var top=0,who=[];
+    (banks||data.banks).forEach(function(b){var r=b.rates[term];if(r==null)return;if(r>top){top=r;who=[b];}else if(r===top){who.push(b);}});
+    return {rate:top,banks:who};
+  }
+  function whoText(list){return list.length?list[0].zh+(list.length>1?' 等 '+list.length+' 家':''):'';}
+
+  function renderQuick(){
+    var q=$('quick');q.textContent='';
+    var all={rate:0,banks:[],term:null};
+    data.terms.forEach(function(t){var b=best(t);if(b.rate>all.rate){all={rate:b.rate,banks:b.banks,term:t};}});
+    var cards=[['全场最高',all.term,all]];
+    [6,12,24].forEach(function(t){if(data.terms.indexOf(t)>=0)cards.push([termLabel(t)+'最高',t,best(t)]);});
+    cards.forEach(function(c){
+      var d=el('div','q');
+      d.append(el('div','k',c[0]),el('div','v',pct(c[2].rate)),el('div','b',whoText(c[2].banks)),el('div','t','存期 '+termLabel(c[1])));
+      q.append(d);
+    });
+  }
+
+  function visibleTerms(){
+    return data.terms.filter(function(t){return state.term==='all'||(state.term==='short'?t<=12:t>=18);});
+  }
+  function visibleBanks(){
+    var list=data.banks.filter(function(b){return state.group==='all'||b.group===state.group;});
+    var s=state.sort;
+    return list.slice().sort(function(a,b){
+      if(s==='name')return a.name.localeCompare(b.name);
+      return (b.rates[s]||0)-(a.rates[s]||0)||a.name.localeCompare(b.name);
+    });
+  }
+
+  function renderTable(){
+    var terms=visibleTerms(),banks=visibleBanks();
+    if(state.sort!=='name'&&terms.indexOf(state.sort)<0){state.sort=terms.indexOf(12)>=0?12:terms[0];banks=visibleBanks();}
+    var thead=document.querySelector('#rates thead'),tbody=document.querySelector('#rates tbody');
+    thead.textContent='';tbody.textContent='';
+    var hr=el('tr'),h0=el('th','sortable'+(state.sort==='name'?' sorted':''),'银行'+(state.sort==='name'?' ▲':''));
+    h0.addEventListener('click',function(){state.sort='name';renderTable();});hr.append(h0);
+    terms.forEach(function(t){
+      var th=el('th','sortable'+(state.sort===t?' sorted':''),termLabel(t)+(state.sort===t?' ▼':''));
+      th.title='按 '+termLabel(t)+' 利率从高到低排序';
+      th.addEventListener('click',function(){state.sort=t;renderTable();});hr.append(th);
+    });
+    thead.append(hr);
+    var tops={};terms.forEach(function(t){tops[t]=best(t,banks).rate;});
+    banks.forEach(function(b){
+      var tr=el('tr'),td=el('td');
+      td.append(el('div','bn',b.zh));
+      if(b.zh!==b.name)td.append(el('div','be',b.name));
+      var meta=el('div','bm');
+      if(GROUP_TAG[b.group])meta.append(el('span','tag '+b.group,GROUP_TAG[b.group]));
+      meta.append(document.createTextNode((b.rating?'评级 '+b.rating+' · ':'')+(b.min_deposit?'起存 '+money(b.min_deposit):'')));
+      td.append(meta);
+      if(b.note)td.append(el('div','bm',b.note));
+      tr.append(td);
+      terms.forEach(function(t){
+        var r=b.rates[t];
+        tr.append(r==null?el('td','none','—'):el('td','rate'+(r===tops[t]?' top':''),r.toFixed(2)));
+      });
+      tbody.append(tr);
+    });
+  }
+
+  function bindChips(id,attr,key){
+    $(id).addEventListener('click',function(e){
+      var b=e.target.closest('.chipbtn');if(!b)return;
+      state[key]=b.getAttribute(attr);
+      [].forEach.call($(id).querySelectorAll('.chipbtn'),function(x){x.classList.toggle('on',x===b);});
+      renderTable();
+    });
+  }
+  bindChips('fGroup','data-g','group');bindChips('fTerm','data-t','term');
+
+  // ---- 计算器 ----
+  function initCalc(){
+    var sel=$('cTerm');
+    data.terms.forEach(function(t){var o=el('option',null,termLabel(t));o.value=t;if(t===12)o.selected=true;sel.append(o);});
+    var amt=$('cAmt');
+    amt.addEventListener('input',function(){
+      var n=amt.value.replace(/[^\d]/g,'').slice(0,10);
+      amt.value=n?Number(n).toLocaleString('en-NZ'):'';
+      calc();
+    });
+    ['cTerm','cTax','cMode'].forEach(function(id){$(id).addEventListener('change',calc);});
+    calc();
+  }
+  function calc(){
+    var P=Number($('cAmt').value.replace(/[^\d]/g,''))||0,t=Number($('cTerm').value),tax=Number($('cTax').value),mode=$('cMode').value;
+    $('cModeField').hidden=t<=12;
+    var rows=data.banks.filter(function(b){return b.rates[t]!=null;}).map(function(b){
+      var r=b.rates[t]/100,gross=(t>12&&mode==='compound')?P*(Math.pow(1+r,t/12)-1):P*r*t/12;
+      return {b:b,rate:b.rates[t],gross:gross,net:gross*(1-tax),ok:!b.min_deposit||P>=b.min_deposit};
+    }).sort(function(x,y){return (y.ok-x.ok)||(y.rate-x.rate)||x.b.name.localeCompare(y.b.name);});
+    var thead=document.querySelector('#cRes thead'),tbody=document.querySelector('#cRes tbody');
+    thead.textContent='';tbody.textContent='';
+    var hr=el('tr');['银行','年利率',tax?'税后利息':'到手利息','税前利息','到期本息'].forEach(function(h){hr.append(el('th',null,h));});thead.append(hr);
+    rows.forEach(function(x){
+      var tr=el('tr',x.ok?'':'dim'),td=el('td');
+      td.append(el('div','bn',x.b.zh));
+      if(!x.ok)td.append(el('div','bm','起存 '+money(x.b.min_deposit)));
+      tr.append(td,el('td',null,pct(x.rate)),el('td','net',money(x.net)),el('td',null,money(x.gross)),el('td',null,money(P+x.net)));
+      tbody.append(tr);
+    });
+    var ok=rows.filter(function(x){return x.ok;}),sum=$('cSummary');sum.textContent='';
+    if(!P){sum.textContent='请输入存款金额。';return;}
+    if(!ok.length){sum.textContent='这个金额低于所有银行在 '+termLabel(t)+' 期限的最低起存额。';return;}
+    var hi=ok[0],lo=ok[ok.length-1];
+    sum.append(document.createTextNode('存 '+money(P)+'、'+termLabel(t)+'：利率最高的是 '));
+    sum.append(el('b',null,hi.b.zh+' '+pct(hi.rate)));
+    sum.append(document.createTextNode('，'+(tax?'税后':'')+'利息约 '));
+    sum.append(el('b',null,money(hi.net)));
+    if(ok.length>1&&hi.net-lo.net>=1)sum.append(document.createTextNode('，比可选银行里最低的一家多 '+money(hi.net-lo.net)+'。'));
+    else sum.append(document.createTextNode('。'));
+  }
+})();
+</script>
+</body>
+</html>

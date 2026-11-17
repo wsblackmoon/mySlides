@@ -14,8 +14,11 @@ index.html              # 主页：导航(个人主页/作品集/AI战略咨询)
   ├─ slides.html        # 幻灯片版(可选)
   ├─ web.html           # 网页阅读版
   └─ images/            # 该文的配图
+nz-rates/               # 「新西兰存款利率」页面(主页导航第 4 个入口)
+  └─ data/              # rates.json(当前利率)+ history.jsonl(每日快照),由采集脚本生成,勿手改
 private/                # 私享会:构建生成的加密页面(勿手改)
 tools/vault-build.mjs   # 私享会加密构建脚本(每份资料独立口令)
+tools/nz-rates-scrape.py # 新西兰存款利率采集脚本
 assets/                 # 微信二维码等公共图
   ├─ vault/             # 私享会口令页(vault.css + vault.js)
   └─ deck/              # 幻灯片演示工具(deck.css + deck.js),所有 slides.html 共用
@@ -51,6 +54,16 @@ assets/                 # 微信二维码等公共图
 - 图片可以写 `loading="lazy"`,引擎会提前加载当前页和下一页。
 - **自动适配**:某页内容超出一屏(窗口矮、目录展开)时,引擎会把整页按比例缩小到放得下(最低 55%)。前提是溢出要能被测到:不要给表格等容器设 `max-height` + 内部滚动,弹性布局里的内容子项设 `flex-shrink:0`。
 - 参考:`investment-system/slides.html`(整屏排版)、`ai-paradigm/slides.html`(居中卡片)、`private-domain/slides.html`(整页图片 + 深色)。
+
+## 新西兰存款利率(`nz-rates/`)
+
+主页导航里的独立页面:各银行定存利率总表(排序/筛选)、最高利率速览、税后收益计算器、中文说明。页面用 JS 读取 `nz-rates/data/rates.json` 渲染。
+
+- 数据:`python3 tools/nz-rates-scrape.py` 从 termdepositrates.co.nz 的总表采集(一天一次,只取利率/评级/起存额这些事实数据),写入 `rates.json`,并往 `history.jsonl` 追加当天快照(留给以后做走势图)。`--check` 只校验不写文件。
+- 校验不过(银行数太少、利率离谱、单日大面积跳变)时脚本报错退出、不动文件,页面继续显示上一份数据;数据超过 3 天没更新,页面会自动提示。
+- 新增银行:在脚本的 `BANKS` 里补中文名和分组(`big4` 四大行 / `cn` 中资 / `other`),否则显示英文名。
+- 内容边界:**只采数字**,说明文字自己写,不搬原站文案和银行 logo;页脚保留数据来源链接和「不构成投资建议」声明。
+- 税率、存款保障等说明以官方为准:利息预扣税看 IRD,存款保障计划看 RBNZ(`rbnz.govt.nz/dcs`);官方调整后同步改 `nz-rates/index.html` 里的说明和计算器选项。
 
 ## 私享会(每份资料独立口令)
 
