@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>新西兰存款利率 · 各银行定存利率对比与计算器 | 吴斯 Aaron Wu</title>
-<meta name="description" content="新西兰各银行定期存款（Term Deposit）利率中文对比：ANZ、ASB、BNZ、Westpac、Kiwibank、中国银行、建设银行、工商银行等 1 个月到 5 年利率，每日更新，附税后收益计算器。" />
+<meta name="description" content="新西兰各银行定期存款（Term Deposit）利率中文对比：ANZ、ASB、BNZ、Westpac、Kiwibank、中国银行、建设银行、工商银行等 1 个月到 5 年利率，含 PIE 定存，每日更新，附税后收益计算器。" />
 <meta property="og:title" content="新西兰存款利率 · 各银行定存利率对比" />
 <meta property="og:description" content="1 个月到 5 年定存利率一页看全，每日更新，附税后收益计算器。" />
 <meta property="og:type" content="website" />
@@ -96,7 +96,6 @@
   th:first-child,td:first-child{position:sticky;left:0;z-index:1;text-align:left;background:var(--bg-card);border-right:1px solid var(--line);min-width:150px}
   thead th:first-child{background:var(--bg-soft);z-index:3}
   .bn{font-weight:700;color:var(--fg);font-size:14px;line-height:1.3;white-space:normal}
-  .be{font-size:11.5px;color:var(--fg-faint);line-height:1.3;white-space:normal}
   .bm{font-size:11.5px;color:var(--fg-soft);margin-top:3px;line-height:1.4;white-space:normal}
   .tag{display:inline-block;padding:0 6px;border-radius:5px;font-size:11px;font-weight:700;margin-right:4px;background:var(--bg-soft);color:var(--fg-soft)}
   .tag.cn{background:#fdecec;color:#c8423d}.tag.big4{background:var(--brand-soft);color:var(--brand)}
@@ -106,6 +105,8 @@
   td.top{background:var(--good-soft);color:var(--good);font-weight:800}
   tbody tr:hover td{background:var(--bg-soft)}
   tbody tr:hover td.top{background:var(--good-soft)}
+  .pienote{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--brand-soft);font-size:13.5px;color:var(--fg-soft)}
+  .pienote b{color:var(--brand)}
   .legend{font-size:12.5px;color:var(--fg-faint);margin-top:10px}
   .legend b{color:var(--good)}
 
@@ -178,7 +179,7 @@
   <div class="wrap">
     <span class="eyebrow">新西兰存款利率</span>
     <h1>新西兰各银行定存利率，<span class="grad">一页看全</span></h1>
-    <p class="sub">把新西兰主要银行 1 个月到 5 年的定期存款（Term Deposit）利率放在一张表里，每天更新一次。可以按期限排序、筛选银行，并用计算器估算税后能拿到多少利息。</p>
+    <p class="sub">把新西兰主要银行 1 个月到 5 年的定期存款（Term Deposit）利率放在一张表里，普通定存和 PIE 定存都有，每天更新一次。可以按期限排序、筛选银行，并用计算器估算税后能拿到多少利息。</p>
     <div class="stamp"><span class="dot"></span><span id="stamp">正在加载最新利率…</span></div>
     <div class="stale" id="stale" hidden></div>
     <noscript><div class="stale">这个页面需要开启 JavaScript 才能显示利率表。</div></noscript>
@@ -189,9 +190,13 @@
 <section id="table">
   <div class="wrap">
     <span class="eyebrow">利率总表</span>
-    <h2>各银行定存年利率（%）</h2>
+    <h2 id="tblTitle">各银行定存年利率（%）</h2>
     <p class="lead">点击某个期限的表头，可以按这个期限的利率从高到低排序。利率为税前年利率。</p>
     <div class="filters">
+      <div class="fgroup" id="fProd"><span class="flabel">产品</span>
+        <button class="chipbtn on" data-p="td">普通定存</button>
+        <button class="chipbtn" data-p="pie">PIE 定存</button>
+      </div>
       <div class="fgroup" id="fGroup"><span class="flabel">银行</span>
         <button class="chipbtn on" data-g="all">全部</button>
         <button class="chipbtn" data-g="big4">四大行</button>
@@ -204,6 +209,7 @@
         <button class="chipbtn" data-t="long">长期（18 个月以上）</button>
       </div>
     </div>
+    <div class="pienote" id="pieNote" hidden></div>
     <div class="tablewrap"><table id="rates"><thead></thead><tbody></tbody></table></div>
     <div class="legend"><b>绿色</b> = 当前列表中该期限的最高利率 · 「—」= 该银行不提供这个期限 · 手机上可左右滑动表格</div>
   </div>
@@ -216,19 +222,14 @@
     <p class="lead">输入金额和期限，按当前利率列出每家银行的税前、税后利息。结果是估算，实际以银行为准。</p>
     <div class="calc">
       <div class="panel">
+        <div class="field" id="cProdField"><label for="cProd">产品类型</label>
+          <select id="cProd"><option value="td">普通定存</option><option value="pie">PIE 定存</option></select></div>
         <div class="field"><label for="cAmt">存款金额（纽币）</label>
           <div class="money"><span>NZ$</span><input id="cAmt" type="text" inputmode="numeric" value="50,000" autocomplete="off"></div></div>
         <div class="field"><label for="cTerm">存期</label><select id="cTerm"></select></div>
-        <div class="field"><label for="cTax">利息预扣税（RWT）税率</label>
-          <select id="cTax">
-            <option value="0.105">10.5%（年收入 ≤ $15,600）</option>
-            <option value="0.175">17.5%（$15,601 – $53,500）</option>
-            <option value="0.30">30%（$53,501 – $78,100）</option>
-            <option value="0.33" selected>33%（$78,101 – $180,000）</option>
-            <option value="0.39">39%（$180,001 以上）</option>
-            <option value="0">不计税（只看税前）</option>
-          </select>
-          <div class="hint">按你的全年应税总收入选择，适用于新西兰税务居民。</div></div>
+        <div class="field"><label for="cTax" id="cTaxLabel">利息预扣税（RWT）税率</label>
+          <select id="cTax"></select>
+          <div class="hint" id="cTaxHint"></div></div>
         <div class="field" id="cModeField"><label for="cMode">付息方式（存期超过 1 年时）</label>
           <select id="cMode"><option value="simple">到期一次付息（单利）</option><option value="compound">每年复利一次</option></select></div>
       </div>
@@ -264,8 +265,9 @@
           <tr><td>$15,600 及以下</td><td>10.5%</td></tr><tr><td>$15,601 – $53,500</td><td>17.5%</td></tr><tr><td>$53,501 – $78,100</td><td>30%</td></tr><tr><td>$78,101 – $180,000</td><td>33%</td></tr><tr><td>$180,001 及以上</td><td>39%</td></tr></table>
         <p>没有向银行提供 IRD 号时，会按 <b>45%</b> 扣。税率选低了，年底可能要补税。非新西兰税务居民适用另一套规则，请咨询银行或税务顾问。来源：<a href="https://www.ird.govt.nz/income-tax/withholding-taxes/resident-withholding-tax-rwt/using-the-right-rwt-tax-rate" target="_blank" rel="noopener">新西兰税务局（IRD）</a>。</p></div>
       <div class="panel"><h3>PIE 定存是什么？</h3>
-        <p>部分银行另外提供 PIE 形式的定存。它的利息不按 RWT 扣税，而是按你的 PIR 税率，<b>最高 28%</b>。对个人税率在 30% 及以上的人，同样的利率下，PIE 的税后收益更高。</p>
-        <p>PIE 的起存额通常更高，可选期限也少一些。本页目前只收录普通定存利率，PIE 利率之后再加。</p></div>
+        <p>部分银行另外提供 PIE 形式的定存。它的收益不按 RWT 扣税，而是按你的 <b>PIR 税率</b>，只有 10.5%、17.5%、28% 三档，<b>最高 28%</b>。对个人税率在 30% 及以上的人，同样的利率下，PIE 的税后收益更高。</p>
+        <p>PIR 看最近两个纳税年度：有一年应税收入不超过 $15,600、加上 PIE 收入后不超过 $53,500，用 10.5%；有一年应税收入不超过 $53,500、加上 PIE 收入后不超过 $78,100，用 17.5%；其余用 28%。可以用 <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/types-of-individual-income/portfolio-investment-entity-income-for-individuals/prescribed-investor-rates/find-my-prescribed-investor-rate" target="_blank" rel="noopener">IRD 的 PIR 查询工具</a>确认自己的税率。</p>
+        <p>PIE 的起存额通常更高，可选期限也少一些；是否在存款保障范围内取决于产品结构，请向银行确认。在上面的总表和计算器里切换到「PIE 定存」就能查看。</p></div>
     </div>
     <div class="disc">
       <p style="margin:0 0 6px"><b>数据来源与更新：</b>利率数据每天从 <a href="https://www.termdepositrates.co.nz/" target="_blank" rel="noopener">termdepositrates.co.nz</a> 采集一次，它汇总的是各银行公开挂牌的利率。数据不是实时的，也不是银行直接提供的，偶尔会和银行当前的实际利率有出入。</p>
@@ -309,11 +311,13 @@
   function money(n){return '$'+Math.round(n).toLocaleString('en-NZ');}
   var GROUP_TAG={big4:'四大行',cn:'中资'};
 
-  var data=null,state={group:'all',term:'all',sort:12};
+  var data=null,state={prod:'td',group:'all',term:'all',sort:12};
+  function prod(p){return (p||state.prod)==='pie'&&data.pie?data.pie:data;}
 
   fetch('data/rates.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
     data=d;
     if(d.terms.indexOf(state.sort)<0)state.sort=d.terms[Math.floor(d.terms.length/2)];
+    if(!d.pie){$('fProd').hidden=true;$('cProdField').hidden=true;}
     renderStamp();renderQuick();renderTable();initCalc();
   }).catch(function(){
     $('stamp').textContent='利率数据加载失败';
@@ -334,7 +338,7 @@
     (banks||data.banks).forEach(function(b){var r=b.rates[term];if(r==null)return;if(r>top){top=r;who=[b];}else if(r===top){who.push(b);}});
     return {rate:top,banks:who};
   }
-  function whoText(list){return list.length?list[0].zh+(list.length>1?' 等 '+list.length+' 家':''):'';}
+  function whoText(list){return list.length?list[0].name+(list.length>1?' 等 '+list.length+' 家':''):'';}
 
   function renderQuick(){
     var q=$('quick');q.textContent='';
@@ -350,10 +354,10 @@
   }
 
   function visibleTerms(){
-    return data.terms.filter(function(t){return state.term==='all'||(state.term==='short'?t<=12:t>=18);});
+    return prod().terms.filter(function(t){return state.term==='all'||(state.term==='short'?t<=12:t>=18);});
   }
   function visibleBanks(){
-    var list=data.banks.filter(function(b){return state.group==='all'||b.group===state.group;});
+    var list=prod().banks.filter(function(b){return state.group==='all'||b.group===state.group;});
     var s=state.sort;
     return list.slice().sort(function(a,b){
       if(s==='name')return a.name.localeCompare(b.name);
@@ -362,7 +366,9 @@
   }
 
   function renderTable(){
-    var terms=visibleTerms(),banks=visibleBanks();
+    var terms=visibleTerms(),banks=visibleBanks(),pie=state.prod==='pie';
+    $('tblTitle').textContent=pie?'各银行 PIE 定存年利率（%）':'各银行定存年利率（%）';
+    renderPieNote(pie);
     if(state.sort!=='name'&&terms.indexOf(state.sort)<0){state.sort=terms.indexOf(12)>=0?12:terms[0];banks=visibleBanks();}
     var thead=document.querySelector('#rates thead'),tbody=document.querySelector('#rates tbody');
     thead.textContent='';tbody.textContent='';
@@ -377,8 +383,7 @@
     var tops={};terms.forEach(function(t){tops[t]=best(t,banks).rate;});
     banks.forEach(function(b){
       var tr=el('tr'),td=el('td');
-      td.append(el('div','bn',b.zh));
-      if(b.zh!==b.name)td.append(el('div','be',b.name));
+      td.append(el('div','bn',b.name));
       var meta=el('div','bm');
       if(GROUP_TAG[b.group])meta.append(el('span','tag '+b.group,GROUP_TAG[b.group]));
       meta.append(document.createTextNode((b.rating?'评级 '+b.rating+' · ':'')+(b.min_deposit?'起存 '+money(b.min_deposit):'')));
@@ -391,6 +396,12 @@
       });
       tbody.append(tr);
     });
+    if(!banks.length){var e=el('tr'),c=el('td','none','这个分类下没有银行提供'+(pie?' PIE 定存':'定存'));c.colSpan=terms.length+1;c.style.textAlign='center';c.style.padding='22px';e.append(c);tbody.append(e);}
+  }
+  function renderPieNote(pie){
+    var n=$('pieNote');n.hidden=!pie;if(!pie)return;n.textContent='';
+    n.append(el('b',null,'PIE 定存'),document.createTextNode('按 PIR 税率计税（10.5% / 17.5% / 28%），不走 RWT。目前有 '+data.pie.banks.length+' 家银行提供。'));
+    if(data.pie.updated.slice(0,10)!==data.updated.slice(0,10))n.append(document.createTextNode(' PIE 数据更新于 '+data.pie.updated.slice(0,10)+'。'));
   }
 
   function bindChips(id,attr,key){
@@ -401,25 +412,38 @@
       renderTable();
     });
   }
-  bindChips('fGroup','data-g','group');bindChips('fTerm','data-t','term');
+  bindChips('fProd','data-p','prod');bindChips('fGroup','data-g','group');bindChips('fTerm','data-t','term');
 
   // ---- 计算器 ----
+  var TAX={
+    td:{label:'利息预扣税（RWT）税率',hint:'按你的全年应税总收入选择，适用于新西兰税务居民。',def:'0.33',opts:[['0.105','10.5%（年收入 ≤ $15,600）'],['0.175','17.5%（$15,601 – $53,500）'],['0.30','30%（$53,501 – $78,100）'],['0.33','33%（$78,101 – $180,000）'],['0.39','39%（$180,001 以上）'],['0','不计税（只看税前）']]},
+    pie:{label:'PIR 税率（PIE 适用）',hint:'PIR 按最近两个纳税年度的收入判定，不确定时可用下方说明里的 IRD 工具查询。',def:'0.28',opts:[['0.105','10.5%'],['0.175','17.5%'],['0.28','28%（最高档）'],['0','不计税（只看税前）']]}
+  };
+  function fillCalc(){
+    var p=$('cProd').value,d=prod(p),sel=$('cTerm'),keep=Number(sel.value)||12;
+    sel.textContent='';
+    d.terms.forEach(function(t){var o=el('option',null,termLabel(t));o.value=t;if(t===keep)o.selected=true;sel.append(o);});
+    var tx=$('cTax');tx.textContent='';
+    TAX[p].opts.forEach(function(x){var o=el('option',null,x[1]);o.value=x[0];if(x[0]===TAX[p].def)o.selected=true;tx.append(o);});
+    $('cTaxLabel').textContent=TAX[p].label;$('cTaxHint').textContent=TAX[p].hint;
+  }
   function initCalc(){
-    var sel=$('cTerm');
-    data.terms.forEach(function(t){var o=el('option',null,termLabel(t));o.value=t;if(t===12)o.selected=true;sel.append(o);});
+    fillCalc();
     var amt=$('cAmt');
     amt.addEventListener('input',function(){
       var n=amt.value.replace(/[^\d]/g,'').slice(0,10);
       amt.value=n?Number(n).toLocaleString('en-NZ'):'';
       calc();
     });
+    $('cProd').addEventListener('change',function(){fillCalc();calc();});
     ['cTerm','cTax','cMode'].forEach(function(id){$(id).addEventListener('change',calc);});
     calc();
   }
   function calc(){
     var P=Number($('cAmt').value.replace(/[^\d]/g,''))||0,t=Number($('cTerm').value),tax=Number($('cTax').value),mode=$('cMode').value;
     $('cModeField').hidden=t<=12;
-    var rows=data.banks.filter(function(b){return b.rates[t]!=null;}).map(function(b){
+    var pie=$('cProd').value==='pie';
+    var rows=prod($('cProd').value).banks.filter(function(b){return b.rates[t]!=null;}).map(function(b){
       var r=b.rates[t]/100,gross=(t>12&&mode==='compound')?P*(Math.pow(1+r,t/12)-1):P*r*t/12;
       return {b:b,rate:b.rates[t],gross:gross,net:gross*(1-tax),ok:!b.min_deposit||P>=b.min_deposit};
     }).sort(function(x,y){return (y.ok-x.ok)||(y.rate-x.rate)||x.b.name.localeCompare(y.b.name);});
@@ -428,7 +452,7 @@
     var hr=el('tr');['银行','年利率',tax?'税后利息':'到手利息','税前利息','到期本息'].forEach(function(h){hr.append(el('th',null,h));});thead.append(hr);
     rows.forEach(function(x){
       var tr=el('tr',x.ok?'':'dim'),td=el('td');
-      td.append(el('div','bn',x.b.zh));
+      td.append(el('div','bn',x.b.name));
       if(!x.ok)td.append(el('div','bm','起存 '+money(x.b.min_deposit)));
       tr.append(td,el('td',null,pct(x.rate)),el('td','net',money(x.net)),el('td',null,money(x.gross)),el('td',null,money(P+x.net)));
       tbody.append(tr);
@@ -437,8 +461,8 @@
     if(!P){sum.textContent='请输入存款金额。';return;}
     if(!ok.length){sum.textContent='这个金额低于所有银行在 '+termLabel(t)+' 期限的最低起存额。';return;}
     var hi=ok[0],lo=ok[ok.length-1];
-    sum.append(document.createTextNode('存 '+money(P)+'、'+termLabel(t)+'：利率最高的是 '));
-    sum.append(el('b',null,hi.b.zh+' '+pct(hi.rate)));
+    sum.append(document.createTextNode((pie?'PIE 定存，':'')+'存 '+money(P)+'、'+termLabel(t)+'：利率最高的是 '));
+    sum.append(el('b',null,hi.b.name+' '+pct(hi.rate)));
     sum.append(document.createTextNode('，'+(tax?'税后':'')+'利息约 '));
     sum.append(el('b',null,money(hi.net)));
     if(ok.length>1&&hi.net-lo.net>=1)sum.append(document.createTextNode('，比可选银行里最低的一家多 '+money(hi.net-lo.net)+'。'));

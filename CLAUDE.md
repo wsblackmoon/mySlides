@@ -57,14 +57,14 @@ assets/                 # 微信二维码等公共图
 
 ## 新西兰存款利率(`nz-rates/`)
 
-主页导航里的独立页面:各银行定存利率总表(排序/筛选)、最高利率速览、税后收益计算器、中文说明。页面用 JS 读取 `nz-rates/data/rates.json` 渲染。
+主页导航里的独立页面:各银行定存利率总表(普通定存 / PIE 定存切换,排序/筛选)、最高利率速览、税后收益计算器、中文说明。银行名统一显示英文。页面用 JS 读取 `nz-rates/data/rates.json` 渲染。
 
-- 数据:`python3 tools/nz-rates-scrape.py` 从 termdepositrates.co.nz 的总表采集(一天一次,只取利率/评级/起存额这些事实数据),写入 `rates.json`,并往 `history.jsonl` 追加当天快照(留给以后做走势图)。`--check` 只校验不写文件。
+- 数据:`python3 tools/nz-rates-scrape.py` 从 termdepositrates.co.nz 的普通定存总表和 PIE 表采集(一天一次,只取利率/评级/起存额这些事实数据),写入 `rates.json`(PIE 在 `pie` 字段;PIE 表采集失败时沿用上一份并打印警告,不影响主表),并往 `history.jsonl` 追加当天快照(留给以后做走势图)。`--check` 只校验不写文件。
 - **每日自动更新**:`.github/workflows/nz-rates.yml` 每天 UTC 02:30 跑一次采集,数据有变化就由 `github-actions[bot]` 提交到 main。所以 **main 上会有机器人的提交:本地推送前先 `git pull --rebase origin main`**。也可以在 GitHub Actions 页面手动点 Run workflow,或 `gh workflow run nz-rates`。
 - 校验不过(银行数太少、利率离谱、单日大面积跳变)时脚本报错退出、不动文件,页面继续显示上一份数据;数据超过 3 天没更新,页面会自动提示。
-- 新增银行:在脚本的 `BANKS` 里补中文名和分组(`big4` 四大行 / `cn` 中资 / `other`),否则显示英文名。
+- 新增银行:需要归入「四大行」或「中资」时,在脚本的 `GROUPS` 里补一行,否则归入 `other`。
 - 内容边界:**只采数字**,说明文字自己写,不搬原站文案和银行 logo;页脚保留数据来源链接和「不构成投资建议」声明。
-- 税率、存款保障等说明以官方为准:利息预扣税看 IRD,存款保障计划看 RBNZ(`rbnz.govt.nz/dcs`);官方调整后同步改 `nz-rates/index.html` 里的说明和计算器选项。
+- 税率、存款保障等说明以官方为准:利息预扣税(RWT)和 PIR 看 IRD,存款保障计划看 RBNZ(`rbnz.govt.nz/dcs`);官方调整后同步改 `nz-rates/index.html` 里的说明和计算器选项。
 
 ## 私享会(每份资料独立口令)
 
