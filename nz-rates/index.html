@@ -103,6 +103,7 @@
   a.bl{color:inherit}
   a.bl:after{content:" ↗";font-weight:400;font-size:.8em;color:var(--fg-faint)}
   a.bl:hover{color:var(--brand)}a.bl:hover:after{color:var(--brand)}
+  .q a.bl:after{content:none}
   .bm{font-size:11.5px;color:var(--fg-soft);margin-top:3px;line-height:1.4;white-space:normal}
   .tag{display:inline-block;padding:0 6px;border-radius:5px;font-size:11px;font-weight:700;margin-right:4px;background:var(--bg-soft);color:var(--fg-soft)}
   .tag.cn{background:#fdecec;color:#c8423d}.tag.big4{background:var(--brand-soft);color:var(--brand)}
@@ -369,7 +370,7 @@
   };
   // 银行 logo(取自各银行官网的站点图标,存在 logos/);没有的银行只显示名字
   var LOGO={'ANZ':'anz','ASB':'asb','BNZ':'bnz','Westpac':'westpac','Kiwibank':'kiwibank','Heartland Bank':'heartland','Co-operative Bank':'coop','SBS Bank':'sbs','TSB Bank':'tsb',
-    'Bank of China':'boc','China Construction Bank':'ccb','ICBC':'icbc','Bank of Baroda':'baroda','Bank of Baroda Freedom 60':'baroda'};
+    'Bank of China':'boc','China Construction Bank':'ccb','ICBC':'icbc','Bank of Baroda':'baroda','Bank of Baroda Freedom 60':'baroda','Rabobank':'rabobank','Revolut':'revolut'};
   function bankEl(name,cls,text){
     var d=el('div',cls),u=BANK_URL[name];
     if(LOGO[name]){var im=el('img','lg');im.src='logos/'+LOGO[name]+'.png';im.alt='';im.loading='lazy';im.onerror=function(){im.remove();};d.append(im);}
