@@ -4,7 +4,7 @@
 
 - 线上地址:<https://wsblackmoon.github.io/mySlides/>
 - 根域名 <https://wsblackmoon.github.io/> 已设为**自动跳转**到本主页(跳转页在另一个仓库 `wsblackmoon.github.io`,只有一个 index.html,一般不用动)。
-- 部署方式:**`git push origin main` 即自动上线**(GitHub Pages,约 30–60s 生效;看不到更新先硬刷新 Cmd+Shift+R)。
+- 部署方式:**`git push origin main` 即自动上线**(main 上有每日数据的自动提交,推送前先 `git pull --rebase origin main`)(GitHub Pages,约 30–60s 生效;看不到更新先硬刷新 Cmd+Shift+R)。
 
 ## 结构
 
@@ -60,6 +60,7 @@ assets/                 # 微信二维码等公共图
 主页导航里的独立页面:各银行定存利率总表(排序/筛选)、最高利率速览、税后收益计算器、中文说明。页面用 JS 读取 `nz-rates/data/rates.json` 渲染。
 
 - 数据:`python3 tools/nz-rates-scrape.py` 从 termdepositrates.co.nz 的总表采集(一天一次,只取利率/评级/起存额这些事实数据),写入 `rates.json`,并往 `history.jsonl` 追加当天快照(留给以后做走势图)。`--check` 只校验不写文件。
+- **每日自动更新**:`.github/workflows/nz-rates.yml` 每天 UTC 02:30 跑一次采集,数据有变化就由 `github-actions[bot]` 提交到 main。所以 **main 上会有机器人的提交:本地推送前先 `git pull --rebase origin main`**。也可以在 GitHub Actions 页面手动点 Run workflow,或 `gh workflow run nz-rates`。
 - 校验不过(银行数太少、利率离谱、单日大面积跳变)时脚本报错退出、不动文件,页面继续显示上一份数据;数据超过 3 天没更新,页面会自动提示。
 - 新增银行:在脚本的 `BANKS` 里补中文名和分组(`big4` 四大行 / `cn` 中资 / `other`),否则显示英文名。
 - 内容边界:**只采数字**,说明文字自己写,不搬原站文案和银行 logo;页脚保留数据来源链接和「不构成投资建议」声明。

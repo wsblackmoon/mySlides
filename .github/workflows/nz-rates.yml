@@ -1,0 +1,35 @@
+# 新西兰存款利率:每天采集一次,数据有变化就提交到 main(GitHub Pages 随之更新)。说明见 CLAUDE.md。
+name: nz-rates
+
+on:
+  schedule:
+    # 每天 UTC 02:30,约新西兰下午 2:30–3:30。源站一般在新西兰时间下午 2 点前后更新
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nz-rates
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 采集并校验
+        run: python3 tools/nz-rates-scrape.py
+      - name: 有变化则提交
+        run: |
+          if git diff --quiet -- nz-rates/data; then
+            echo "利率没有变化,不提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nz-rates/data
+          git commit -m "data(新西兰存款利率): 每日更新 $(date -u +%F)"
+          git push
