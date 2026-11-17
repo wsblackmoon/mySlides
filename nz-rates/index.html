@@ -113,6 +113,25 @@
   .legend{font-size:12.5px;color:var(--fg-faint);margin-top:10px}
   .legend b{color:var(--good)}
 
+  /* 活期储蓄 */
+  .sav td,.sav th{white-space:normal;vertical-align:top}
+  .sav th:first-child,.sav td:first-child{min-width:150px}
+  .sav td.r{font-size:17px;font-weight:800;color:var(--fg);white-space:nowrap}
+  .sav td.r small{display:block;font-size:11.5px;font-weight:500;color:var(--fg-faint);white-space:nowrap}
+  .sav td.c{text-align:left;font-size:13px;color:var(--fg-soft);min-width:170px;line-height:1.55}
+  .sav td.c a,.sav .cmob a{color:var(--brand);white-space:nowrap}
+  .sav .cmob{display:none;font-size:12.5px;color:var(--fg-soft);line-height:1.55;margin-top:6px}
+  @media(max-width:640px){.sav td.c,.sav th:nth-child(3){display:none}.sav .cmob{display:block}.sav th:first-child,.sav td:first-child{position:static;border-right:0}}
+  .tag.call{background:var(--good-soft);color:var(--good)}.tag.bonus{background:var(--warn-soft);color:var(--warn)}.tag.notice{background:var(--brand-soft);color:var(--brand)}
+  .promo{margin:16px 0 0;padding:12px 16px;border-radius:12px;background:var(--good-soft);color:var(--fg);font-size:14px;border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+  .promo b{color:var(--good)}
+  .revo{margin-top:18px}
+  .revo h3{margin:0 0 4px;font-size:16.5px}
+  .revo p{margin:0 0 10px;color:var(--fg-soft);font-size:13.5px}
+  .revo td,.revo th{padding:8px 8px;white-space:normal}
+  .revo td:first-child,.revo th:first-child{min-width:0;position:static;border-right:0}
+  .revo td:nth-child(2),.revo td:nth-child(3){white-space:nowrap}
+
   /* 计算器 */
   .calc{display:grid;gap:18px;margin-top:20px}
   @media(min-width:900px){.calc{grid-template-columns:320px 1fr;align-items:start}}
@@ -217,7 +236,33 @@
   </div>
 </section>
 
-<section id="calc" class="soft">
+<section id="savings" class="soft" hidden>
+  <div class="wrap">
+    <span class="eyebrow">活期储蓄</span>
+    <h2>活期、奖励账户与通知存款利率</h2>
+    <p class="lead">不想把钱锁死时的几种选择。利率为税前年利率，都是浮动利率，银行可以随时调整。</p>
+    <div class="stamp" style="margin-top:14px"><span class="dot"></span><span id="savStamp"></span></div>
+    <div class="stale" id="savStale" hidden></div>
+    <div class="filters">
+      <div class="fgroup" id="fSav"><span class="flabel">类型</span>
+        <button class="chipbtn on" data-s="all">全部</button>
+        <button class="chipbtn" data-s="call">随存随取</button>
+        <button class="chipbtn" data-s="bonus">奖励账户</button>
+        <button class="chipbtn" data-s="notice">通知存款</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table class="sav" id="sav"><thead><tr><th>银行 / 账户</th><th>年利率</th><th style="text-align:left">条件与说明</th></tr></thead><tbody></tbody></table></div>
+    <div class="legend">随存随取 = 随时可取、没有附加条件 · 奖励账户 = 满足条件才有奖励利率 · 通知存款 = 取款要提前若干天通知</div>
+    <div class="promo" id="revoPromo" hidden></div>
+    <div class="panel revo" id="revo" hidden>
+      <h3>Revolut：利率跟会员档位走</h3>
+      <p>Revolut 的活期利率取决于你订的会员档位，付费档利率更高，但要交月费。最后一列只算「利息减月费」，没算会员的其他权益。</p>
+      <div class="tablewrap" style="box-shadow:none"><table id="revoTbl"><thead><tr><th>档位</th><th>月费</th><th>年利率</th><th>存多少才比免费档划算</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
   <div class="wrap">
     <span class="eyebrow">计算器</span>
     <h2>存这笔钱，到期能拿多少利息？</h2>
@@ -244,7 +289,7 @@
   </div>
 </section>
 
-<section id="guide">
+<section id="guide" class="soft">
   <div class="wrap">
     <span class="eyebrow">看懂定存</span>
     <h2>几个常被问到的问题</h2>
@@ -266,12 +311,15 @@
         <table class="mini"><tr><th>全年应税总收入</th><th>RWT 税率</th></tr>
           <tr><td>$15,600 及以下</td><td>10.5%</td></tr><tr><td>$15,601 – $53,500</td><td>17.5%</td></tr><tr><td>$53,501 – $78,100</td><td>30%</td></tr><tr><td>$78,101 – $180,000</td><td>33%</td></tr><tr><td>$180,001 及以上</td><td>39%</td></tr></table>
         <p>没有向银行提供 IRD 号时，会按 <b>45%</b> 扣。税率选低了，年底可能要补税。非新西兰税务居民适用另一套规则，请咨询银行或税务顾问。来源：<a href="https://www.ird.govt.nz/income-tax/withholding-taxes/resident-withholding-tax-rwt/using-the-right-rwt-tax-rate" target="_blank" rel="noopener">新西兰税务局（IRD）</a>。</p></div>
+      <div class="panel"><h3>活期、奖励账户、通知存款有什么区别？</h3>
+        <p><b>随存随取</b>的活期储蓄账户最灵活，但四大行的普通活期利率很低。<b>奖励账户</b>平时只有很低的基础利率，当月满足条件（比如有存入、没取款）才给奖励利率。</p>
+        <p><b>通知存款</b>介于活期和定存之间：没有固定到期日，但取款要提前 32 天、60 天或 90 天通知，利率通常比活期高。这三类都是<b>浮动利率</b>，和定存的锁定利率不同。</p></div>
       <div class="panel"><h3>PIE 定存是什么？</h3>
         <p>部分银行另外提供 PIE 形式的定存。它的收益不按 RWT 扣税，而是按你的 <b>PIR 税率</b>，只有 10.5%、17.5%、28% 三档，<b>最高 28%</b>。对个人税率在 30% 及以上的人，同样的利率下，PIE 的税后收益更高。</p>
         <p>PIR 看最近两个纳税年度：有一年应税收入不超过 $15,600、加上 PIE 收入后不超过 $53,500，用 10.5%；有一年应税收入不超过 $53,500、加上 PIE 收入后不超过 $78,100，用 17.5%；其余用 28%。可以用 <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/types-of-individual-income/portfolio-investment-entity-income-for-individuals/prescribed-investor-rates/find-my-prescribed-investor-rate" target="_blank" rel="noopener">IRD 的 PIR 查询工具</a>确认自己的税率。</p>
         <p>PIE 的起存额通常更高，可选期限也少一些；是否在存款保障范围内取决于产品结构，请向银行确认。在上面的总表和计算器里切换到「PIE 定存」就能查看。</p></div>
     </div>
-    <div class="disc">
+    <div class="disc" style="background:var(--bg-card)">
       <p style="margin:0"><b>免责声明：</b>本页只提供事实信息，按利率高低排列，不构成任何投资或理财建议，也没有考虑你的个人财务状况。存款前请到银行官网或向银行确认最新利率和完整条款。</p>
     </div>
   </div>
@@ -312,7 +360,7 @@
   function money(n){return '$'+Math.round(n).toLocaleString('en-NZ');}
   var GROUP_TAG={big4:'四大行',cn:'中资'};
 
-  var data=null,state={prod:'td',group:'all',term:'all',sort:12};
+  var sav=null,data=null,state={prod:'td',group:'all',term:'all',sort:12};
   function prod(p){return (p||state.prod)==='pie'&&data.pie?data.pie:data;}
 
   fetch('data/rates.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
@@ -358,6 +406,23 @@
       });
       q.append(lab,grid);
     });
+    // 第三行:活期储蓄(各类型最高)
+    if(sav){
+      var lab=el('div','qlabel','活期储蓄');lab.append(el('small',null,'浮动利率，人工定期核对'));
+      var grid=el('div','quick');
+      [['call','随存随取最高'],['bonus','奖励账户最高'],['notice','通知存款最高']].forEach(function(x){
+        var top=sav.accounts.filter(function(a){return a.type===x[0];}).sort(function(a,b){return b.rate-a.rate;})[0];
+        if(!top)return;
+        var k=el('div','q');
+        k.append(el('div','k',x[1]),el('div','v',pct(top.rate)),el('div','b',top.bank),el('div','t',top.product+(top.notice_days?' · 提前 '+top.notice_days+' 天':'')));
+        grid.append(k);
+      });
+      var pr=sav.revolut&&sav.revolut.promo;
+      if(pr&&Date.now()<new Date(pr.until+'T23:59:59+13:00').getTime()){
+        var k=el('div','q');k.append(el('div','k','新客优惠'),el('div','v',pct(pr.rate)),el('div','b','Revolut'),el('div','t',pr.short));grid.append(k);
+      }
+      q.append(lab,grid);
+    }
   }
 
   function visibleTerms(){
@@ -420,6 +485,60 @@
     });
   }
   bindChips('fProd','data-p','prod');bindChips('fGroup','data-g','group');bindChips('fTerm','data-t','term');
+
+  // ---- 活期储蓄(data/savings.json,人工核对维护;加载失败不影响定存) ----
+  var savType='all',TYPE={call:'随存随取',bonus:'奖励账户',notice:'通知存款'};
+  fetch('data/savings.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
+    sav=d;$('savings').hidden=false;
+    $('savStamp').textContent='核对于 '+d.verified+' · 来自各银行官网 · 人工定期核对，非每日更新';
+    var days=Math.floor((Date.now()-new Date(d.verified+'T12:00:00+13:00').getTime())/864e5);
+    if(days>=45){$('savStale').hidden=false;$('savStale').textContent='注意：活期利率已有 '+days+' 天没有核对，可能已经变化，请以银行官网为准。';}
+    renderSav();renderRevolut();if(data)renderQuick();
+  }).catch(function(){});
+  function renderSav(){
+    var tb=document.querySelector('#sav tbody');tb.textContent='';
+    sav.accounts.filter(function(a){return savType==='all'||a.type===savType;}).sort(function(a,b){return b.rate-a.rate||a.bank.localeCompare(b.bank);}).forEach(function(a){
+      var tr=el('tr'),td=el('td');
+      td.append(el('div','bn',a.bank),el('div','bm',a.product));
+      var m=el('div','bm');m.append(el('span','tag '+a.type,TYPE[a.type]));td.append(m);
+      var r=el('td','r',pct(a.rate));
+      if(a.type==='bonus'&&a.base!=null)r.append(el('small',null,'基础 '+pct(a.base)));
+      if(a.type==='notice'&&a.notice_days)r.append(el('small',null,'提前 '+a.notice_days+' 天'));
+      if(a.rate_note)r.append(el('small',null,a.rate_note));
+      // 说明在电脑上是第三列,手机上放到账户名下面
+      var c=el('td','c'),cm=el('div','cmob');
+      [c,cm].forEach(function(box){
+        box.append(document.createTextNode(a.note||''));
+        if(a.source){if(a.note)box.append(document.createTextNode(' '));var l=el('a',null,'官网 ↗');l.href=a.source;l.target='_blank';l.rel='noopener';box.append(l);}
+      });
+      td.append(cm);
+      tr.append(td,r,c);tb.append(tr);
+    });
+  }
+  $('fSav').addEventListener('click',function(e){
+    var b=e.target.closest('.chipbtn');if(!b)return;savType=b.getAttribute('data-s');
+    [].forEach.call($('fSav').querySelectorAll('.chipbtn'),function(x){x.classList.toggle('on',x===b);});
+    renderSav();
+  });
+  function renderRevolut(){
+    var rv=sav.revolut;if(!rv)return;
+    $('revo').hidden=false;
+    var tb=document.querySelector('#revoTbl tbody');tb.textContent='';
+    var free=rv.plans.filter(function(p){return !p.fee;})[0];
+    rv.plans.forEach(function(p){
+      var tr=el('tr'),be='—';
+      if(p.fee&&free){be=p.rate>free.rate?'约 '+money(Math.ceil(p.fee*12/((p.rate-free.rate)/100)/100)*100)+' 以上':'只为利息的话不划算';}
+      var name=el('td');name.append(el('div','bn',p.plan));
+      var rate=el('td','rate',pct(p.rate));if(p.note){rate.append(el('div','bm',p.note));}
+      tr.append(name,el('td',null,p.fee?'$'+p.fee.toFixed(2):'免费'),rate,el('td',null,be));tb.append(tr);
+    });
+    var pr=rv.promo;
+    if(pr&&Date.now()<new Date(pr.until+'T23:59:59+13:00').getTime()){
+      var box=$('revoPromo');box.hidden=false;box.textContent='';
+      box.append(el('b',null,'Revolut 新客优惠：'+pct(pr.rate)),document.createTextNode('　'+pr.text+' '));
+      var l=el('a',null,'条款 ↗');l.href=pr.source;l.target='_blank';l.rel='noopener';l.style.color='var(--brand)';box.append(l);
+    }
+  }
 
   // ---- 计算器 ----
   var TAX={

@@ -1,0 +1,288 @@
+{
+ "verified": "2026-11-18",
+ "accounts": [
+  {
+   "bank": "Heartland Bank",
+   "product": "Digital Saver",
+   "type": "call",
+   "rate": 2.4,
+   "note": "任意金额同一利率，只能转到一个指定账户。",
+   "source": "https://www.heartland.co.nz/savings-and-deposits/interest-rates"
+  },
+  {
+   "bank": "Heartland Bank",
+   "product": "Direct Call",
+   "type": "call",
+   "rate": 1.9,
+   "note": "",
+   "source": "https://www.heartland.co.nz/savings-and-deposits/interest-rates"
+  },
+  {
+   "bank": "Heartland Bank",
+   "product": "32 day Notice Saver",
+   "type": "notice",
+   "rate": 3.05,
+   "notice_days": 32,
+   "note": "",
+   "source": "https://www.heartland.co.nz/savings-and-deposits/interest-rates"
+  },
+  {
+   "bank": "Heartland Bank",
+   "product": "90 day Notice Saver",
+   "type": "notice",
+   "rate": 3.25,
+   "notice_days": 90,
+   "note": "",
+   "source": "https://www.heartland.co.nz/savings-and-deposits/interest-rates"
+  },
+  {
+   "bank": "Rabobank",
+   "product": "RaboSaver",
+   "type": "call",
+   "rate": 1.75,
+   "note": "500 万以内同一利率，无最低余额、无手续费。",
+   "source": "https://www.rabobank.co.nz/online-savings/online-savings-interest-rates"
+  },
+  {
+   "bank": "Rabobank",
+   "product": "PremiumSaver",
+   "type": "bonus",
+   "rate": 2.65,
+   "base": 1.0,
+   "note": "月末余额（不含当月利息）比月初至少多 $50 才有奖励利率；只对 10 万以内的余额有效。",
+   "source": "https://www.rabobank.co.nz/online-savings/online-savings-interest-rates"
+  },
+  {
+   "bank": "Rabobank",
+   "product": "NoticeSaver",
+   "type": "notice",
+   "rate": 2.85,
+   "notice_days": 60,
+   "note": "",
+   "source": "https://www.rabobank.co.nz/online-savings/online-savings-interest-rates"
+  },
+  {
+   "bank": "TSB Bank",
+   "product": "WebSaver",
+   "type": "call",
+   "rate": 1.4,
+   "note": "需要同时有 TSB 的日常账户，只能网上转账。",
+   "source": "https://www.tsb.co.nz/rates-fees-agreements/account-interest"
+  },
+  {
+   "bank": "Co-operative Bank",
+   "product": "Online account",
+   "type": "call",
+   "rate": 1.1,
+   "note": "没有银行卡，需要通过日常账户转出。",
+   "source": "https://www.co-operativebank.co.nz/rates"
+  },
+  {
+   "bank": "Co-operative Bank",
+   "product": "Step Saver",
+   "type": "bonus",
+   "rate": 2.4,
+   "base": 0.6,
+   "note": "月末余额（不含利息）高于月初，且当月取款不超过一次，才有奖励利率。",
+   "source": "https://www.co-operativebank.co.nz/rates"
+  },
+  {
+   "bank": "SBS Bank",
+   "product": "i-save",
+   "type": "call",
+   "rate": 0.6,
+   "note": "没有银行卡，只能在自己的 SBS 账户之间网上转账。",
+   "source": "https://www.sbsbank.co.nz/rates"
+  },
+  {
+   "bank": "Revolut",
+   "product": "Instant Access Savings（免费档）",
+   "type": "call",
+   "rate": 2.0,
+   "note": "利息每天发放。付费档位利率更高，见下方档位表。",
+   "source": "https://www.revolut.com/en-NZ/legal/interest-rates-and-fees/"
+  },
+  {
+   "bank": "ICBC",
+   "product": "Savings",
+   "type": "call",
+   "rate": 1.5,
+   "note": "",
+   "source": "https://nz.icbc.com.cn/en/column/1438058492316762157.html"
+  },
+  {
+   "bank": "ICBC",
+   "product": "Smart Saver",
+   "type": "bonus",
+   "rate": 2.5,
+   "base": 0.0,
+   "note": "当月没有取款才有利息，取过一次当月就没有利息；只能在网银开户。",
+   "source": "https://nz.icbc.com.cn/en/column/1438058492316762157.html"
+  },
+  {
+   "bank": "Bank of China",
+   "product": "Online Saver",
+   "type": "call",
+   "rate": 2.35,
+   "rate_note": "1 万–10 万档",
+   "note": "按余额分档：1 万以下 1.35%；1 万–10 万 2.35%；10 万–20 万 2.55%；20 万以上 2.65%。只对该行的房贷或定存客户开放。",
+   "source": "https://www.bankofchina.com/nz/en/bocinfo/bi3/202610/t20261013_25696390.html"
+  },
+  {
+   "bank": "China Construction Bank",
+   "product": "NZD Saving Account",
+   "type": "call",
+   "rate": 1.5,
+   "note": "官网利率公告的日期是 2025 年 4 月，比较旧，开户前请向银行确认。",
+   "source": "https://nz.ccb.com/newzealand/en/zxgg/201908051564972928.html"
+  },
+  {
+   "bank": "Bank of Baroda",
+   "product": "Baroda Saving Account",
+   "type": "call",
+   "rate": 1.25,
+   "note": "无最低余额。",
+   "source": "https://www.barodanzltd.co.nz/rates-and-charges/deposit-rates"
+  },
+  {
+   "bank": "Bank of Baroda",
+   "product": "Freedom 60 Savings Account",
+   "type": "call",
+   "rate": 1.75,
+   "note": "只对 60 岁及以上客户开放。",
+   "source": "https://www.barodanzltd.co.nz/rates-and-charges/deposit-rates"
+  },
+  {
+   "bank": "ANZ",
+   "product": "Online account",
+   "type": "call",
+   "rate": 0.5,
+   "note": "",
+   "source": "https://www.anz.co.nz/rates-fees-agreements/personal-accounts/"
+  },
+  {
+   "bank": "ANZ",
+   "product": "Serious Saver",
+   "type": "bonus",
+   "rate": 2.05,
+   "base": 0.05,
+   "note": "当月没有取款，并且存入至少 $20（不含利息），才有奖励利率。",
+   "source": "https://www.anz.co.nz/rates-fees-agreements/personal-accounts/"
+  },
+  {
+   "bank": "ASB",
+   "product": "Savings On Call",
+   "type": "call",
+   "rate": 0.25,
+   "note": "",
+   "source": "https://www.asb.co.nz/bank-accounts/interest-rates-fees.html"
+  },
+  {
+   "bank": "ASB",
+   "product": "Savings Plus Monthly",
+   "type": "bonus",
+   "rate": 2.05,
+   "base": 0.05,
+   "note": "当月不取款，或只在每月第一天取一次，才有奖励利率。",
+   "source": "https://www.asb.co.nz/bank-accounts/interest-rates-fees.html"
+  },
+  {
+   "bank": "BNZ",
+   "product": "Rapid Save",
+   "type": "call",
+   "rate": 2.2,
+   "note": "没有奖励条件。每月第一次取款免费，之后每次 $3。",
+   "source": "https://www.bnz.co.nz/personal-banking/everyday-banking/rapid-save"
+  },
+  {
+   "bank": "Westpac",
+   "product": "Simple Saver",
+   "type": "call",
+   "rate": 0.35,
+   "note": "",
+   "source": "https://www.westpac.co.nz/about-us/legal-information-privacy/savings-accounts-terms-fees-rates/"
+  },
+  {
+   "bank": "Westpac",
+   "product": "Bonus Saver",
+   "type": "bonus",
+   "rate": 1.75,
+   "base": 0.05,
+   "note": "月末余额（不含利息和手续费）比上月末至少多 $20，才有奖励利率。",
+   "source": "https://www.westpac.co.nz/about-us/legal-information-privacy/savings-accounts-terms-fees-rates/"
+  },
+  {
+   "bank": "Westpac",
+   "product": "Notice Saver",
+   "type": "notice",
+   "rate": 3.0,
+   "notice_days": 32,
+   "note": "PIE 基金形式，按 PIR 计税。",
+   "source": "https://www.westpac.co.nz/about-us/legal-information-privacy/savings-accounts-terms-fees-rates/"
+  },
+  {
+   "bank": "Kiwibank",
+   "product": "Online Call",
+   "type": "call",
+   "rate": 1.9,
+   "note": "无最低余额，无附加条件。",
+   "source": "https://www.kiwibank.co.nz/personal-banking/investments/rates-and-charges/"
+  },
+  {
+   "bank": "Kiwibank",
+   "product": "Notice Saver 32 天",
+   "type": "notice",
+   "rate": 2.2,
+   "notice_days": 32,
+   "note": "PIE 基金形式，按 PIR 计税。",
+   "source": "https://www.kiwibank.co.nz/personal-banking/investments/rates-and-charges/"
+  },
+  {
+   "bank": "Kiwibank",
+   "product": "Notice Saver 90 天",
+   "type": "notice",
+   "rate": 2.75,
+   "notice_days": 90,
+   "note": "PIE 基金形式，按 PIR 计税。",
+   "source": "https://www.kiwibank.co.nz/personal-banking/investments/rates-and-charges/"
+  }
+ ],
+ "revolut": {
+  "source": "https://www.revolut.com/en-NZ/legal/interest-rates-and-fees/",
+  "plans": [
+   {
+    "plan": "Standard",
+    "fee": 0,
+    "rate": 2.0
+   },
+   {
+    "plan": "Plus",
+    "fee": 5.99,
+    "rate": 2.0
+   },
+   {
+    "plan": "Premium",
+    "fee": 11.99,
+    "rate": 2.25
+   },
+   {
+    "plan": "Metal",
+    "fee": 22.99,
+    "rate": 2.75
+   },
+   {
+    "plan": "Ultra",
+    "fee": 79.99,
+    "rate": 3.0,
+    "note": "25 万以上降到 2.75%"
+   }
+  ],
+  "promo": {
+   "rate": 3.5,
+   "until": "2027-02-03",
+   "short": "前 4 个月 · 5 万以内",
+   "text": "2027 年 2 月 3 日前注册，并在一个月内开通储蓄账户，前 4 个月按 3.50%（浮动）计息，只对 5 万纽币以内的余额有效。",
+   "source": "https://www.revolut.com/en-NZ/legal/IAS-Promotion-2026/"
+  }
+ }
+}
