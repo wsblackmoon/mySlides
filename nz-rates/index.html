@@ -213,6 +213,33 @@
   </div>
 </section>
 
+<section id="calc" class="soft">
+  <div class="wrap">
+    <span class="eyebrow">计算器</span>
+    <h2>存这笔钱，到期能拿多少利息？</h2>
+    <p class="lead">输入金额和期限，按当前利率列出每家银行的税前、税后利息。结果是估算，实际以银行为准。</p>
+    <div class="calc">
+      <div class="panel">
+        <div class="field" id="cProdField"><label for="cProd">产品类型</label>
+          <select id="cProd"><option value="td">普通定存</option><option value="pie">PIE 定存</option></select></div>
+        <div class="field"><label for="cAmt">存款金额（纽币）</label>
+          <div class="money"><span>NZ$</span><input id="cAmt" type="text" inputmode="numeric" value="50,000" autocomplete="off"></div></div>
+        <div class="field"><label for="cTerm">存期</label><select id="cTerm"></select></div>
+        <div class="field"><label for="cTax" id="cTaxLabel">利息预扣税（RWT）税率</label>
+          <select id="cTax"></select>
+          <div class="hint" id="cTaxHint"></div></div>
+        <div class="field" id="cModeField"><label for="cMode">付息方式（存期超过 1 年时）</label>
+          <select id="cMode"><option value="simple">到期一次付息（单利）</option><option value="compound">每年复利一次</option></select></div>
+      </div>
+      <div class="panel">
+        <div class="summary" id="cSummary"></div>
+        <div class="tablewrap" style="box-shadow:none"><table class="res" id="cRes"><thead></thead><tbody></tbody></table></div>
+        <div class="legend">灰色行 = 金额低于该银行的最低起存额</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="table">
   <div class="wrap">
     <span class="eyebrow">利率总表</span>
@@ -262,34 +289,7 @@
   </div>
 </section>
 
-<section id="calc" class="soft">
-  <div class="wrap">
-    <span class="eyebrow">计算器</span>
-    <h2>存这笔钱，到期能拿多少利息？</h2>
-    <p class="lead">输入金额和期限，按当前利率列出每家银行的税前、税后利息。结果是估算，实际以银行为准。</p>
-    <div class="calc">
-      <div class="panel">
-        <div class="field" id="cProdField"><label for="cProd">产品类型</label>
-          <select id="cProd"><option value="td">普通定存</option><option value="pie">PIE 定存</option></select></div>
-        <div class="field"><label for="cAmt">存款金额（纽币）</label>
-          <div class="money"><span>NZ$</span><input id="cAmt" type="text" inputmode="numeric" value="50,000" autocomplete="off"></div></div>
-        <div class="field"><label for="cTerm">存期</label><select id="cTerm"></select></div>
-        <div class="field"><label for="cTax" id="cTaxLabel">利息预扣税（RWT）税率</label>
-          <select id="cTax"></select>
-          <div class="hint" id="cTaxHint"></div></div>
-        <div class="field" id="cModeField"><label for="cMode">付息方式（存期超过 1 年时）</label>
-          <select id="cMode"><option value="simple">到期一次付息（单利）</option><option value="compound">每年复利一次</option></select></div>
-      </div>
-      <div class="panel">
-        <div class="summary" id="cSummary"></div>
-        <div class="tablewrap" style="box-shadow:none"><table class="res" id="cRes"><thead></thead><tbody></tbody></table></div>
-        <div class="legend">灰色行 = 金额低于该银行的最低起存额</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="guide">
+<section id="guide" class="soft">
   <div class="wrap">
     <span class="eyebrow">看懂定存</span>
     <h2>几个常被问到的问题</h2>
@@ -319,7 +319,7 @@
         <p>PIR 看最近两个纳税年度：有一年应税收入不超过 $15,600、加上 PIE 收入后不超过 $53,500，用 10.5%；有一年应税收入不超过 $53,500、加上 PIE 收入后不超过 $78,100，用 17.5%；其余用 28%。可以用 <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/types-of-individual-income/portfolio-investment-entity-income-for-individuals/prescribed-investor-rates/find-my-prescribed-investor-rate" target="_blank" rel="noopener">IRD 的 PIR 查询工具</a>确认自己的税率。</p>
         <p>PIE 的起存额通常更高，可选期限也少一些；是否在存款保障范围内取决于产品结构，请向银行确认。在上面的总表和计算器里切换到「PIE 定存」就能查看。</p></div>
     </div>
-    <div class="disc">
+    <div class="disc" style="background:var(--bg-card)">
       <p style="margin:0"><b>免责声明：</b>本页只提供事实信息，按利率高低排列，不构成任何投资或理财建议，也没有考虑你的个人财务状况。存款前请到银行官网或向银行确认最新利率和完整条款。</p>
     </div>
   </div>
