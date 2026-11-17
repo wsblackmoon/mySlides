@@ -66,7 +66,7 @@ assets/                 # 微信二维码等公共图
 - **活期储蓄**(利率总表里「产品」的第三个选项;随存随取 / 奖励账户 / 通知存款 / Revolut 档位):数据在 `nz-rates/data/savings.json`,**人工维护,不是每日采集**。每条利率都要在该银行**官网**核实并带上 `source` 链接;奖励账户另有一句简短条件 `cond`(显示在速览卡片上);核对一轮后把 `verified` 改成当天日期(超过 45 天页面会提示)。Revolut 的新客优惠有 `until` 日期,过期后页面自动隐藏。
   - **不要用 interest.co.nz**:它的使用条款明确禁止自动采集、系统性复制和 AI 平台采集。其他聚合站也不作为利率来源。
   - 读官网的门路:Heartland、TSB、SBS、Westpac 用 curl 就能读;Kiwibank 有公开数据接口 `rates.kiwibank.co.nz/api/v1/rates`;Co-operative Bank 读 `/api/content/content/website/rates`;ANZ、ASB、BNZ、Rabobank、Revolut 要用浏览器打开;Bank of India 官网有验证页,读不到,目前没收录。
-- 内容边界:**只采数字**,说明文字自己写,不搬原站文案和银行 logo;页脚保留数据来源链接和「不构成投资建议」声明。
+- 内容边界:**只采数字**,说明文字自己写,不搬原站文案;银行 logo 用各银行官网自己的站点图标(存在 `nz-rates/logos/`),不从聚合站拿;页脚保留数据来源链接和「不构成投资建议」声明。
 - 税率、存款保障等说明以官方为准:利息预扣税(RWT)和 PIR 看 IRD,存款保障计划看 RBNZ(`rbnz.govt.nz/dcs`);官方调整后同步改 `nz-rates/index.html` 里的说明和计算器选项。
 
 ## 私享会(每份资料独立口令)
