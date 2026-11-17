@@ -212,11 +212,18 @@
   <div class="wrap">
     <span class="eyebrow">利率总表</span>
     <h2 id="tblTitle">各银行定存年利率（%）</h2>
-    <p class="lead">点击某个期限的表头，可以按这个期限的利率从高到低排序。利率为税前年利率。</p>
+    <p class="lead" id="tblLead">点击某个期限的表头，可以按这个期限的利率从高到低排序。利率为税前年利率。</p>
     <div class="filters">
       <div class="fgroup" id="fProd"><span class="flabel">产品</span>
         <button class="chipbtn on" data-p="td">普通定存</button>
         <button class="chipbtn" data-p="pie">PIE 定存</button>
+        <button class="chipbtn" data-p="sav" id="savChip" hidden>活期储蓄</button>
+      </div>
+      <div class="fgroup" id="fSav" hidden><span class="flabel">类型</span>
+        <button class="chipbtn on" data-s="all">全部</button>
+        <button class="chipbtn" data-s="call">随存随取</button>
+        <button class="chipbtn" data-s="bonus">奖励账户</button>
+        <button class="chipbtn" data-s="notice">通知存款</button>
       </div>
       <div class="fgroup" id="fGroup"><span class="flabel">银行</span>
         <button class="chipbtn on" data-g="all">全部</button>
@@ -230,27 +237,14 @@
         <button class="chipbtn" data-t="long">长期（18 个月以上）</button>
       </div>
     </div>
+    <div id="tdBlock">
     <div class="pienote" id="pieNote" hidden></div>
     <div class="tablewrap"><table id="rates"><thead></thead><tbody></tbody></table></div>
     <div class="legend"><b>绿色</b> = 当前列表中该期限的最高利率 · 「—」= 该银行不提供这个期限 · 手机上可左右滑动表格</div>
-  </div>
-</section>
-
-<section id="savings" class="soft" hidden>
-  <div class="wrap">
-    <span class="eyebrow">活期储蓄</span>
-    <h2>活期、奖励账户与通知存款利率</h2>
-    <p class="lead">不想把钱锁死时的几种选择。利率为税前年利率，都是浮动利率，银行可以随时调整。</p>
-    <div class="stamp" style="margin-top:14px"><span class="dot"></span><span id="savStamp"></span></div>
-    <div class="stale" id="savStale" hidden></div>
-    <div class="filters">
-      <div class="fgroup" id="fSav"><span class="flabel">类型</span>
-        <button class="chipbtn on" data-s="all">全部</button>
-        <button class="chipbtn" data-s="call">随存随取</button>
-        <button class="chipbtn" data-s="bonus">奖励账户</button>
-        <button class="chipbtn" data-s="notice">通知存款</button>
-      </div>
     </div>
+    <div id="savBlock" hidden>
+    <div class="stamp" style="margin:0 0 12px"><span class="dot"></span><span id="savStamp"></span></div>
+    <div class="stale" id="savStale" hidden></div>
     <div class="tablewrap"><table class="sav" id="sav"><thead><tr><th>银行 / 账户</th><th>年利率</th><th style="text-align:left">条件与说明</th></tr></thead><tbody></tbody></table></div>
     <div class="legend">随存随取 = 随时可取、没有附加条件 · 奖励账户 = 满足条件才有奖励利率 · 通知存款 = 取款要提前若干天通知</div>
     <div class="promo" id="revoPromo" hidden></div>
@@ -259,10 +253,11 @@
       <p>Revolut 的活期利率取决于你订的会员档位，付费档利率更高，但要交月费。最后一列只算「利息减月费」，没算会员的其他权益。</p>
       <div class="tablewrap" style="box-shadow:none"><table id="revoTbl"><thead><tr><th>档位</th><th>月费</th><th>年利率</th><th>存多少才比免费档划算</th></tr></thead><tbody></tbody></table></div>
     </div>
+    </div>
   </div>
 </section>
 
-<section id="calc">
+<section id="calc" class="soft">
   <div class="wrap">
     <span class="eyebrow">计算器</span>
     <h2>存这笔钱，到期能拿多少利息？</h2>
@@ -289,7 +284,7 @@
   </div>
 </section>
 
-<section id="guide" class="soft">
+<section id="guide">
   <div class="wrap">
     <span class="eyebrow">看懂定存</span>
     <h2>几个常被问到的问题</h2>
@@ -319,7 +314,7 @@
         <p>PIR 看最近两个纳税年度：有一年应税收入不超过 $15,600、加上 PIE 收入后不超过 $53,500，用 10.5%；有一年应税收入不超过 $53,500、加上 PIE 收入后不超过 $78,100，用 17.5%；其余用 28%。可以用 <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/types-of-individual-income/portfolio-investment-entity-income-for-individuals/prescribed-investor-rates/find-my-prescribed-investor-rate" target="_blank" rel="noopener">IRD 的 PIR 查询工具</a>确认自己的税率。</p>
         <p>PIE 的起存额通常更高，可选期限也少一些；是否在存款保障范围内取决于产品结构，请向银行确认。在上面的总表和计算器里切换到「PIE 定存」就能查看。</p></div>
     </div>
-    <div class="disc" style="background:var(--bg-card)">
+    <div class="disc">
       <p style="margin:0"><b>免责声明：</b>本页只提供事实信息，按利率高低排列，不构成任何投资或理财建议，也没有考虑你的个人财务状况。存款前请到银行官网或向银行确认最新利率和完整条款。</p>
     </div>
   </div>
@@ -366,7 +361,7 @@
   fetch('data/rates.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
     data=d;
     if(d.terms.indexOf(state.sort)<0)state.sort=d.terms[Math.floor(d.terms.length/2)];
-    if(!d.pie){$('fProd').hidden=true;$('cProdField').hidden=true;}
+    if(!d.pie){document.querySelector('#fProd [data-p=pie]').hidden=true;$('cProdField').hidden=true;}
     renderStamp();renderQuick();renderTable();initCalc();
   }).catch(function(){
     $('stamp').textContent='利率数据加载失败';
@@ -438,6 +433,15 @@
   }
 
   function renderTable(){
+    var isSav=state.prod==='sav'&&sav;
+    $('tdBlock').hidden=isSav;$('savBlock').hidden=!isSav;
+    $('fGroup').hidden=isSav;$('fTerm').hidden=isSav;$('fSav').hidden=!isSav;
+    if(isSav){
+      $('tblTitle').textContent='活期、奖励账户与通知存款年利率（%）';
+      $('tblLead').textContent='不想把钱锁死时的几种选择。利率为税前年利率，都是浮动利率，银行可以随时调整。';
+      return;
+    }
+    $('tblLead').textContent='点击某个期限的表头，可以按这个期限的利率从高到低排序。利率为税前年利率。';
     var terms=visibleTerms(),banks=visibleBanks(),pie=state.prod==='pie';
     $('tblTitle').textContent=pie?'各银行 PIE 定存年利率（%）':'各银行定存年利率（%）';
     renderPieNote(pie);
@@ -489,7 +493,7 @@
   // ---- 活期储蓄(data/savings.json,人工核对维护;加载失败不影响定存) ----
   var savType='all',TYPE={call:'随存随取',bonus:'奖励账户',notice:'通知存款'};
   fetch('data/savings.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
-    sav=d;$('savings').hidden=false;
+    sav=d;$('savChip').hidden=false;
     $('savStamp').textContent='核对于 '+d.verified+' · 来自各银行官网 · 人工定期核对，非每日更新';
     var days=Math.floor((Date.now()-new Date(d.verified+'T12:00:00+13:00').getTime())/864e5);
     if(days>=45){$('savStale').hidden=false;$('savStale').textContent='注意：活期利率已有 '+days+' 天没有核对，可能已经变化，请以银行官网为准。';}

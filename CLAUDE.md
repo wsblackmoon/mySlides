@@ -63,7 +63,7 @@ assets/                 # 微信二维码等公共图
 - **每日自动更新**:`.github/workflows/nz-rates.yml` 每天 UTC 02:30 跑一次采集,数据有变化就由 `github-actions[bot]` 提交到 main。所以 **main 上会有机器人的提交:本地推送前先 `git pull --rebase origin main`**。也可以在 GitHub Actions 页面手动点 Run workflow,或 `gh workflow run nz-rates`。
 - 校验不过(银行数太少、利率离谱、单日大面积跳变)时脚本报错退出、不动文件,页面继续显示上一份数据;数据超过 3 天没更新,页面会自动提示。
 - 新增银行:需要归入「四大行」或「中资」时,在脚本的 `GROUPS` 里补一行,否则归入 `other`。
-- **活期储蓄板块**(随存随取 / 奖励账户 / 通知存款 / Revolut 档位):数据在 `nz-rates/data/savings.json`,**人工维护,不是每日采集**。每条利率都要在该银行**官网**核实并带上 `source` 链接;核对一轮后把 `verified` 改成当天日期(超过 45 天页面会提示)。Revolut 的新客优惠有 `until` 日期,过期后页面自动隐藏。
+- **活期储蓄**(利率总表里「产品」的第三个选项;随存随取 / 奖励账户 / 通知存款 / Revolut 档位):数据在 `nz-rates/data/savings.json`,**人工维护,不是每日采集**。每条利率都要在该银行**官网**核实并带上 `source` 链接;核对一轮后把 `verified` 改成当天日期(超过 45 天页面会提示)。Revolut 的新客优惠有 `until` 日期,过期后页面自动隐藏。
   - **不要用 interest.co.nz**:它的使用条款明确禁止自动采集、系统性复制和 AI 平台采集。其他聚合站也不作为利率来源。
   - 读官网的门路:Heartland、TSB、SBS、Westpac 用 curl 就能读;Kiwibank 有公开数据接口 `rates.kiwibank.co.nz/api/v1/rates`;Co-operative Bank 读 `/api/content/content/website/rates`;ANZ、ASB、BNZ、Rabobank、Revolut 要用浏览器打开;Bank of India 官网有验证页,读不到,目前没收录。
 - 内容边界:**只采数字**,说明文字自己写,不搬原站文案和银行 logo;页脚保留数据来源链接和「不构成投资建议」声明。
