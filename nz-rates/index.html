@@ -68,7 +68,10 @@
   .stale{margin-top:14px;padding:11px 15px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:14px;font-weight:600;border:1px solid color-mix(in srgb,var(--warn) 30%,transparent)}
 
   /* 速览 */
-  .quick{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-top:26px}
+  .qlabel{margin:24px 0 10px;font-size:13px;font-weight:700;color:var(--fg-soft);display:flex;align-items:center;gap:10px}
+  .qlabel:after{content:"";flex:1;height:1px;background:var(--line)}
+  .qlabel small{font-weight:500;color:var(--fg-faint);font-size:12.5px}
+  .quick{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
   @media(min-width:760px){.quick{grid-template-columns:repeat(4,1fr)}}
   .q{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
   .q .k{font-size:12.5px;color:var(--fg-faint);font-weight:700;letter-spacing:.04em}
@@ -183,7 +186,7 @@
     <div class="stamp"><span class="dot"></span><span id="stamp">正在加载最新利率…</span></div>
     <div class="stale" id="stale" hidden></div>
     <noscript><div class="stale">这个页面需要开启 JavaScript 才能显示利率表。</div></noscript>
-    <div class="quick" id="quick"></div>
+    <div id="quick"></div>
   </div>
 </section>
 
@@ -340,16 +343,22 @@
   }
   function whoText(list){return list.length?list[0].name+(list.length>1?' 等 '+list.length+' 家':''):'';}
 
+  // 两行速览:普通定存一行,PIE 定存一行
   function renderQuick(){
     var q=$('quick');q.textContent='';
-    var all={rate:0,banks:[],term:null};
-    data.terms.forEach(function(t){var b=best(t);if(b.rate>all.rate){all={rate:b.rate,banks:b.banks,term:t};}});
-    var cards=[['全场最高',all.term,all]];
-    [6,12,24].forEach(function(t){if(data.terms.indexOf(t)>=0)cards.push([termLabel(t)+'最高',t,best(t)]);});
-    cards.forEach(function(c){
-      var d=el('div','q');
-      d.append(el('div','k',c[0]),el('div','v',pct(c[2].rate)),el('div','b',whoText(c[2].banks)),el('div','t','存期 '+termLabel(c[1])));
-      q.append(d);
+    [['普通定存',data,''],['PIE 定存',data.pie,'按 PIR 计税，最高 28%']].forEach(function(row){
+      var d=row[1];if(!d)return;
+      var lab=el('div','qlabel',row[0]);if(row[2]){lab.append(el('small',null,row[2]));}
+      var grid=el('div','quick'),all={rate:0,banks:[],term:null};
+      d.terms.forEach(function(t){var b=best(t,d.banks);if(b.rate>all.rate){all={rate:b.rate,banks:b.banks,term:t};}});
+      var cards=[['全场最高',all.term,all]];
+      [6,12,24].forEach(function(t){if(d.terms.indexOf(t)>=0)cards.push([termLabel(t)+'最高',t,best(t,d.banks)]);});
+      cards.forEach(function(c){
+        var k=el('div','q');
+        k.append(el('div','k',c[0]),el('div','v',pct(c[2].rate)),el('div','b',whoText(c[2].banks)),el('div','t','存期 '+termLabel(c[1])));
+        grid.append(k);
+      });
+      q.append(lab,grid);
     });
   }
 
